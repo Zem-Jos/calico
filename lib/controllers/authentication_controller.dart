@@ -55,6 +55,20 @@ class AuthController extends GetxController {
     }
   }
 
+  void loginAnonymous() async {
+    try {
+      await auth.signInAnonymously();
+    } catch (e) {
+      Get.snackbar('About Login', 'Login message',
+          backgroundColor: Colors.redAccent,
+          snackPosition: SnackPosition.BOTTOM,
+          titleText: Text('Login failed',
+              style: GoogleFonts.roboto(color: Colors.white)),
+          messageText: Text(e.toString(),
+              style: GoogleFonts.roboto(color: Colors.white)));
+    }
+  }
+
   void logout() async {
     await auth.signOut();
   }

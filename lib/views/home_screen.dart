@@ -3,6 +3,8 @@ import 'package:get/get_connect.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../controllers/authentication_controller.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
     Key? key,
@@ -31,7 +33,21 @@ class _HomeScreenState extends State<HomeScreen> {
             style: GoogleFonts.poppins(fontWeight: FontWeight.w400),
           ),
         ),
-        body: Placeholder());
+        body: Center(
+          child: Column(
+            children: [
+              Text(
+                'Home Screen',
+                style: GoogleFonts.poppins(fontWeight: FontWeight.w400),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    AuthController.instance.logout();
+                  },
+                  child: Text('Logout'))
+            ],
+          ),
+        ));
   }
 }
 
