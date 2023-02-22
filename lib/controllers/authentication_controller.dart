@@ -1,9 +1,9 @@
+import 'package:calico/models/navigation_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../views/goto_screen.dart';
-import '../views/home_screen.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -22,7 +22,7 @@ class AuthController extends GetxController {
     if (user == null) {
       await Get.offAll(() => GotoScreen());
     } else {
-      Get.offAll(() => HomeScreen());
+      Get.offAll(() => NavigationPage());
     }
   }
 

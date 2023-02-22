@@ -1,3 +1,4 @@
+import 'package:calico/controllers/authentication_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/widgets/mood_board.dart';
 import 'package:flutter/material.dart';
@@ -227,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 34,
                               ),
                               Text(
-                                'Semangat',
+                                'Smgt',
                                 style: GoogleFonts.rubik(
                                     fontSize: 11, color: blackColor),
                               )
@@ -242,7 +243,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 23,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    AuthController.instance.logout();
+                  },
                   child: Image.asset(
                     'assets/images/chat_button.png',
                     width: 342,
@@ -263,39 +266,40 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: 94,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-                color: Color(0xffFDFCFC),
-              ),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Image.asset(
-                      'assets/images/nav/home.png',
-                      width: 32,
-                    ),
-                    Image.asset(
-                      'assets/images/nav/activity.png',
-                      width: 32,
-                    ),
-                    Image.asset(
-                      'assets/images/nav/chat.png',
-                      width: 32,
-                    ),
-                    Image.asset(
-                      'assets/images/nav/calendar.png',
-                      width: 32,
-                    ),
-                  ]),
-            ),
-          ),
         ],
       )),
     );
   }
 }
+
+//  Align(
+//             alignment: Alignment.bottomCenter,
+//             child: Container(
+//               width: MediaQuery.of(context).size.width,
+//               height: 94,
+//               decoration: const BoxDecoration(
+//                 borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+//                 color: Color(0xffFDFCFC),
+//               ),
+//               child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                   children: [
+//                     Image.asset(
+//                       'assets/images/nav/home.png',
+//                       width: 32,
+//                     ),
+//                     Image.asset(
+//                       'assets/images/nav/activity.png',
+//                       width: 32,
+//                     ),
+//                     Image.asset(
+//                       'assets/images/nav/chat.png',
+//                       width: 32,
+//                     ),
+//                     Image.asset(
+//                       'assets/images/nav/calendar.png',
+//                       width: 32,
+//                     ),
+//                   ]),
+//             ),
+//           ),
