@@ -1,4 +1,6 @@
+import 'package:calico/views/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:calico/controllers/authentication_controller.dart';
 
@@ -104,16 +106,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextButton(
                       child: Text(
-                        'Get help signing in.',
+                        "Don't have an account? Click here.",
                         style: GoogleFonts.roboto(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             color: Color(0xff0B4E90)),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        // navigate to register screen
+                        Get.offAll(() => RegisterScreen());
+                      },
                     ),
                   ],
                 ),
+                ElevatedButton(
+                    onPressed: () {
+                      AuthController.instance.loginAnonymous();
+                    },
+                    child: Text("Login Anonymously")),
                 Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 81),

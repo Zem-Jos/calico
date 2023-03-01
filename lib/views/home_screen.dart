@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../controllers/authentication_controller.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -269,6 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       )),
     );
+
   }
 }
 
