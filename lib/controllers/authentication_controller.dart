@@ -1,9 +1,10 @@
+import 'package:calico/views/register_screenui.dart';
+import 'package:calico/widgets/navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../views/goto_screen.dart';
-import '../views/home_screen.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -21,8 +22,9 @@ class AuthController extends GetxController {
   _initialScreen(User? user) async {
     if (user == null) {
       await Get.offAll(() => GotoScreen());
+      // await Get.offAll(() => RegisterUi());
     } else {
-      Get.offAll(() => HomeScreen());
+      Get.offAll(() => NavigationPage());
     }
   }
 
