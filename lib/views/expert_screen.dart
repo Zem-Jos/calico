@@ -1,4 +1,5 @@
 import 'package:calico/theme.dart';
+import 'package:calico/widgets/expert_card.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -27,19 +28,16 @@ class _ExpertScreenState extends State<ExpertScreen> {
           backgroundColor: Color(0xffFDFCFC),
           title: Text('hinted search text'),
           onSearch: (value) => setState(() => searchValue = value)),
-      // drawer: Drawer(
-      //     child: ListView(padding: EdgeInsets.zero, children: [
-      //   const DrawerHeader(
-      //     decoration: BoxDecoration(
-      //       color: Color(0xffE0A071),
-      //     ),
-      //     child: Text('Drawer Header'),
-      //   ),
-      //   ListTile(
-      //       title: const Text('Item 1'), onTap: () => Navigator.pop(context)),
-      //   ListTile(
-      //       title: const Text('Item 2'), onTap: () => Navigator.pop(context))
-      // ])),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return ExpertCard();
+              }),
+        ),
+      ),
       drawer: Container(
         width: MediaQuery.of(context).size.width * 0.8,
         height: MediaQuery.of(context).size.height,
