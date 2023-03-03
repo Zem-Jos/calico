@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   cloud_firestore: ^4.4.3
+  easy_search_bar: ^2.4.2
   firebase_auth: ^4.2.8
   firebase_core: ^2.6.1
   flutter:

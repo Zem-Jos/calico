@@ -8,9 +8,5 @@ class BottomNavigationController extends GetxController {
 
   void changeIndex(int index) {
     selectedIndex.value = index;
-    if (selectedIndex == 2) {
-      Get.to(ChatScreen());
-      selectedIndex = 0.obs;
-    }
   }
 }

@@ -17,6 +17,7 @@ class ChatScreen extends StatelessWidget {
         return false;
       },
       child: Scaffold(
+        backgroundColor: Color(0xffFAF2ED),
         appBar: AppBar(
           elevation: 0,
           automaticallyImplyLeading: false,
@@ -81,7 +82,6 @@ class ChatScreen extends StatelessWidget {
             ),
           ),
         ),
-        backgroundColor: const Color(0xffFAF2ED),
         body: Stack(
           children: <Widget>[
             Padding(
@@ -104,7 +104,16 @@ class ChatScreen extends StatelessWidget {
                             maxWidth: MediaQuery.of(context).size.width * 0.75,
                           ),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius:
+                                (messages[index].messageType == 'receiver'
+                                    ? const BorderRadius.only(
+                                        bottomRight: Radius.circular(20),
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20))
+                                    : const BorderRadius.only(
+                                        bottomLeft: Radius.circular(20),
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20))),
                             color: (messages[index].messageType == 'receiver'
                                 ? const Color(0xffFDFCFC)
                                 : const Color(0xffE0A071)),

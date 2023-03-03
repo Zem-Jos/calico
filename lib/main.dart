@@ -17,11 +17,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       home: Scaffold(
-        body: Center(
-          child: GotoScreen(),
-        ),
+        body: GotoScreen(),
       ),
     );
   }
