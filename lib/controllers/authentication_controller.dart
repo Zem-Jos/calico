@@ -1,3 +1,5 @@
+import 'package:calico/controllers/user_controller.dart';
+import 'package:calico/models/user_model.dart';
 import 'package:calico/views/register_screen.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,6 +34,14 @@ class AuthController extends GetxController {
     try {
       await auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
+      UserModel user = UserModel(
+        id: auth.currentUser!.uid,
+        email: email,
+        name: name,
+      );
+
+      await UserController().createUser(user);
     } catch (e) {
       Get.snackbar('About User', 'User message',
           backgroundColor: Colors.redAccent,
