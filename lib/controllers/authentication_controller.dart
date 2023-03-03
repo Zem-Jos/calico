@@ -1,5 +1,8 @@
 import 'package:calico/views/login_screen_UI.dart';
 import 'package:calico/views/register_screenui.dart';
+import 'package:calico/controllers/user_controller.dart';
+import 'package:calico/models/user_model.dart';
+import 'package:calico/views/register_screen.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +32,18 @@ class AuthController extends GetxController {
     }
   }
 
-  void register(String email, password) async {
+  void register(String email, String name, String password) async {
     try {
       await auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
+      UserModel user = UserModel(
+        id: auth.currentUser!.uid,
+        email: email,
+        name: name,
+      );
+
+      await UserController().createUser(user);
     } catch (e) {
       Get.snackbar('About User', 'User message',
           backgroundColor: Colors.redAccent,
@@ -47,6 +58,20 @@ class AuthController extends GetxController {
   void login(String email, password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
+    } catch (e) {
+      Get.snackbar('About Login', 'Login message',
+          backgroundColor: Colors.redAccent,
+          snackPosition: SnackPosition.BOTTOM,
+          titleText: Text('Login failed',
+              style: GoogleFonts.roboto(color: Colors.white)),
+          messageText: Text(e.toString(),
+              style: GoogleFonts.roboto(color: Colors.white)));
+    }
+  }
+
+  void loginWithGoogle() async {
+    try {
+      await auth.signInWithPopup(GoogleAuthProvider());
     } catch (e) {
       Get.snackbar('About Login', 'Login message',
           backgroundColor: Colors.redAccent,
