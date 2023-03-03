@@ -10,6 +10,7 @@ class BottomNavigationController extends GetxController {
     selectedIndex.value = index;
     if (selectedIndex == 2) {
       Get.to(ChatScreen());
+      selectedIndex = 0.obs;
     }
   }
 }
