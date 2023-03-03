@@ -1,7 +1,7 @@
 import 'package:calico/controllers/navigation_controller.dart';
 import 'package:calico/views/activity_screen.dart';
 import 'package:calico/views/calendar_screen.dart';
-import 'package:calico/views/chat_screen.dart';
+import 'package:calico/views/expert_screen.dart';
 import 'package:calico/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,7 @@ class NavigationPage extends StatelessWidget {
   final screen = [
     const HomeScreen(),
     const ActivityScreen(),
-    ChatScreen(),
+    ExpertScreen(),
     const CalendarScreen(),
   ];
 

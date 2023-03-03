@@ -1,11 +1,9 @@
 import 'package:calico/controllers/authentication_controller.dart';
 import 'package:calico/theme.dart';
-import 'package:calico/widgets/mood_board.dart';
+import 'package:calico/views/chat_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../controllers/authentication_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -248,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      AuthController.instance.logout();
+                      Get.to(ChatScreen());
                     },
                     child: Image.asset(
                       'assets/images/chat_button.png',
@@ -260,7 +258,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      AuthController.instance.logout();
+                    },
                     child: Image.asset(
                       'assets/images/expert_button.png',
                       width: 342,
