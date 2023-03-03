@@ -84,10 +84,13 @@ class _RegisterUiState extends State<RegisterScreen> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: TextFormField(
+                          cursorColor: Color(0xffE0A071),
                           controller: emailController,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             labelText: 'Email atau Nomor Telepon',
+                            hintText: 'Email atau Nomor Telepon',
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                           ),
                           validator: (val) {
                             if (val == null || val.isEmpty) {
@@ -113,10 +116,13 @@ class _RegisterUiState extends State<RegisterScreen> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: TextFormField(
+                          cursorColor: Color(0xffE0A071),
                           controller: nameController,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             labelText: 'Nama',
+                            hintText: 'Nama',
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                           ),
                           validator: (val) {
                             if (val == null || val.isEmpty) {
@@ -141,17 +147,23 @@ class _RegisterUiState extends State<RegisterScreen> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0, right: 4.0),
                         child: TextFormField(
+                          cursorColor: Color(0xffE0A071),
                           controller: passwordController,
                           obscureText: _obscureTextPassword,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             suffixIcon: InkWell(
                               onTap: _togglePassword,
-                              child: Icon(_obscureTextPassword
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
+                              child: Icon(
+                                _obscureTextPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Color(0xffE0A071),
+                              ),
                             ),
                             labelText: 'Kata Sandi',
+                            hintText: 'Kata Sandi',
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                           ),
                           validator: (val) {
                             if (val == null || val.isEmpty) {
@@ -180,17 +192,23 @@ class _RegisterUiState extends State<RegisterScreen> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0, right: 4.0),
                         child: TextFormField(
+                          cursorColor: Color(0xffE0A071),
                           controller: passwordConfirmController,
                           obscureText: _obscureTextConfirmPassword,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             suffixIcon: InkWell(
                               onTap: _togglePasswordConfirm,
-                              child: Icon(_obscureTextConfirmPassword
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
+                              child: Icon(
+                                _obscureTextConfirmPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Color(0xffE0A071),
+                              ),
                             ),
                             labelText: 'Konfirmasi Kata Sandi',
+                            hintText: 'Konfirmasi Kata Sandi',
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                           ),
                           validator: (val) {
                             if (val == null || val.isEmpty) {
@@ -244,16 +262,35 @@ class _RegisterUiState extends State<RegisterScreen> {
                     // Policy
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0),
-                      child: Text(
-                        'Dengan mendaftar pada aplikasi Calico, saya telah menyetujui Ketentuan Layanan dan Kebijakan Privasi kami.',
+                      child: RichText(
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.roboto(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: darkGrayColor,
+                        text: TextSpan(
+                          text:
+                              'Dengan mendaftar pada aplikasi Calico, saya telah menyetujui ',
+                          style: GoogleFonts.roboto(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: darkGrayColor,
+                          ),
+                          children: const <TextSpan>[
+                            TextSpan(
+                                text: 'Ketentuan Layanan',
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            TextSpan(text: ' dan '),
+                            TextSpan(
+                                text: 'Kebijakan Privasi',
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ],
                         ),
                       ),
                     ),
+
                     // Line break, seperator
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
