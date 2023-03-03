@@ -21,38 +21,77 @@ class NavigationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffFAF2ED),
       body: Obx(
         () => IndexedStack(
           index: bottomNavigationController.selectedIndex.value,
           children: screen,
         ),
       ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.leaderboard),
-              label: 'Activity',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Chat',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Calendar',
-            ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+          boxShadow: [
+            BoxShadow(
+                color: Color(0x26000000), spreadRadius: 0, blurRadius: 15),
           ],
-          showUnselectedLabels: false,
-          showSelectedLabels: false,
-          currentIndex: bottomNavigationController.selectedIndex.value,
-          selectedItemColor: const Color(0xff157FFB),
-          onTap: (index) => bottomNavigationController.changeIndex(index),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+          child: Obx(
+            () => SizedBox(
+              height: 94,
+              child: BottomNavigationBar(
+                elevation: 0.0,
+                type: BottomNavigationBarType.fixed,
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Image.asset(
+                      'assets/images/icon/home.png',
+                      width: 32,
+                    ),
+                    activeIcon: Image.asset(
+                      'assets/images/icon/home_active.png',
+                      width: 32,
+                    ),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Image.asset('assets/images/icon/activities.png',
+                        width: 32),
+                    activeIcon: Image.asset(
+                        'assets/images/icon/activities_active.png',
+                        width: 32),
+                    label: 'Activity',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Image.asset('assets/images/icon/chat.png', width: 32),
+                    activeIcon: Image.asset(
+                        'assets/images/icon/chat_active.png',
+                        width: 32),
+                    label: 'Chat',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Image.asset('assets/images/icon/calendar.png',
+                        width: 32),
+                    activeIcon: Image.asset(
+                        'assets/images/icon/calendar_active.png',
+                        width: 32),
+                    label: 'Calendar',
+                  ),
+                ],
+                showUnselectedLabels: false,
+                showSelectedLabels: false,
+                currentIndex: bottomNavigationController.selectedIndex.value,
+                selectedItemColor: const Color(0xff157FFB),
+                onTap: (index) => bottomNavigationController.changeIndex(index),
+              ),
+            ),
+          ),
         ),
       ),
     );

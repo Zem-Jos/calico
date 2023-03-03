@@ -73,7 +73,7 @@ class ChatScreen extends StatelessWidget {
                     ],
                   ),
                   Image.asset(
-                    'assets/images/sound_on.png',
+                    'assets/images/icon/sound_on.png',
                     width: 40,
                   ),
                 ],
@@ -165,7 +165,7 @@ class ChatScreen extends StatelessWidget {
                         ),
                       ),
                       Image.asset(
-                        'assets/images/send_icon.png',
+                        'assets/images/icon/send_icon.png',
                         width: 45,
                       ),
                     ]),
