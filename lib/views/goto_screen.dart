@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:calico/views/register_screen.dart';
-import 'package:calico/views/register_screen.dart';
+import 'package:calico/views/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
@@ -95,7 +94,7 @@ class GotoScreen extends StatelessWidget {
                                     color: Color(0xff157FFB),
                                   ),
                                   onPressed: () {
-                                    Get.to(() => RegisterScreen());
+                                    Get.to(() => LoginScreen());
                                   },
                                 ),
                               )

@@ -367,7 +367,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                             Text(
                               'Sudah punya akun? ',
                               style: GoogleFonts.roboto(
-                                fontSize: 14,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w400,
                                 color: darkGrayColor,
                               ),
@@ -379,7 +379,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                               child: Text(
                                 'Masuk',
                                 style: GoogleFonts.roboto(
-                                  fontSize: 14,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.w400,
                                   color: brownColor,
                                 ),

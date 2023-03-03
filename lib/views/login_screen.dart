@@ -1,160 +1,222 @@
+import 'package:calico/controllers/authentication_controller.dart';
+import 'package:calico/views/login_screen.dart';
 import 'package:calico/views/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:calico/theme.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:calico/controllers/authentication_controller.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  // Initially password is obscure
-  bool _obscureText = true;
-
-  late String _password;
-
-  // Toggles the password show status
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
-
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
-                Text(
-                  'Pokedex App',
-                  style: GoogleFonts.roboto(
-                      fontSize: 30, fontWeight: FontWeight.w900),
-                ),
-                SizedBox(
-                  height: 43,
-                ),
-                Text(
-                  'Login',
-                  style: GoogleFonts.roboto(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xff157FFB)),
-                ),
-                SizedBox(
-                  height: 9,
-                ),
-                Text(
-                  'Login to track all pokemon',
-                  style: GoogleFonts.roboto(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
+    return Scaffold(
+      backgroundColor: whiteColor,
+      body: SafeArea(
+          child: Stack(
+        children: [
+          Align(
+            alignment: AlignmentDirectional.bottomCenter,
+            child: Image.asset('assets/images/auth_bg.png'),
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/logo_text.png',
+                    height: 53,
                   ),
-                ),
-                SizedBox(
-                  height: 60,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: TextFormField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                    ),
+                  SizedBox(
+                    height: 49, //<-- SEE HERE
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: TextFormField(
-                    controller: passwordController,
-                    obscureText: _obscureText,
-                    decoration: InputDecoration(
-                      suffixIcon: InkWell(
-                        onTap: _toggle,
-                        child: Icon(_obscureText
-                            ? Icons.visibility
-                            : Icons.visibility_off),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0x1AE0A071),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Color(0xffE0A071),
                       ),
-                      labelText: 'Password',
                     ),
-                    validator: (val) =>
-                        val!.length < 6 ? 'Password too short.' : null,
-                    onSaved: (val) => _password = val!,
+                    child: TextFormField(
+                      // controller: emailController,
+                      cursorColor: Color(0xffe0a071),
+                      decoration: InputDecoration(
+                          hintText: 'Email atau Nomor Telepon',
+                          contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                          border: InputBorder.none),
+                    ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Forgot password?',
-                      style: GoogleFonts.roboto(
-                          fontSize: 14, fontWeight: FontWeight.w400),
-                    ),
-                    SizedBox(
-                      width: 4,
-                    ),
-                    TextButton(
-                      child: Text(
-                        "Don't have an account? Click here.",
-                        style: GoogleFonts.roboto(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xff0B4E90)),
+                  SizedBox(
+                    height: 15, //<-- SEE HERE
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0x1AE0A071),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Color(0xffE0A071),
                       ),
-                      onPressed: () {
-                        // navigate to register screen
-                        Get.offAll(() => RegisterScreen());
-                      },
                     ),
-                  ],
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      AuthController.instance.loginAnonymous();
-                    },
-                    child: Text("Login Anonymously")),
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 81),
-                  child: GestureDetector(
+                    child: TextFormField(
+                      cursorColor: Color(0xffe0a071),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Kata Sandi',
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                        // suffixIcon: InkWell(
+                        //   onTap: _toggle,
+                        //   child: Icon(_obscureText
+                        //       ? Icons.visibility
+                        //       : Icons.visibility_off),
+                        // ),
+                      ),
+                      // validator: (val) =>
+                      //     val!.length < 6 ? 'Password too short.' : null,
+                      // // onSaved: (val) => _password = val!,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15, //<-- SEE HERE
+                  ),
+                  GestureDetector(
                     onTap: () {
-                      AuthController.instance.login(emailController.text.trim(),
-                          passwordController.text.trim());
+                      // AuthController.instance.register(
+                      //     emailController.text.trim(),
+                      //     passwordController.text.trim());
                     },
                     child: Container(
-                      width: 220,
-                      height: 51,
+                      width: double.infinity,
+                      height: 44,
                       decoration: BoxDecoration(
-                          color: Color(0xff157FFB),
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                          color: brownColor,
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: Center(
                         child: Text(
                           'Login',
                           style: GoogleFonts.roboto(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xffCFE3FC)),
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: whiteColor),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+
+                  Row(children: [
+                    Expanded(
+                      child: new Container(
+                          margin:
+                              const EdgeInsets.only(left: 10.0, right: 15.0),
+                          child: Divider(
+                            color: Colors.black,
+                            height: 50,
+                          )),
+                    ),
+                    Text("ATAU"),
+                    Expanded(
+                      child: new Container(
+                          margin:
+                              const EdgeInsets.only(left: 15.0, right: 10.0),
+                          child: Divider(
+                            color: Colors.black,
+                            height: 50,
+                          )),
+                    ),
+                  ]),
+                  // SizedBox(
+                  //   height: 18,
+                  // ),
+                  GestureDetector(
+                    onTap: () {
+                      AuthController.instance.loginWithGoogle();
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: whiteColor,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/images/google.png', width: 19),
+                          SizedBox(width: 6),
+                          Text(
+                            'Masuk dengan Google',
+                            style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: darkGrayColor),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 18,
+                  ),
+
+                  GestureDetector(
+                    onTap: () {
+                      AuthController.instance.loginAnonymous();
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: whiteColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Akses Sebagai Tamu',
+                          style: GoogleFonts.rubik(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400,
+                              color: darkGrayColor),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 18,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Pengguna Baru? ',
+                        style: GoogleFonts.roboto(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          color: darkGrayColor,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => RegisterScreen());
+                        },
+                        child: Text(
+                          'Daftar',
+                          style: GoogleFonts.roboto(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: brownColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ),
+        ],
+      )),
     );
   }
 }
