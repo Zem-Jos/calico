@@ -1,4 +1,4 @@
-import 'package:calico/views/register_screenui.dart';
+import 'package:calico/views/register_screen.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class AuthController extends GetxController {
     }
   }
 
-  void register(String email, password) async {
+  void register(String email, String name, String password) async {
     try {
       await auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -46,6 +46,20 @@ class AuthController extends GetxController {
   void login(String email, password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
+    } catch (e) {
+      Get.snackbar('About Login', 'Login message',
+          backgroundColor: Colors.redAccent,
+          snackPosition: SnackPosition.BOTTOM,
+          titleText: Text('Login failed',
+              style: GoogleFonts.roboto(color: Colors.white)),
+          messageText: Text(e.toString(),
+              style: GoogleFonts.roboto(color: Colors.white)));
+    }
+  }
+
+  void loginWithGoogle() async {
+    try {
+      await auth.signInWithPopup(GoogleAuthProvider());
     } catch (e) {
       Get.snackbar('About Login', 'Login message',
           backgroundColor: Colors.redAccent,
