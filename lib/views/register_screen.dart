@@ -68,119 +68,146 @@ class _RegisterUiState extends State<RegisterScreen> {
                       'assets/images/logo_text.png',
                       height: 53,
                     ),
+                    SizedBox(
+                      height: 47,
+                    ),
                     Container(
+                      height: 44,
                       decoration: BoxDecoration(
                         color: Color(0x1AE0A071),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: Color(0xffE0A071),
                         ),
                       ),
                       // Email or Phone Number
-                      child: TextFormField(
-                        controller: emailController,
-                        decoration: const InputDecoration(
-                          labelText: 'Email atau Nomor Telepon',
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: TextFormField(
+                          controller: emailController,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            labelText: 'Email atau Nomor Telepon',
+                          ),
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Email atau nomor telepon tidak boleh kosong';
+                            }
+                            return null;
+                          },
                         ),
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'Email atau nomor telepon tidak boleh kosong';
-                          }
-                          return null;
-                        },
                       ),
                     ),
+                    SizedBox(height: 10),
                     // Name input
                     Container(
+                      height: 44,
                       decoration: BoxDecoration(
                         color: Color(0x1AE0A071),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: Color(0xffE0A071),
                         ),
                       ),
                       // Email or Phone Number
-                      child: TextFormField(
-                        controller: nameController,
-                        decoration: const InputDecoration(
-                          labelText: 'Nama',
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: TextFormField(
+                          controller: nameController,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            labelText: 'Nama',
+                          ),
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Nama tidak boleh kosong';
+                            }
+                            return null;
+                          },
                         ),
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'Nama tidak boleh kosong';
-                          }
-                          return null;
-                        },
                       ),
                     ),
+                    SizedBox(height: 10),
                     // Password
                     Container(
+                      height: 44,
                       decoration: BoxDecoration(
                         color: Color(0x1AE0A071),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: Color(0xffE0A071),
                         ),
                       ),
-                      child: TextFormField(
-                        controller: passwordController,
-                        obscureText: _obscureTextPassword,
-                        decoration: InputDecoration(
-                          suffixIcon: InkWell(
-                            onTap: _togglePassword,
-                            child: Icon(_obscureTextPassword
-                                ? Icons.visibility
-                                : Icons.visibility_off),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 4.0),
+                        child: TextFormField(
+                          controller: passwordController,
+                          obscureText: _obscureTextPassword,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            suffixIcon: InkWell(
+                              onTap: _togglePassword,
+                              child: Icon(_obscureTextPassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                            ),
+                            labelText: 'Kata Sandi',
                           ),
-                          labelText: 'Kata Sandi',
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Kata sandi tidak boleh kosong';
+                            }
+                            if (val!.length < 6) {
+                              return 'Kata sandi terlalu pendek.';
+                            }
+                            return null;
+                          },
+                          onChanged: (val) => _password = val,
                         ),
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'Kata sandi tidak boleh kosong';
-                          }
-                          if (val!.length < 6) {
-                            return 'Kata sandi terlalu pendek.';
-                          }
-                          return null;
-                        },
-                        onChanged: (val) => _password = val,
                       ),
                     ),
+                    SizedBox(height: 10),
                     // Confirm Password
                     Container(
+                      height: 44,
                       decoration: BoxDecoration(
                         color: Color(0x1AE0A071),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: Color(0xffE0A071),
                         ),
                       ),
-                      child: TextFormField(
-                        controller: passwordConfirmController,
-                        obscureText: _obscureTextConfirmPassword,
-                        decoration: InputDecoration(
-                          suffixIcon: InkWell(
-                            onTap: _togglePasswordConfirm,
-                            child: Icon(_obscureTextConfirmPassword
-                                ? Icons.visibility
-                                : Icons.visibility_off),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 4.0),
+                        child: TextFormField(
+                          controller: passwordConfirmController,
+                          obscureText: _obscureTextConfirmPassword,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            suffixIcon: InkWell(
+                              onTap: _togglePasswordConfirm,
+                              child: Icon(_obscureTextConfirmPassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                            ),
+                            labelText: 'Konfirmasi Kata Sandi',
                           ),
-                          labelText: 'Konfirmasi Kata Sandi',
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Konfirmasi kata sandi tidak boleh kosong';
+                            }
+                            if (val != _password) {
+                              return 'Konfirmasi kata sandi tidak sesuai';
+                            }
+                            return null;
+                          },
+                          onSaved: (val) {
+                            _passwordConfirm = val!;
+                          },
                         ),
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'Konfirmasi kata sandi tidak boleh kosong';
-                          }
-                          if (val != _password) {
-                            return 'Konfirmasi kata sandi tidak sesuai';
-                          }
-                          return null;
-                        },
-                        onSaved: (val) {
-                          _passwordConfirm = val!;
-                        },
                       ),
                     ),
+                    SizedBox(height: 10),
                     // Register Button
                     GestureDetector(
                       onTap: () {
@@ -201,7 +228,8 @@ class _RegisterUiState extends State<RegisterScreen> {
                         height: 44,
                         decoration: BoxDecoration(
                             color: brownColor,
-                            borderRadius: BorderRadius.all(Radius.circular(4))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
                         child: Center(
                           child: Text(
                             'Register',
@@ -269,14 +297,19 @@ class _RegisterUiState extends State<RegisterScreen> {
                         decoration: BoxDecoration(
                           color: whiteColor,
                         ),
-                        child: Center(
-                          child: Text(
-                            'Daftar dengan Google',
-                            style: GoogleFonts.roboto(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: darkGrayColor),
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/images/google.png', width: 19),
+                            SizedBox(width: 6),
+                            Text(
+                              'Daftar dengan Google',
+                              style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: darkGrayColor),
+                            ),
+                          ],
                         ),
                       ),
                     ),
