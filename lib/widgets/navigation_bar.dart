@@ -14,7 +14,7 @@ class NavigationPage extends StatelessWidget {
   final screen = [
     const HomeScreen(),
     const ActivityScreen(),
-    const ChatScreen(),
+    ChatScreen(),
     const CalendarScreen(),
   ];
 

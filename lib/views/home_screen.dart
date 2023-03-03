@@ -28,8 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(60)),
-                  color: Color(0xE6FDFCFC)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(60)),
+                color: Color(0xE6FDFCFC),
+              ),
             ),
           ),
           SingleChildScrollView(
@@ -275,35 +276,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-//  Align(
-//             alignment: Alignment.bottomCenter,
-//             child: Container(
-//               width: MediaQuery.of(context).size.width,
-//               height: 94,
-//               decoration: const BoxDecoration(
-//                 borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-//                 color: Color(0xffFDFCFC),
-//               ),
-//               child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                   children: [
-//                     Image.asset(
-//                       'assets/images/nav/home.png',
-//                       width: 32,
-//                     ),
-//                     Image.asset(
-//                       'assets/images/nav/activity.png',
-//                       width: 32,
-//                     ),
-//                     Image.asset(
-//                       'assets/images/nav/chat.png',
-//                       width: 32,
-//                     ),
-//                     Image.asset(
-//                       'assets/images/nav/calendar.png',
-//                       width: 32,
-//                     ),
-//                   ]),
-//             ),
-//           ),
