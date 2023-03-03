@@ -1,3 +1,5 @@
+import 'package:calico/views/login_screen_UI.dart';
+import 'package:calico/views/register_screenui.dart';
 import 'package:calico/controllers/user_controller.dart';
 import 'package:calico/models/user_model.dart';
 import 'package:calico/views/register_screen.dart';
@@ -23,8 +25,8 @@ class AuthController extends GetxController {
 
   _initialScreen(User? user) async {
     if (user == null) {
-      await Get.offAll(() => GotoScreen());
-      // await Get.offAll(() => RegisterUi());
+      // await Get.offAll(() => GotoScreen());
+      await Get.offAll(() => LoginScreenUI());
     } else {
       Get.offAll(() => NavigationPage());
     }
