@@ -30,7 +30,9 @@ class _ExpertScreenState extends State<ExpertScreen> {
           onSearch: (value) => setState(() => searchValue = value)),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: edge,
+          ),
           child: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {

@@ -38,12 +38,12 @@ class LoginScreen extends StatelessWidget {
                       color: Color(0x1AE0A071),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: Color(0xffE0A071),
+                        color: lightBrownColor,
                       ),
                     ),
                     child: TextFormField(
                       // controller: emailController,
-                      cursorColor: Color(0xffe0a071),
+                      cursorColor: lightBrownColor,
                       decoration: InputDecoration(
                           hintText: 'Email atau Nomor Telepon',
                           contentPadding: EdgeInsets.symmetric(horizontal: 20),
@@ -58,11 +58,11 @@ class LoginScreen extends StatelessWidget {
                       color: Color(0x1AE0A071),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: Color(0xffE0A071),
+                        color: lightBrownColor,
                       ),
                     ),
                     child: TextFormField(
-                      cursorColor: Color(0xffe0a071),
+                      cursorColor: lightBrownColor,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Kata Sandi',
@@ -151,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                             style: GoogleFonts.roboto(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
-                                color: darkGrayColor),
+                                color: blackColor),
                           ),
                         ],
                       ),
@@ -177,7 +177,7 @@ class LoginScreen extends StatelessWidget {
                           style: GoogleFonts.rubik(
                               fontSize: 17,
                               fontWeight: FontWeight.w400,
-                              color: darkGrayColor),
+                              color: blackColor),
                         ),
                       ),
                     ),
@@ -193,7 +193,7 @@ class LoginScreen extends StatelessWidget {
                         style: GoogleFonts.roboto(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
-                          color: darkGrayColor,
+                          color: blackColor,
                         ),
                       ),
                       GestureDetector(
