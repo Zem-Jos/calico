@@ -53,18 +53,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.to(SosScreen());
+                          Get.to(const SosScreen());
                         },
                         child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 32, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 32, vertical: 4),
                           decoration: BoxDecoration(
                             color: const Color(0xffEDCFCF),
                             borderRadius: BorderRadius.circular(50),
-                            border: Border.all(
-                              color: const Color(0xffB94545),
-                              width: 2.5,
-                            ),
                           ),
                           child: Text(
                             'SOS',

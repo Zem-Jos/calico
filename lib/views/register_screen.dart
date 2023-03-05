@@ -174,7 +174,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                               if (val == null || val.isEmpty) {
                                 return 'Kata sandi tidak boleh kosong';
                               }
-                              if (val!.length < 6) {
+                              if (val.length < 6) {
                                 return 'Kata sandi terlalu pendek.';
                               }
                               return null;

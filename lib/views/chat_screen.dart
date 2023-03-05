@@ -1,6 +1,7 @@
 // TODO : Add chat screen
 
 import 'package:calico/models/chat_message_model.dart';
+import 'package:calico/theme.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class ChatScreen extends StatelessWidget {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Color(0xffFAF2ED),
+        backgroundColor: lightGrayColor,
         appBar: AppBar(
           elevation: 0,
           automaticallyImplyLeading: false,
