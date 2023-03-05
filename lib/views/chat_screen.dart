@@ -1,14 +1,39 @@
-// TODO : Add chat screen
-import 'package:calico/models/chat_message_model.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ChatScreen extends StatelessWidget {
+import '../controllers/chat_session_controller.dart';
+import '../models/chat_session_model.dart';
+import '../utils/getCurrentDate.dart';
+
+class ChatScreen extends StatefulWidget {
   ChatScreen({super.key});
 
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  late List<ChatMessage> _messages = [];
+  // late Future<List<ChatMessage>> _messages;
   var messageController = TextEditingController();
+
+  @override
+  initState() {
+    super.initState();
+    // _messages = ChatSessionController.instance.getChatMessages();
+    _loadMessages();
+  }
+
+  _loadMessages() async {
+    List<ChatMessage> message =
+        await ChatSessionController.instance.getChatMessages();
+    setState(() {
+      _messages = message;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -85,55 +110,55 @@ class ChatScreen extends StatelessWidget {
         body: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(bottom: 98.0),
-              child: ListView.builder(
-                itemCount: messages.length,
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
-                // physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: const EdgeInsets.only(
-                        left: 14, right: 14, top: 10, bottom: 10),
-                    child: Align(
-                      alignment: (messages[index].messageType == 'receiver'
-                          ? Alignment.topLeft
-                          : Alignment.topRight),
-                      child: Container(
-                          constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width * 0.75,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                (messages[index].messageType == 'receiver'
-                                    ? const BorderRadius.only(
-                                        bottomRight: Radius.circular(20),
-                                        topLeft: Radius.circular(20),
-                                        topRight: Radius.circular(20))
-                                    : const BorderRadius.only(
-                                        bottomLeft: Radius.circular(20),
-                                        topLeft: Radius.circular(20),
-                                        topRight: Radius.circular(20))),
-                            color: (messages[index].messageType == 'receiver'
-                                ? const Color(0xffFDFCFC)
-                                : const Color(0xffE0A071)),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 16),
-                          child: Text(
-                            messages[index].messageContent,
-                            style: GoogleFonts.rubik(
-                              fontSize: 17,
-                              color: (messages[index].messageType == 'receiver'
-                                  ? const Color(0xff242424)
-                                  : const Color(0xffFDFCFC)),
+                padding: const EdgeInsets.only(bottom: 98.0),
+                child: ListView.builder(
+                  itemCount: _messages.length,
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: const EdgeInsets.only(
+                          left: 14, right: 14, top: 10, bottom: 10),
+                      child: Align(
+                        alignment: (_messages[index].messageSender == 'calico'
+                            ? Alignment.topLeft
+                            : Alignment.topRight),
+                        child: Container(
+                            constraints: BoxConstraints(
+                              maxWidth:
+                                  MediaQuery.of(context).size.width * 0.75,
                             ),
-                          )),
-                    ),
-                  );
-                },
-              ),
-            ),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  (_messages[index].messageSender == 'calico'
+                                      ? const BorderRadius.only(
+                                          bottomRight: Radius.circular(20),
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20))
+                                      : const BorderRadius.only(
+                                          bottomLeft: Radius.circular(20),
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20))),
+                              color: (_messages[index].messageSender == 'calico'
+                                  ? const Color(0xffFDFCFC)
+                                  : const Color(0xffE0A071)),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 16),
+                            child: Text(
+                              _messages[index].messageContent,
+                              style: GoogleFonts.rubik(
+                                fontSize: 17,
+                                color:
+                                    (_messages[index].messageSender == 'calico'
+                                        ? const Color(0xff242424)
+                                        : const Color(0xffFDFCFC)),
+                              ),
+                            )),
+                      ),
+                    );
+                  },
+                )),
             Align(
               alignment: Alignment.bottomLeft,
               child: Container(
@@ -173,9 +198,25 @@ class ChatScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Image.asset(
-                        'assets/images/icon/send_icon.png',
-                        width: 45,
+                      GestureDetector(
+                        onTap: () {
+                          if (messageController.text.isNotEmpty) {
+                            setState(() {
+                              _messages.insert(
+                                  _messages.length,
+                                  ChatMessage(
+                                      messageContent: messageController.text,
+                                      messageSender: 'user'));
+                              messageController.clear();
+                            });
+
+                            // update firebase db
+                          }
+                        },
+                        child: Image.asset(
+                          'assets/images/icon/send_icon.png',
+                          width: 45,
+                        ),
                       ),
                     ]),
               ),
@@ -191,29 +232,29 @@ List<ChatMessage> messages = [
   ChatMessage(
       messageContent:
           "Halo Izora! Perkenalkan aku Urai, chatbot yang siap menemanimu dalam mengatasi kecemasan",
-      messageType: "receiver"),
+      messageSender: "calico"),
   ChatMessage(
       messageContent:
           "Ceritakan keluh kesahmu! Aku akan meringkas percakapan harian kita menjadi jurnal. Bisa diakses di halaman riwayat",
-      messageType: "receiver"),
-  ChatMessage(messageContent: "Salam kenal!", messageType: "receiver"),
-  ChatMessage(messageContent: "Halo juga, Urai!", messageType: "sender"),
+      messageSender: "calico"),
+  ChatMessage(messageContent: "Salam kenal!", messageSender: "calico"),
+  ChatMessage(messageContent: "Halo juga, Urai!", messageSender: "user"),
   ChatMessage(
       messageContent: "Jadi, bagaimana perasaanmu hari ini, Izora?",
-      messageType: "receiver"),
-  ChatMessage(messageContent: "Sedih", messageType: "sender"),
+      messageSender: "calico"),
+  ChatMessage(messageContent: "Sedih", messageSender: "user"),
   ChatMessage(
       messageContent:
           "Halo Izora! Perkenalkan aku Urai, chatbot yang siap menemanimu dalam mengatasi kecemasan",
-      messageType: "receiver"),
+      messageSender: "calico"),
   ChatMessage(
       messageContent:
           "Ceritakan keluh kesahmu! Aku akan meringkas percakapan harian kita menjadi jurnal. Bisa diakses di halaman riwayat",
-      messageType: "receiver"),
-  ChatMessage(messageContent: "Salam kenal!", messageType: "receiver"),
-  ChatMessage(messageContent: "Halo juga, Urai!", messageType: "sender"),
+      messageSender: "calico"),
+  ChatMessage(messageContent: "Salam kenal!", messageSender: "calico"),
+  ChatMessage(messageContent: "Halo juga, Urai!", messageSender: "user"),
   ChatMessage(
       messageContent: "Jadi, bagaimana perasaanmu hari ini, Izora?",
-      messageType: "receiver"),
-  ChatMessage(messageContent: "Sedih", messageType: "sender"),
+      messageSender: "calico"),
+  ChatMessage(messageContent: "Sedih", messageSender: "user"),
 ];

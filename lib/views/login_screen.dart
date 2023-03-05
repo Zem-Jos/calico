@@ -7,7 +7,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     child: TextFormField(
-                      // controller: emailController,
+                      controller: emailController,
                       cursorColor: Color(0xffe0a071),
                       decoration: InputDecoration(
                           hintText: 'Email atau Nomor Telepon',
@@ -62,6 +65,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     child: TextFormField(
+                      controller: passwordController,
                       cursorColor: Color(0xffe0a071),
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -85,9 +89,10 @@ class LoginScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // AuthController.instance.register(
-                      //     emailController.text.trim(),
-                      //     passwordController.text.trim());
+                      AuthController.instance.login(
+                        emailController.text.trim(),
+                        passwordController.text.trim(),
+                      );
                     },
                     child: Container(
                       width: double.infinity,
