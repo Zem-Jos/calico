@@ -1,3 +1,4 @@
+import 'package:calico/controllers/authentication_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -175,27 +176,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               SizedBox(height: 8),
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 16.0),
-                  child: Row(children: [
-                    Image.asset(
-                      'assets/images/icon/out_icon.png',
-                      width: 35,
-                    ),
-                    SizedBox(width: 16),
-                    Text(
-                      'Keluar',
-                      style: GoogleFonts.rubik(
-                          fontSize: 17, fontWeight: FontWeight.w400),
-                    ),
-                  ]),
+              GestureDetector(
+                onTap: () {
+                  AuthController.instance.logout();
+                },
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 16.0),
+                    child: Row(children: [
+                      Image.asset(
+                        'assets/images/icon/out_icon.png',
+                        width: 35,
+                      ),
+                      SizedBox(width: 16),
+                      Text(
+                        'Keluar',
+                        style: GoogleFonts.rubik(
+                            fontSize: 17, fontWeight: FontWeight.w400),
+                      ),
+                    ]),
+                  ),
                 ),
               ),
             ],

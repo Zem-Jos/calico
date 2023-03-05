@@ -258,9 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   ),
                   GestureDetector(
-                    onTap: () {
-                      AuthController.instance.logout();
-                    },
+                    onTap: () {},
                     child: Image.asset(
                       'assets/images/expert_button.png',
                       width: 342,
