@@ -15,7 +15,7 @@ class NavigationPage extends StatelessWidget {
     const HomeScreen(),
     const ActivityScreen(),
     ExpertScreen(),
-    const CalendarScreen(),
+    CalendarScreen(),
   ];
 
   @override

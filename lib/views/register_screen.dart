@@ -174,7 +174,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                               if (val == null || val.isEmpty) {
                                 return 'Kata sandi tidak boleh kosong';
                               }
-                              if (val!.length < 6) {
+                              if (val.length < 6) {
                                 return 'Kata sandi terlalu pendek.';
                               }
                               return null;
@@ -277,7 +277,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                             style: GoogleFonts.roboto(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: darkGrayColor,
+                              color: blackColor,
                             ),
                             children: const <TextSpan>[
                               TextSpan(
@@ -306,7 +306,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                             Expanded(
                               child: Divider(
                                 thickness: 2,
-                                color: darkGrayColor,
+                                color: blackColor,
                               ),
                             ),
                             Padding(
@@ -317,14 +317,14 @@ class _RegisterUiState extends State<RegisterScreen> {
                                 style: GoogleFonts.roboto(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
-                                  color: darkGrayColor,
+                                  color: blackColor,
                                 ),
                               ),
                             ),
                             Expanded(
                               child: Divider(
                                 thickness: 2,
-                                color: darkGrayColor,
+                                color: blackColor,
                               ),
                             ),
                           ],
@@ -352,7 +352,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                                 style: GoogleFonts.roboto(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400,
-                                    color: darkGrayColor),
+                                    color: blackColor),
                               ),
                             ],
                           ),
@@ -369,7 +369,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                               style: GoogleFonts.roboto(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
-                                color: darkGrayColor,
+                                color: blackColor,
                               ),
                             ),
                             GestureDetector(

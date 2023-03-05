@@ -1,6 +1,7 @@
 import 'package:calico/controllers/authentication_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/chat_screen.dart';
+import 'package:calico/views/sos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,16 +52,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       GestureDetector(
+                        onTap: () {
+                          Get.to(const SosScreen());
+                        },
                         child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 32, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 32, vertical: 4),
                           decoration: BoxDecoration(
                             color: const Color(0xffEDCFCF),
                             borderRadius: BorderRadius.circular(50),
-                            border: Border.all(
-                              color: const Color(0xffB94545),
-                              width: 2.5,
-                            ),
                           ),
                           child: Text(
                             'SOS',

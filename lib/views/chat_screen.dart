@@ -1,3 +1,4 @@
+import 'package:calico/theme.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Color(0xffFAF2ED),
+        backgroundColor: lightGrayColor,
         appBar: AppBar(
           elevation: 0,
           automaticallyImplyLeading: false,
