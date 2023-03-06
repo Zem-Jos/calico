@@ -13,9 +13,11 @@ dependencies:
   firebase_core: ^2.6.1
   flutter:
     sdk: flutter
+  flutter_native_splash: ^2.2.19
   flutter_phone_direct_caller: ^2.1.1
   get: ^4.6.5
   google_fonts: ^4.0.3
+  shared_preferences: ^2.0.18
   table_calendar: ^3.0.1
 
 dev_dependencies:
@@ -30,3 +32,9 @@ flutter:
     - assets/images/mood/
     - assets/images/nav/
     - assets/images/icon/
+
+flutter_native_splash:
+  image: assets/images/splash.png
+  color: "#F0E8D5"
+  android: true
+  ios: true
