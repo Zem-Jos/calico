@@ -28,10 +28,11 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   _loadMessages() async {
-    List<ChatMessage> message =
+    List<ChatMessage> messages =
         await ChatSessionController.instance.getChatMessages();
     setState(() {
-      _messages = message;
+      _messages = messages;
+      print(messages);
     });
   }
 
@@ -202,6 +203,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       GestureDetector(
                         onTap: () {
                           if (messageController.text.isNotEmpty) {
+                            ChatMessage chatMessage = ChatMessage(
+                                messageContent: messageController.text,
+                                messageSender: "user");
+
                             setState(() {
                               _messages.insert(
                                   _messages.length,
@@ -210,8 +215,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                       messageSender: 'user'));
                               messageController.clear();
                             });
-
                             // update firebase db
+                            ChatSessionController.instance
+                                .insertChatMessage(chatMessage);
                           }
                         },
                         child: Image.asset(

@@ -5,12 +5,14 @@ class ChatSession {
   final String? id;
   List<ChatMessage> messages;
   DateTime session;
+  Timestamp firebaseSession;
 
   ChatSession({
     this.id,
     required this.messages,
     required DateTime session,
-  }) : session = getCurrentDate();
+  })  : session = getCurrentDate(),
+        firebaseSession = Timestamp.fromDate(session);
 
   factory ChatSession.fromFirestore({
     required DocumentSnapshot<Map<String, dynamic>> snapshot,
@@ -18,14 +20,15 @@ class ChatSession {
   }) {
     // var list = json['messages'] as List;
     final data = snapshot.data();
-
-    var list = data!['messages'] as List;
+    if (data == null) throw Exception("Chat Session not found!");
+    var id = snapshot.id;
+    var list = data['messages'] as List;
     var session = data['session'];
     DateTime sessionDate = DateTime.parse(session);
 
     List<ChatMessage> messages =
         list.map((message) => ChatMessage.fromJson(message)).toList();
-    return ChatSession(messages: messages, session: sessionDate);
+    return ChatSession(id: id, messages: messages, session: sessionDate);
   }
 
   // tojson
@@ -33,6 +36,7 @@ class ChatSession {
     return {
       'messages': messages.map((e) => e.toJson()).toList(),
       'session': session.toString(),
+      'firebaseSession': firebaseSession,
     };
   }
 }

@@ -246,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.to(ChatScreen());
+                      Get.to(() => ChatScreen());
                     },
                     child: Image.asset(
                       'assets/images/chat_button.png',

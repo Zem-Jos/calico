@@ -11,23 +11,21 @@ class ChatSessionController extends GetxController {
   Future<ChatSession?> getChatSession(DateTime session) async {
     final ref = _db
         .collection("chatSessions")
-        .where("session", isEqualTo: session.toString());
+        .where("firebaseSession", isEqualTo: Timestamp.fromDate(session));
 
-    ref.get().then((querySnapshot) {
-      if (querySnapshot.docs.isEmpty) {
-        print("No chat session found!");
-        createNewChatSession();
-        // return empty ChatSession
-        return ChatSession(messages: [], session: getCurrentDate());
-      }
-      ChatSession chatSession =
-          ChatSession.fromFirestore(snapshot: querySnapshot.docs.first);
+    final querySnapshot = await ref.get();
 
-      return chatSession;
-    }, onError: (error) {
-      print("Failed to get chat session: $error");
-    });
-    return null;
+    if (querySnapshot.docs.isEmpty) {
+      print("No chat session found!");
+      createNewChatSession();
+      // return empty ChatSession
+      return ChatSession(messages: [], session: getCurrentDate());
+    }
+
+    ChatSession chatSession =
+        ChatSession.fromFirestore(snapshot: querySnapshot.docs.first);
+    print("chatSession adf: ${chatSession.id}");
+    return chatSession;
   }
 
   Future<void> createNewChatSession() async {
@@ -35,9 +33,6 @@ class ChatSessionController extends GetxController {
       messages: [],
       session: getCurrentDate(),
     );
-
-    print('chatsession: ${chatSession.toJson()}');
-
     await _db
         .collection('chatSessions')
         .add(chatSession.toJson())
@@ -52,23 +47,32 @@ class ChatSessionController extends GetxController {
     ChatSession? chatSession = await getChatSession(getCurrentDate());
 
     if (chatSession == null) {
-      return [];
+      return [ChatMessage(messageContent: "adfadf", messageSender: "user")];
     }
 
     return chatSession.messages;
   }
 
-  Future<void> insertChatMessage(
-      ChatSession chatSession, ChatMessage message) async {
-    final ref = _db.collection("chatSessions").doc(chatSession.id);
+  Future<void> insertChatMessage(ChatMessage message) async {
+    try {
+      // get current chat session
+      ChatSession? chatSession = await getChatSession(getCurrentDate());
 
-    ref.update({
-      "messages": FieldValue.arrayUnion([message.toJson()])
-    }).then((value) {
-      print("Successfully insert chat message!");
-    }, onError: (error) {
-      print("Failed to insert chat message: $error");
-    });
+      if (chatSession == null) throw Exception("Failed to get chat session.");
+      print("chatSession id: $chatSession.id");
+
+      final ref = _db.collection("chatSessions").doc(chatSession.id);
+
+      ref.update({
+        "messages": FieldValue.arrayUnion([message.toJson()])
+      }).then((value) {
+        print("Successfully insert chat message!");
+      }).catchError((err) {
+        print(err);
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> updateChatSession(ChatSession chatSession) async {
