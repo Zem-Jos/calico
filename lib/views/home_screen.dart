@@ -1,4 +1,4 @@
-import 'package:calico/controllers/authentication_controller.dart';
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/chat_screen.dart';
 import 'package:calico/views/sos_screen.dart';
@@ -14,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final ThemeController _themeController = Get.find<ThemeController>();
+  final ColorController _colorController = Get.put(ColorController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
             child: Container(
               width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(60)),
-                color: Color(0xE6FDFCFC),
+                color: _colorController.getBackgroundColor(),
               ),
             ),
           ),
@@ -84,7 +86,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 173,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: whiteColor,
+                      color: _colorController.getContainerColor(),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xff433230).withOpacity(0.15),
+                          spreadRadius: 0,
+                          blurRadius: 12,
+                          offset:
+                              const Offset(0, 4), // changes position of shadow
+                        ),
+                      ],
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,7 +105,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Bagaimana Suasana Hatimu Hari Ini?',
                           style: GoogleFonts.rubik(
                             fontSize: 16,
-                            color: blackColor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -109,8 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   'Senang',
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 11, color: blackColor),
+                                  style: GoogleFonts.rubik(fontSize: 11),
                                 )
                               ],
                             ),
@@ -122,8 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   'Biasa',
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 11, color: blackColor),
+                                  style: GoogleFonts.rubik(fontSize: 11),
                                 )
                               ],
                             ),
@@ -135,8 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   'Sedih',
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 11, color: blackColor),
+                                  style: GoogleFonts.rubik(fontSize: 11),
                                 )
                               ],
                             ),
@@ -148,8 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   'Marah',
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 11, color: blackColor),
+                                  style: GoogleFonts.rubik(fontSize: 11),
                                 )
                               ],
                             ),
@@ -161,8 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   'Cemas',
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 11, color: blackColor),
+                                  style: GoogleFonts.rubik(fontSize: 11),
                                 )
                               ],
                             ),
@@ -179,8 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   'Lelah',
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 11, color: blackColor),
+                                  style: GoogleFonts.rubik(fontSize: 11),
                                 )
                               ],
                             ),
@@ -192,8 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   'Kecewa',
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 11, color: blackColor),
+                                  style: GoogleFonts.rubik(fontSize: 11),
                                 )
                               ],
                             ),
@@ -205,8 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   'Takut',
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 11, color: blackColor),
+                                  style: GoogleFonts.rubik(fontSize: 11),
                                 )
                               ],
                             ),
@@ -218,8 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   'Hampa',
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 11, color: blackColor),
+                                  style: GoogleFonts.rubik(fontSize: 11),
                                 )
                               ],
                             ),
@@ -231,8 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   'Smgt',
-                                  style: GoogleFonts.rubik(
-                                      fontSize: 11, color: blackColor),
+                                  style: GoogleFonts.rubik(fontSize: 11),
                                 )
                               ],
                             ),
@@ -248,10 +248,36 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Get.to(ChatScreen());
                     },
-                    child: Image.asset(
-                      'assets/images/chat_button.png',
-                      width: 342,
-                      height: 97,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff433230).withOpacity(0.15),
+                            spreadRadius: 0,
+                            blurRadius: 12,
+                            offset: const Offset(
+                                0, 4), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xff433230).withOpacity(0.15),
+                              spreadRadius: 0,
+                              blurRadius: 12,
+                              offset: const Offset(
+                                  0, 4), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Image.asset(
+                          'assets/images/chat_button.png',
+                          width: 342,
+                          height: 97,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(

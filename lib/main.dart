@@ -1,3 +1,4 @@
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/views/goto_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,33 +32,13 @@ Future<void> main() async {
 }
 
 class MainApp extends StatelessWidget {
-  // RxBool _isLightTheme = false.obs;
-
-  // Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
-  // _saveThemeStatus() async {
-  //   SharedPreferences pref = await _prefs;
-  //   pref.setBool('theme', _isLightTheme.value);
-  // }
-
-  // _getThemeStatus() async {
-  //   var _isLight = _prefs.then((SharedPreferences prefs) {
-  //     return prefs.getBool('theme') != null ? prefs.getBool('theme') : true;
-  //   }).obs;
-  //   _isLightTheme.value = (await _isLight.value)!;
-  //   Get.changeThemeMode(_isLightTheme.value ? ThemeMode.light : ThemeMode.dark);
-  // }
-
-  // MainApp() {
-  //   _getThemeStatus();
-  // }
-
+  final ThemeController _themeController = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      // theme: _lightTheme,
-      // darkTheme: _darkTheme,
-      themeMode: ThemeMode.system,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       home: const Scaffold(
         body: GotoScreen(),

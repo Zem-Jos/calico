@@ -1,6 +1,6 @@
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/widgets/expert_card.dart';
-import 'package:calico/widgets/navigation_bar.dart';
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +14,7 @@ class ExpertScreen extends StatefulWidget {
 }
 
 class _ExpertScreenState extends State<ExpertScreen> {
+  final ThemeController _themeController = Get.find<ThemeController>();
   var searchController = TextEditingController();
   RangeValues _currentRangeValues = RangeValues(40, 80);
 

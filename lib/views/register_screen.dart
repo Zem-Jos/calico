@@ -1,4 +1,5 @@
 import 'package:calico/controllers/authentication_controller.dart';
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterUiState extends State<RegisterScreen> {
+  final ThemeController _themeController = Get.find<ThemeController>();
+
   final _formKey = GlobalKey<FormState>();
   late String _password;
   late String _passwordConfirm;

@@ -1,4 +1,4 @@
-import 'package:calico/theme.dart';
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/chat_session_controller.dart';
 import '../models/chat_session_model.dart';
-import '../utils/getCurrentDate.dart';
 
 class ChatScreen extends StatefulWidget {
   ChatScreen({super.key});
@@ -16,14 +15,15 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  // final ThemeController _themeController = Get.find<ThemeController>();
+  final ColorController _colorController = Get.put(ColorController());
+
   late List<ChatMessage> _messages = [];
-  // late Future<List<ChatMessage>> _messages;
   var messageController = TextEditingController();
 
   @override
   initState() {
     super.initState();
-    // _messages = ChatSessionController.instance.getChatMessages();
     _loadMessages();
   }
 
@@ -43,11 +43,11 @@ class _ChatScreenState extends State<ChatScreen> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: lightGrayColor,
+        backgroundColor: _colorController.getBackgroundColor(),
         appBar: AppBar(
           elevation: 0,
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           flexibleSpace: SafeArea(
             child: Container(
               height: 65,
@@ -61,10 +61,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     color: Color(0xff433230).withOpacity(0.15),
                     spreadRadius: 0,
                     blurRadius: 12,
-                    offset: Offset(0, 4), // changes position of shadow
+                    offset: const Offset(0, 4), // changes position of shadow
                   ),
                 ],
-                color: Color(0xffFDFCFC),
+                color: _colorController.getContainerColor(),
               ),
               padding: EdgeInsets.only(right: 16),
               child: Row(
@@ -74,6 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   Row(
                     children: [
                       IconButton(
+                        color: _colorController.getTextColor(),
                         onPressed: () {
                           Get.offAll(NavigationPage());
                         },
@@ -141,8 +142,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                           topLeft: Radius.circular(20),
                                           topRight: Radius.circular(20))),
                               color: (_messages[index].messageSender == 'calico'
-                                  ? const Color(0xffFDFCFC)
-                                  : const Color(0xffE0A071)),
+                                  ? _colorController.getCalicoChatColor()
+                                  : _colorController.getUserChatColor()),
                             ),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
@@ -150,10 +151,10 @@ class _ChatScreenState extends State<ChatScreen> {
                               _messages[index].messageContent,
                               style: GoogleFonts.rubik(
                                 fontSize: 17,
-                                color:
-                                    (_messages[index].messageSender == 'calico'
-                                        ? const Color(0xff242424)
-                                        : const Color(0xffFDFCFC)),
+                                color: (_messages[index].messageSender ==
+                                        'calico'
+                                    ? _colorController.getCalicoChatTextColor()
+                                    : _colorController.getUserChatTextColor()),
                               ),
                             )),
                       ),
@@ -167,10 +168,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
                 height: 98,
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(20)),
-                    color: Color(0xffFDFCFC)),
+                    color: _colorController.getContainerColor()),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

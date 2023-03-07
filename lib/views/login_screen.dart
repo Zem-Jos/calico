@@ -1,4 +1,5 @@
 import 'package:calico/controllers/authentication_controller.dart';
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/views/login_screen.dart';
 import 'package:calico/views/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
+  final ThemeController _themeController = Get.find<ThemeController>();
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
