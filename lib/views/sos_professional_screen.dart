@@ -15,7 +15,7 @@ class SosProfessionalScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         flexibleSpace: SafeArea(
           child: Container(
             height: 65,
@@ -70,6 +70,31 @@ class SosProfessionalScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               GestureDetector(
+                onTap: () {
+                  //show alert dialog
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Call'),
+                          content: Text('Do you want to call?'),
+                          actions: [
+                            ElevatedButton(
+                              child: Text('Yes'),
+                              onPressed: () {
+                                _callNumber();
+                              },
+                            ),
+                            ElevatedButton(
+                              child: Text('No'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      });
+                },
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -128,6 +153,31 @@ class SosProfessionalScreen extends StatelessWidget {
                 ),
               ),
               GestureDetector(
+                onTap: () {
+                  //show alert dialog
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Call'),
+                          content: Text('Do you want to call?'),
+                          actions: [
+                            ElevatedButton(
+                              child: Text('Yes'),
+                              onPressed: () {
+                                _callNumber();
+                              },
+                            ),
+                            ElevatedButton(
+                              child: Text('No'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      });
+                },
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -186,7 +236,32 @@ class SosProfessionalScreen extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => _callNumber(),
+                // onTap: () => _callNumber(),
+                onTap: () {
+                  //show alert dialog
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Call'),
+                          content: Text('Do you want to call?'),
+                          actions: [
+                            ElevatedButton(
+                              child: Text('Yes'),
+                              onPressed: () {
+                                _callNumber();
+                              },
+                            ),
+                            ElevatedButton(
+                              child: Text('No'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      });
+                },
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(

@@ -114,53 +114,58 @@ class _ChatScreenState extends State<ChatScreen> {
           children: <Widget>[
             Padding(
                 padding: const EdgeInsets.only(bottom: 98.0),
-                child: ListView.builder(
-                  itemCount: _messages.length,
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.only(top: 10, bottom: 10),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: const EdgeInsets.only(
-                          left: 14, right: 14, top: 10, bottom: 10),
-                      child: Align(
-                        alignment: (_messages[index].messageSender == 'calico'
-                            ? Alignment.topLeft
-                            : Alignment.topRight),
-                        child: Container(
-                            constraints: BoxConstraints(
-                              maxWidth:
-                                  MediaQuery.of(context).size.width * 0.75,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  (_messages[index].messageSender == 'calico'
-                                      ? const BorderRadius.only(
-                                          bottomRight: Radius.circular(20),
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20))
-                                      : const BorderRadius.only(
-                                          bottomLeft: Radius.circular(20),
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20))),
-                              color: (_messages[index].messageSender == 'calico'
-                                  ? _colorController.getCalicoChatColor()
-                                  : _colorController.getUserChatColor()),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 16),
-                            child: Text(
-                              _messages[index].messageContent,
-                              style: GoogleFonts.rubik(
-                                fontSize: 17,
-                                color: (_messages[index].messageSender ==
-                                        'calico'
-                                    ? _colorController.getCalicoChatTextColor()
-                                    : _colorController.getUserChatTextColor()),
+                child: Expanded(
+                  child: ListView.builder(
+                    itemCount: _messages.length,
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: const EdgeInsets.only(
+                            left: 14, right: 14, top: 10, bottom: 10),
+                        child: Align(
+                          alignment: (_messages[index].messageSender == 'calico'
+                              ? Alignment.topLeft
+                              : Alignment.topRight),
+                          child: Container(
+                              constraints: BoxConstraints(
+                                maxWidth:
+                                    MediaQuery.of(context).size.width * 0.75,
                               ),
-                            )),
-                      ),
-                    );
-                  },
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    (_messages[index].messageSender == 'calico'
+                                        ? const BorderRadius.only(
+                                            bottomRight: Radius.circular(20),
+                                            topLeft: Radius.circular(20),
+                                            topRight: Radius.circular(20))
+                                        : const BorderRadius.only(
+                                            bottomLeft: Radius.circular(20),
+                                            topLeft: Radius.circular(20),
+                                            topRight: Radius.circular(20))),
+                                color:
+                                    (_messages[index].messageSender == 'calico'
+                                        ? _colorController.getCalicoChatColor()
+                                        : _colorController.getUserChatColor()),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 16),
+                              child: Text(
+                                _messages[index].messageContent,
+                                style: GoogleFonts.rubik(
+                                  fontSize: 17,
+                                  color: (_messages[index].messageSender ==
+                                          'calico'
+                                      ? _colorController
+                                          .getCalicoChatTextColor()
+                                      : _colorController
+                                          .getUserChatTextColor()),
+                                ),
+                              )),
+                        ),
+                      );
+                    },
+                  ),
                 )),
             Align(
               alignment: Alignment.bottomLeft,
