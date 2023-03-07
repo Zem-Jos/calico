@@ -1,4 +1,5 @@
 import 'package:calico/controllers/authentication_controller.dart';
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +14,12 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final ThemeController _themeController = Get.find<ThemeController>();
+  final ColorController _colorController = Get.put(ColorController());
   @override
   Widget build(BuildContext context) {
-    var switchState = false;
     return Scaffold(
-      backgroundColor: shadeGrayColor,
+      backgroundColor: _colorController.getBackgroundColor(),
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
@@ -53,13 +55,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: whiteColor,
+                  color: _colorController.getContainerColor(),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
@@ -93,7 +94,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: whiteColor,
+                  color: _colorController.getContainerColor(),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
@@ -117,7 +118,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: whiteColor,
+                  color: _colorController.getContainerColor(),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
@@ -135,27 +136,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           fontSize: 17, fontWeight: FontWeight.w400),
                     ),
                     const Spacer(),
-                    Switch.adaptive(
-                      activeColor: brownColor,
-                      activeTrackColor: lightBrownColor,
-                      inactiveThumbColor: brownColor,
-                      inactiveTrackColor: lightGrayColor,
-                      splashRadius: 50.0,
-                      // boolean variable value
-                      // value: forAndroid,
-                      value: switchState,
-                      // changes the state of the switch
-                      // onChanged: (value) => setState(() => forAndroid = value),
-                      onChanged: (value) => setState(() => switchState = value),
-                    ),
+                    Obx(() => Switch(
+                          activeColor: brownColor,
+                          activeTrackColor: lightBrownColor,
+                          inactiveThumbColor: brownColor,
+                          inactiveTrackColor: lightGrayColor,
+                          value: _themeController.isDarkMode.value,
+                          onChanged: (value) {
+                            setState(() {
+                              _themeController.changeTheme();
+                            });
+                          },
+                        )),
                   ]),
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: whiteColor,
+                  color: _colorController.getContainerColor(),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
@@ -183,7 +183,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: whiteColor,
+                    color: _colorController.getContainerColor(),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(

@@ -1,3 +1,4 @@
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +14,15 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
+  final ThemeController _themeController = Get.find<ThemeController>();
+  final ColorController _colorController = Get.put(ColorController());
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: lightGrayColor,
+        backgroundColor: _colorController.getBackgroundColor(),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: edge),
@@ -38,7 +41,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         offset: Offset(0, 4), // changes position of shadow
                       ),
                     ],
-                    color: whiteColor,
+                    color: _colorController.getContainerColor(),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Row(
@@ -93,9 +96,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 SizedBox(height: 12),
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: whiteColor),
+                    borderRadius: BorderRadius.circular(15),
+                    color: _colorController.getContainerColor(),
+                  ),
                   child: TableCalendar(
+                    locale: 'en_US',
                     firstDay:
                         DateTime.now().subtract(const Duration(days: 365)),
                     lastDay: DateTime.now().add(const Duration(days: 365)),

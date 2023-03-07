@@ -12,6 +12,7 @@ const Color creamColor = Color(0xffF2B997);
 const Color lightGreenColor = Color(0xffCFD29D);
 const Color greenColor = Color(0xff71A77A);
 const Color shadeGrayColor = Color(0xffF2F2F2);
+const Color darkBackground = Color(0xff505050);
 const double edge = 24.0;
 
 // TextStyle blackTextStyle = GoogleFonts.rubik(

@@ -1,4 +1,5 @@
 import 'package:calico/controllers/navigation_controller.dart';
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/views/activity_screen.dart';
 import 'package:calico/views/calendar_screen.dart';
 import 'package:calico/views/expert_screen.dart';
@@ -20,8 +21,10 @@ class NavigationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController _themeController = Get.find<ThemeController>();
+    final ColorController _colorController = Get.put(ColorController());
     return Scaffold(
-      backgroundColor: Color(0xffFAF2ED),
+      backgroundColor: _colorController.getBackgroundColor(),
       body: Obx(
         () => IndexedStack(
           index: bottomNavigationController.selectedIndex.value,

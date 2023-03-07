@@ -1,6 +1,5 @@
 import 'package:calico/theme.dart';
 import 'package:calico/views/sos_screen.dart';
-import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
