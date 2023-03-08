@@ -98,6 +98,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: _colorController.getContainerColor(),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xff433230).withOpacity(0.15),
+                        spreadRadius: 0,
+                        blurRadius: 12,
+                        offset: Offset(0, 4), // changes position of shadow
+                      ),
+                    ],
                   ),
                   child: TableCalendar(
                     locale: 'en_US',

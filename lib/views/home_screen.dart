@@ -80,92 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: 30,
                   ),
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(
-                  //       horizontal: 25, vertical: 18),
-                  //   width: 342,
-                  //   height: 173,
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.circular(20),
-                  //     color: _colorController.getContainerColor(),
-                  //     boxShadow: [
-                  //       BoxShadow(
-                  //         color: Color(0xff433230).withOpacity(0.15),
-                  //         spreadRadius: 0,
-                  //         blurRadius: 12,
-                  //         offset:
-                  //             const Offset(0, 4), // changes position of shadow
-                  //       ),
-                  //     ],
-                  //   ),
-                  //   child: Column(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Text(
-                  //         'Bagaimana Suasana Hatimu Hari Ini?',
-                  //         style: GoogleFonts.rubik(
-                  //           fontSize: 16,
-                  //           fontWeight: FontWeight.w500,
-                  //         ),
-                  //       ),
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //         children: [
-                  //           Image.asset(
-                  //             'assets/images/mood/senang.png',
-                  //             width: 52,
-                  //           ),
-                  //           Image.asset(
-                  //             'assets/images/mood/biasa.png',
-                  //             width: 52,
-                  //           ),
-                  //           Image.asset(
-                  //             'assets/images/mood/sedih.png',
-                  //             width: 52,
-                  //           ),
-                  //           Image.asset(
-                  //             'assets/images/mood/marah.png',
-                  //             width: 52,
-                  //           ),
-                  //           Image.asset(
-                  //             'assets/images/mood/cemas.png',
-                  //             width: 52,
-                  //           ),
-                  //         ],
-                  //       ),
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //         children: [
-                  //           Image.asset(
-                  //             'assets/images/mood/lelah.png',
-                  //             width: 52,
-                  //           ),
-                  //           Image.asset(
-                  //             'assets/images/mood/kecewa.png',
-                  //             width: 52,
-                  //           ),
-                  //           Image.asset(
-                  //             'assets/images/mood/takut.png',
-                  //             width: 52,
-                  //           ),
-                  //           Image.asset(
-                  //             'assets/images/mood/hampa.png',
-                  //             width: 52,
-                  //           ),
-                  //           Image.asset(
-                  //             'assets/images/mood/semangat.png',
-                  //             width: 52,
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-
                   MoodBoard(),
                   const SizedBox(
-                    height: 23,
+                    height: 20,
                   ),
                   GestureDetector(
                     onTap: () {

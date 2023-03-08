@@ -4,13 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MoodBoard extends StatelessWidget {
+class MoodBoard extends StatefulWidget {
   const MoodBoard({super.key});
 
+  @override
+  State<MoodBoard> createState() => _MoodBoardState();
+}
+
+class _MoodBoardState extends State<MoodBoard> {
   @override
   Widget build(BuildContext context) {
     final ThemeController _themeController = Get.find<ThemeController>();
     final ColorController _colorController = Get.put(ColorController());
+
+    var moodChosen;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
       decoration: BoxDecoration(
@@ -29,14 +36,24 @@ class MoodBoard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
+          SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(
-                width: 52,
-                _themeController.isDarkMode.value
-                    ? 'assets/images/mood/senang_dark.png'
-                    : 'assets/images/mood/senang.png',
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    moodChosen = _themeController.isDarkMode.value
+                        ? 'assets/images/mood/senang_dark.png'
+                        : 'assets/images/mood/senang.png';
+                  });
+                },
+                child: Image.asset(
+                  width: 52,
+                  _themeController.isDarkMode.value
+                      ? 'assets/images/mood/senang_dark.png'
+                      : 'assets/images/mood/senang.png',
+                ),
               ),
               Image.asset(
                 _themeController.isDarkMode.value
@@ -64,6 +81,7 @@ class MoodBoard extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
