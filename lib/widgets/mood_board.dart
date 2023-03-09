@@ -1,3 +1,4 @@
+import 'package:calico/controllers/mood_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:flutter/material.dart';
@@ -16,108 +17,216 @@ class _MoodBoardState extends State<MoodBoard> {
   Widget build(BuildContext context) {
     final ThemeController _themeController = Get.find<ThemeController>();
     final ColorController _colorController = Get.put(ColorController());
+    final MoodController _moodController = Get.put(MoodController());
 
-    var moodChosen;
     return Container(
+      width: double.infinity,
+      // height: MediaQuery.of(context).size.height * 0.22,
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: _colorController.getContainerColor(),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Bagaimana Suasana Hatimu Hari Ini?',
-            style: GoogleFonts.rubik(
-              fontSize: 16,
-              color: _colorController.getTextColor(),
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    moodChosen = _themeController.isDarkMode.value
-                        ? 'assets/images/mood/senang_dark.png'
-                        : 'assets/images/mood/senang.png';
-                  });
-                },
-                child: Image.asset(
-                  width: 52,
-                  _themeController.isDarkMode.value
-                      ? 'assets/images/mood/senang_dark.png'
-                      : 'assets/images/mood/senang.png',
-                ),
-              ),
-              Image.asset(
-                _themeController.isDarkMode.value
-                    ? 'assets/images/mood/biasa_dark.png'
-                    : 'assets/images/mood/biasa.png',
-                width: 52,
-              ),
-              Image.asset(
-                _themeController.isDarkMode.value
-                    ? 'assets/images/mood/sedih_dark.png'
-                    : 'assets/images/mood/sedih.png',
-                width: 52,
-              ),
-              Image.asset(
-                _themeController.isDarkMode.value
-                    ? 'assets/images/mood/marah_dark.png'
-                    : 'assets/images/mood/marah.png',
-                width: 52,
-              ),
-              Image.asset(
-                _themeController.isDarkMode.value
-                    ? 'assets/images/mood/cemas_dark.png'
-                    : 'assets/images/mood/cemas.png',
-                width: 52,
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.asset(
-                _themeController.isDarkMode.value
-                    ? 'assets/images/mood/lelah_dark.png'
-                    : 'assets/images/mood/lelah.png',
-                width: 52,
-              ),
-              Image.asset(
-                _themeController.isDarkMode.value
-                    ? 'assets/images/mood/kecewa_dark.png'
-                    : 'assets/images/mood/kecewa.png',
-                width: 52,
-              ),
-              Image.asset(
-                _themeController.isDarkMode.value
-                    ? 'assets/images/mood/takut_dark.png'
-                    : 'assets/images/mood/takut.png',
-                width: 52,
-              ),
-              Image.asset(
-                _themeController.isDarkMode.value
-                    ? 'assets/images/mood/hampa_dark.png'
-                    : 'assets/images/mood/hampa.png',
-                width: 52,
-              ),
-              Image.asset(
-                _themeController.isDarkMode.value
-                    ? 'assets/images/mood/semangat_dark.png'
-                    : 'assets/images/mood/semangat.png',
-                width: 52,
-              ),
-            ],
-          )
-        ],
+      child: GetBuilder<MoodController>(
+        builder: (controller) {
+          return controller.selectedMood.value.isNotEmpty
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Row(
+                    children: [
+                      Hero(
+                        tag: 'mood',
+                        child: Image.asset(
+                          _themeController.isDarkMode.value
+                              ? 'assets/images/mood/${_moodController.selectedMood()}_dark.png'
+                              : 'assets/images/mood/${_moodController.selectedMood()}.png',
+                          width: 70,
+                        ),
+                      ),
+                      const Spacer(),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.52,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Yay! Manfaatkan hari yang indah ini sebaik mungkin',
+                              style: GoogleFonts.rubik(fontSize: 16),
+                            ),
+                            const SizedBox(height: 10),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _moodController.selectedMood.value = '';
+                                });
+                              },
+                              child: Text(
+                                'Lihat statistik',
+                                style: GoogleFonts.rubik(fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Bagaimana Suasana Hatimu Hari Ini?',
+                      style: GoogleFonts.rubik(
+                        fontSize: 16,
+                        color: _colorController.getTextColor(),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _moodController.selectedMood('senang');
+                            });
+                          },
+                          child: Image.asset(
+                            width: 52,
+                            _themeController.isDarkMode.value
+                                ? 'assets/images/mood/senang_dark.png'
+                                : 'assets/images/mood/senang.png',
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _moodController.selectedMood('biasa');
+                            });
+                          },
+                          child: Image.asset(
+                            _themeController.isDarkMode.value
+                                ? 'assets/images/mood/biasa_dark.png'
+                                : 'assets/images/mood/biasa.png',
+                            width: 52,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _moodController.selectedMood('sedih');
+                            });
+                          },
+                          child: Image.asset(
+                            _themeController.isDarkMode.value
+                                ? 'assets/images/mood/sedih_dark.png'
+                                : 'assets/images/mood/sedih.png',
+                            width: 52,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _moodController.selectedMood('marah');
+                            });
+                          },
+                          child: Image.asset(
+                            _themeController.isDarkMode.value
+                                ? 'assets/images/mood/marah_dark.png'
+                                : 'assets/images/mood/marah.png',
+                            width: 52,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _moodController.selectedMood('cemas');
+                            });
+                          },
+                          child: Image.asset(
+                            _themeController.isDarkMode.value
+                                ? 'assets/images/mood/cemas_dark.png'
+                                : 'assets/images/mood/cemas.png',
+                            width: 52,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _moodController.selectedMood('lelah');
+                            });
+                          },
+                          child: Image.asset(
+                            _themeController.isDarkMode.value
+                                ? 'assets/images/mood/lelah_dark.png'
+                                : 'assets/images/mood/lelah.png',
+                            width: 52,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _moodController.selectedMood('kecewa');
+                            });
+                          },
+                          child: Image.asset(
+                            _themeController.isDarkMode.value
+                                ? 'assets/images/mood/kecewa_dark.png'
+                                : 'assets/images/mood/kecewa.png',
+                            width: 52,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _moodController.selectedMood('takut');
+                            });
+                          },
+                          child: Image.asset(
+                            _themeController.isDarkMode.value
+                                ? 'assets/images/mood/takut_dark.png'
+                                : 'assets/images/mood/takut.png',
+                            width: 52,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _moodController.selectedMood('hampa');
+                            });
+                          },
+                          child: Image.asset(
+                            _themeController.isDarkMode.value
+                                ? 'assets/images/mood/hampa_dark.png'
+                                : 'assets/images/mood/hampa.png',
+                            width: 52,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _moodController.selectedMood('semangat');
+                            });
+                          },
+                          child: Image.asset(
+                            _themeController.isDarkMode.value
+                                ? 'assets/images/mood/semangat_dark.png'
+                                : 'assets/images/mood/semangat.png',
+                            width: 52,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+        },
       ),
     );
   }

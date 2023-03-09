@@ -33,7 +33,6 @@ class _ChatScreenState extends State<ChatScreen> {
         await ChatSessionController.instance.getChatMessages();
     setState(() {
       _messages = messages;
-      print(messages);
     });
   }
 
@@ -128,40 +127,38 @@ class _ChatScreenState extends State<ChatScreen> {
                               ? Alignment.topLeft
                               : Alignment.topRight),
                           child: Container(
-                              constraints: BoxConstraints(
-                                maxWidth:
-                                    MediaQuery.of(context).size.width * 0.75,
+                            constraints: BoxConstraints(
+                              maxWidth:
+                                  MediaQuery.of(context).size.width * 0.75,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  (_messages[index].messageSender == 'calico'
+                                      ? const BorderRadius.only(
+                                          bottomRight: Radius.circular(20),
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20))
+                                      : const BorderRadius.only(
+                                          bottomLeft: Radius.circular(20),
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20))),
+                              color: (_messages[index].messageSender == 'calico'
+                                  ? _colorController.getCalicoChatColor()
+                                  : _colorController.getUserChatColor()),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 16),
+                            child: SelectableText(
+                              _messages[index].messageContent,
+                              style: GoogleFonts.rubik(
+                                fontSize: 17,
+                                color: (_messages[index].messageSender ==
+                                        'calico'
+                                    ? _colorController.getCalicoChatTextColor()
+                                    : _colorController.getUserChatTextColor()),
                               ),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    (_messages[index].messageSender == 'calico'
-                                        ? const BorderRadius.only(
-                                            bottomRight: Radius.circular(20),
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20))
-                                        : const BorderRadius.only(
-                                            bottomLeft: Radius.circular(20),
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20))),
-                                color:
-                                    (_messages[index].messageSender == 'calico'
-                                        ? _colorController.getCalicoChatColor()
-                                        : _colorController.getUserChatColor()),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 16),
-                              child: Text(
-                                _messages[index].messageContent,
-                                style: GoogleFonts.rubik(
-                                  fontSize: 17,
-                                  color: (_messages[index].messageSender ==
-                                          'calico'
-                                      ? _colorController
-                                          .getCalicoChatTextColor()
-                                      : _colorController
-                                          .getUserChatTextColor()),
-                                ),
-                              )),
+                            ),
+                          ),
                         ),
                       );
                     },
@@ -196,6 +193,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             fontWeight: FontWeight.w400,
                             color: _colorController.getTextColor(),
                           ),
+                          cursorColor: brownColor,
                           controller: messageController,
                           decoration: const InputDecoration(
                             border: InputBorder.none,

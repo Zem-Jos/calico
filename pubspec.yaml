@@ -13,6 +13,7 @@ dependencies:
   firebase_core: ^2.6.1
   flutter:
     sdk: flutter
+  flutter_clipboard_manager: ^0.0.2
   flutter_native_splash: ^2.2.19
   flutter_phone_direct_caller: ^2.1.1
   get: ^4.6.5
