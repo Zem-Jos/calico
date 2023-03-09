@@ -21,6 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   late List<ChatMessage> _messages = [];
   var messageController = TextEditingController();
+  RxBool soundOn = true.obs;
 
   @override
   initState() {
@@ -100,10 +101,24 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     ],
                   ),
-                  Image.asset(
-                    'assets/images/icon/sound_on.png',
-                    width: 40,
-                  ),
+                  Obx(
+                    () {
+                      return soundOn.isTrue
+                          ? GestureDetector(
+                              onTap: soundOn = false.obs,
+                              child: Image.asset(
+                                'assets/images/icon/sound_on.png',
+                                width: 40,
+                              ),
+                            )
+                          : GestureDetector(
+                              onTap: soundOn = true.obs,
+                              child: Image.asset(
+                                  'assets/images/icon/sound_off.png',
+                                  width: 40),
+                            );
+                    },
+                  )
                 ],
               ),
             ),

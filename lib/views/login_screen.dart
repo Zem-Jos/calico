@@ -173,7 +173,6 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: 18,
                       ),
-
                       GestureDetector(
                         onTap: () {
                           AuthController.instance.loginAnonymous();
