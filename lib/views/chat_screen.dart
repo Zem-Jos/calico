@@ -1,4 +1,5 @@
 import 'package:calico/controllers/theme_controller.dart';
+import 'package:calico/theme.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,14 +9,14 @@ import '../controllers/chat_session_controller.dart';
 import '../models/chat_session_model.dart';
 
 class ChatScreen extends StatefulWidget {
-  ChatScreen({super.key});
+  const ChatScreen({super.key});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  // final ThemeController _themeController = Get.find<ThemeController>();
+  final ThemeController _themeController = Get.find<ThemeController>();
   final ColorController _colorController = Get.put(ColorController());
 
   late List<ChatMessage> _messages = [];
@@ -32,7 +33,6 @@ class _ChatScreenState extends State<ChatScreen> {
         await ChatSessionController.instance.getChatMessages();
     setState(() {
       _messages = messages;
-      print(messages);
     });
   }
 
@@ -75,13 +75,12 @@ class _ChatScreenState extends State<ChatScreen> {
                   Row(
                     children: [
                       IconButton(
-                        color: _colorController.getTextColor(),
                         onPressed: () {
                           Get.offAll(NavigationPage());
                         },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.arrow_back,
-                          color: Colors.black,
+                          color: _colorController.getTextColor(),
                         ),
                       ),
                       const SizedBox(
@@ -114,19 +113,20 @@ class _ChatScreenState extends State<ChatScreen> {
           children: <Widget>[
             Padding(
                 padding: const EdgeInsets.only(bottom: 98.0),
-                child: ListView.builder(
-                  itemCount: _messages.length,
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.only(top: 10, bottom: 10),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: const EdgeInsets.only(
-                          left: 14, right: 14, top: 10, bottom: 10),
-                      child: Align(
-                        alignment: (_messages[index].messageSender == 'calico'
-                            ? Alignment.topLeft
-                            : Alignment.topRight),
-                        child: Container(
+                child: Expanded(
+                  child: ListView.builder(
+                    itemCount: _messages.length,
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: const EdgeInsets.only(
+                            left: 14, right: 14, top: 10, bottom: 10),
+                        child: Align(
+                          alignment: (_messages[index].messageSender == 'calico'
+                              ? Alignment.topLeft
+                              : Alignment.topRight),
+                          child: Container(
                             constraints: BoxConstraints(
                               maxWidth:
                                   MediaQuery.of(context).size.width * 0.75,
@@ -148,7 +148,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             ),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
-                            child: Text(
+                            child: SelectableText(
                               _messages[index].messageContent,
                               style: GoogleFonts.rubik(
                                 fontSize: 17,
@@ -157,10 +157,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                     ? _colorController.getCalicoChatTextColor()
                                     : _colorController.getUserChatTextColor()),
                               ),
-                            )),
-                      ),
-                    );
-                  },
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 )),
             Align(
               alignment: Alignment.bottomLeft,
@@ -171,34 +173,38 @@ class _ChatScreenState extends State<ChatScreen> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(20)),
+                        const BorderRadius.vertical(top: Radius.circular(20)),
                     color: _colorController.getContainerColor()),
                 child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: 294,
-                        height: 40,
                         decoration: BoxDecoration(
-                          color: const Color(0x1AE0A071),
+                          color: _themeController.isDarkMode.value
+                              ? darkBackground
+                              : lightGrayColor,
                           borderRadius: BorderRadius.circular(18),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: TextFormField(
-                            style: GoogleFonts.rubik(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            controller: messageController,
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                              labelText: 'Ketik pesan anda',
-                              hintText: 'Ketik pesan anda',
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.never,
-                            ),
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: TextFormField(
+                          style: GoogleFonts.rubik(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                            color: _colorController.getTextColor(),
                           ),
+                          cursorColor: brownColor,
+                          controller: messageController,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            labelText: null,
+                            hintText: 'Ketik pesan anda',
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            alignLabelWithHint: true,
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 4),
+                          ),
+                          maxLines: null,
                         ),
                       ),
                       GestureDetector(

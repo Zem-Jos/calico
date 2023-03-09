@@ -1,3 +1,4 @@
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/sos_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,14 @@ class SosProfessionalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController _themeController = Get.find<ThemeController>();
+    final ColorController _colorController = Get.put(ColorController());
     return Scaffold(
       backgroundColor: Color(0xffFFE2E8),
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         flexibleSpace: SafeArea(
           child: Container(
             height: 65,
@@ -70,6 +73,39 @@ class SosProfessionalScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               GestureDetector(
+                onTap: () {
+                  //show alert dialog
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: _colorController.getContainerColor(),
+                          title: Text('Hotline Pemerintah'),
+                          content:
+                              Text('Apakah anda ingin melakukan panggilan?'),
+                          actions: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: brownColor,
+                              ),
+                              child: const Text('Iya'),
+                              onPressed: () {
+                                _callNumber();
+                              },
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: brownColor,
+                              ),
+                              child: const Text('Tidak'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      });
+                },
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -128,6 +164,39 @@ class SosProfessionalScreen extends StatelessWidget {
                 ),
               ),
               GestureDetector(
+                onTap: () {
+                  //show alert dialog
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: _colorController.getContainerColor(),
+                          title: Text('Kementrian Kesehatan'),
+                          content:
+                              Text('Apakah anda ingin melakukan panggilan?'),
+                          actions: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: brownColor,
+                              ),
+                              child: Text('Iya'),
+                              onPressed: () {
+                                _callNumber();
+                              },
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: brownColor,
+                              ),
+                              child: Text('Tidak'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      });
+                },
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -186,7 +255,40 @@ class SosProfessionalScreen extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => _callNumber(),
+                // onTap: () => _callNumber(),
+                onTap: () {
+                  //show alert dialog
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: _colorController.getContainerColor(),
+                          title: Text('Save Yourselves Indonesia (Jakarta)'),
+                          content:
+                              Text('Apakah anda ingin melakukan panggilan?'),
+                          actions: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: brownColor,
+                              ),
+                              child: Text('Iya'),
+                              onPressed: () {
+                                _callNumber();
+                              },
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: brownColor,
+                              ),
+                              child: Text('Tidak'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      });
+                },
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(

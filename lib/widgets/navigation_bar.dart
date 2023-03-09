@@ -47,7 +47,7 @@ class NavigationPage extends StatelessWidget {
           ),
           child: Obx(
             () => SizedBox(
-              height: 94,
+              height: MediaQuery.of(context).size.height * 0.12,
               child: BottomNavigationBar(
                 elevation: 0.0,
                 type: BottomNavigationBarType.fixed,
