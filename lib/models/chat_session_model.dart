@@ -1,4 +1,4 @@
-import 'package:calico/utils/getCurrentDate.dart';
+import 'package:calico/utils/date_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatSession {

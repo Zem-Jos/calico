@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 import '../models/chat_session_model.dart';
-import '../utils/getCurrentDate.dart';
+import '../utils/date_util.dart';
 
 class ChatSessionController extends GetxController {
   static ChatSessionController instance = Get.put(ChatSessionController());
@@ -33,6 +33,24 @@ class ChatSessionController extends GetxController {
     return chatSession;
   }
 
+  Future<ChatSession?> findChatSession(DateTime session) async {
+    final ref = _db
+        .collection("chatSessions")
+        .where("firebaseSession", isEqualTo: Timestamp.fromDate(session))
+        .where("userId", isEqualTo: AuthController.instance.user!.uid);
+
+    final querySnapshot = await ref.get();
+
+    if (querySnapshot.docs.isEmpty) {
+      print("No chat session found!");
+      return null;
+    }
+
+    ChatSession chatSession =
+        ChatSession.fromFirestore(snapshot: querySnapshot.docs.first);
+    return chatSession;
+  }
+
   Future<void> createNewChatSession() async {
     ChatSession chatSession = ChatSession(
       messages: [],
@@ -54,6 +72,16 @@ class ChatSessionController extends GetxController {
 
     if (chatSession == null) {
       return [ChatMessage(messageContent: "", messageSender: "user")];
+    }
+
+    return chatSession.messages;
+  }
+
+  Future<List<ChatMessage>?> getChatMessagesByDate(DateTime date) async {
+    ChatSession? chatSession = await findChatSession(date);
+
+    if (chatSession == null) {
+      return null;
     }
 
     return chatSession.messages;
