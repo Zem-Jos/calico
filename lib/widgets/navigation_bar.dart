@@ -7,10 +7,16 @@ import 'package:calico/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class NavigationPage extends StatelessWidget {
+class NavigationPage extends StatefulWidget {
+  const NavigationPage({Key? key}) : super(key: key);
+
+  @override
+  State<NavigationPage> createState() => _NavigationPageState();
+}
+
+class _NavigationPageState extends State<NavigationPage> {
   BottomNavigationController bottomNavigationController =
       Get.put(BottomNavigationController());
-  NavigationPage({Key? key}) : super(key: key);
 
   final screen = [
     const HomeScreen(),
