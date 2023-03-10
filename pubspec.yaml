@@ -17,6 +17,7 @@ dependencies:
   flutter_phone_direct_caller: ^2.1.1
   get: ^4.6.5
   google_fonts: ^4.0.3
+  google_sign_in: ^6.0.2
   shared_preferences: ^2.0.18
   table_calendar: ^3.0.1
 
