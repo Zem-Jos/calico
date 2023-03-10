@@ -21,7 +21,6 @@ class MoodController extends GetxController {
         .where("userId", isEqualTo: AuthController.instance.user!.uid);
 
     QuerySnapshot querySnapshot = await ref.get();
-    print(querySnapshot.docs.first.toString());
 
     if (querySnapshot.docs.isEmpty) {
       // create new mood
@@ -57,7 +56,6 @@ class MoodController extends GetxController {
         .where("userId", isEqualTo: AuthController.instance.user!.uid);
 
     QuerySnapshot querySnapshot = await ref.get();
-    print(querySnapshot.docs.first.toString());
 
     if (querySnapshot.docs.isEmpty) {
       // create new mood
