@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatefulWidget {
-  CalendarScreen({super.key});
+  const CalendarScreen({super.key});
 
   @override
   State<CalendarScreen> createState() => _CalendarScreenState();
@@ -17,7 +17,7 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   final ThemeController _themeController = Get.find<ThemeController>();
   final ColorController _colorController = Get.put(ColorController());
-  MoodController _moodController = Get.put(MoodController());
+  final MoodController _moodController = Get.put(MoodController());
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -30,7 +30,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             padding: const EdgeInsets.symmetric(horizontal: edge),
             child: Column(
               children: [
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                   height: 65,
                   decoration: BoxDecoration(
@@ -95,7 +95,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
@@ -116,7 +116,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     lastDay: DateTime.now().add(const Duration(days: 365)),
                     focusedDay: _focusedDay,
                     calendarFormat: _calendarFormat,
-                    calendarStyle: CalendarStyle(
+                    calendarStyle: const CalendarStyle(
                       isTodayHighlighted: true,
                       todayDecoration: BoxDecoration(
                         color: lightBrownColor,
@@ -158,45 +158,51 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Column(
                   children: [
-                    // Obx(
-                    //   () {
-                    //     return Container(
-                    //       padding: EdgeInsets.symmetric(
-                    //           vertical: 15, horizontal: 16),
-                    //       decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(15),
-                    //         color: _colorController.getContainerColor(),
-                    //         boxShadow: [
-                    //           BoxShadow(
-                    //             color: Color(0xff433230).withOpacity(0.15),
-                    //             spreadRadius: 0,
-                    //             blurRadius: 12,
-                    //             offset:
-                    //                 Offset(0, 4), // changes position of shadow
-                    //           ),
-                    //         ],
-                    //       ),
-                    //       child: Row(children: [
-                    //         Image.asset(
-                    //           'assets/images/mood/${_moodController.selectedMood.toString()}_icon.png',
-                    //           width: 35,
-                    //         ),
-                    //         SizedBox(width: 16),
-                    //         Text(
-                    //           'Hari ini anda merasa ${_moodController.selectedMood.toString()}',
-                    //           style: GoogleFonts.rubik(
-                    //               fontSize: 17,
-                    //               color: _colorController.getTextColor()),
-                    //         ),
-                    //       ]),
-                    //     );
-                    //   },
-                    // ),
+                    Obx(
+                      () {
+                        if (_moodController.selectedMood == '') {
+                          return SizedBox(
+                            height: 0,
+                          );
+                        } else {
+                          return Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 16),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: _colorController.getContainerColor(),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0xff433230).withOpacity(0.15),
+                                  spreadRadius: 0,
+                                  blurRadius: 12,
+                                  offset: const Offset(
+                                      0, 4), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Row(children: [
+                              Image.asset(
+                                'assets/images/mood/${_moodController.selectedMood.toString()}_icon.png',
+                                width: 35,
+                              ),
+                              SizedBox(width: 16),
+                              Text(
+                                'Hari ini anda merasa ${_moodController.selectedMood.toString()}',
+                                style: GoogleFonts.rubik(
+                                    fontSize: 17,
+                                    color: _colorController.getTextColor()),
+                              ),
+                            ]),
+                          );
+                        }
+                      },
+                    ),
                     SizedBox(
                       height: 10,
                     ),

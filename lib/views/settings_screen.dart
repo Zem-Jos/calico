@@ -73,10 +73,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         'assets/images/icon/avatar.png',
                         width: 45,
                       ),
-                      Text(
-                        'SadGirl21',
-                        style: GoogleFonts.rubik(
-                            fontSize: 22, fontWeight: FontWeight.w400),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 50,
+                          ),
+                          Text(
+                            'SadGirl21',
+                            style: GoogleFonts.rubik(
+                                fontSize: 22, fontWeight: FontWeight.w400),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              // Get.to(const EditProfileScreen());
+                            },
+                            icon: const Icon(
+                              Icons.edit,
+                              color: brownColor,
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 4),
                       Text(
