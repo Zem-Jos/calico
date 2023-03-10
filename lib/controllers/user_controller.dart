@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../models/user_model.dart';
 
 class UserController extends GetxController {
+  static UserController instance = UserController();
+  UserModel? user;
   final _db = FirebaseFirestore.instance;
 
   Future<void> createUser(UserModel user) async {
@@ -22,5 +24,25 @@ class UserController extends GetxController {
       );
       print(error.toString());
     });
+  }
+
+  Future<UserModel?> getUser(String id) async {
+    final QuerySnapshot result = await FirebaseFirestore.instance
+        .collection('users')
+        .where('id', isEqualTo: id)
+        .get();
+
+    if (result.docs.isEmpty) {
+      return null;
+    }
+
+    UserModel user = UserModel.fromFirestore(result.docs.first);
+
+    return user;
+  }
+
+  Future<void> setUser(UserModel user) async {
+    this.user = user;
+    update();
   }
 }

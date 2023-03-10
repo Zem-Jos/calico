@@ -7,10 +7,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../views/goto_screen.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   late Rx<User?> _user;
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -67,18 +69,54 @@ class AuthController extends GetxController {
     }
   }
 
-  void loginWithGoogle() async {
-    try {
-      await auth.signInWithPopup(GoogleAuthProvider());
-    } catch (e) {
-      Get.snackbar('About Login', 'Login message',
-          backgroundColor: Colors.redAccent,
-          snackPosition: SnackPosition.BOTTOM,
-          titleText: Text('Login failed',
-              style: GoogleFonts.roboto(color: Colors.white)),
-          messageText: Text(e.toString(),
-              style: GoogleFonts.roboto(color: Colors.white)));
+  // void loginWithGoogle() async {
+  //   try {
+  //     await auth.signInWithPopup(GoogleAuthProvider());
+  //   } catch (e) {
+  //     Get.snackbar('About Login', 'Login message',
+  //         backgroundColor: Colors.redAccent,
+  //         snackPosition: SnackPosition.BOTTOM,
+  //         titleText: Text('Login failed',
+  //             style: GoogleFonts.roboto(color: Colors.white)),
+  //         messageText: Text(e.toString(),
+  //             style: GoogleFonts.roboto(color: Colors.white)));
+  //   }
+  // }
+  Future<UserCredential?> loginWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+    if (googleUser != null) {
+      // Obtain the Google auth details (id token and access token).
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // Create a new credential using the Google auth details.
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // check if user exists in firestore
+      UserModel? user = await UserController().getUser(googleUser.id);
+
+      if (user == null) {
+        // create user in firestore
+        user = UserModel(
+          id: googleUser.id,
+          email: googleUser.email,
+          name: googleUser.displayName ?? "",
+        );
+
+        await UserController().createUser(user);
+      }
+
+      UserController.instance.setUser(user);
+
+      // Sign in to Firebase with the Google credential.
+      return await auth.signInWithCredential(credential);
     }
+
+    return null;
   }
 
   void loginAnonymous() async {
