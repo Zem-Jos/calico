@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../controllers/authentication_controller.dart';
+
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
 
@@ -15,6 +17,7 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
+  AuthController authController = Get.find<AuthController>();
   final ThemeController _themeController = Get.find<ThemeController>();
   final ColorController _colorController = Get.put(ColorController());
   final MoodController _moodController = Get.put(MoodController());
@@ -67,13 +70,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'SadGirl21',
+                                authController.user?.displayName ?? 'Tamu',
                                 style: GoogleFonts.rubik(
-                                    fontSize: 22, fontWeight: FontWeight.w400),
+                                    fontSize: 16, fontWeight: FontWeight.w400),
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               Text(
-                                'user51267839120',
+                                authController.user?.email ?? 'anonim',
                                 style: GoogleFonts.rubik(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,

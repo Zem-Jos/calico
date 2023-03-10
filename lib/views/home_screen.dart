@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../controllers/authentication_controller.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -15,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  AuthController authController = Get.find<AuthController>();
   final ThemeController _themeController = Get.find<ThemeController>();
   final ColorController _colorController = Get.put(ColorController());
   @override
@@ -46,13 +49,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Halo, SadGirl21!',
-                        style: GoogleFonts.rubik(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500,
-                          color: whiteColor,
-                        ),
+                      Obx(
+                        () {
+                          if (authController.user != null) {
+                            if (authController.user!.isAnonymous) {
+                              return Text(
+                                'Halo, Tamu',
+                                style: GoogleFonts.rubik(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500,
+                                  color: whiteColor,
+                                ),
+                              );
+                            }
+                            var splitted =
+                                authController.user?.displayName?.split(' ');
+                            return Text(
+                              'Halo, ${splitted!.first}',
+                              style: GoogleFonts.rubik(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w500,
+                                color: whiteColor,
+                              ),
+                            );
+                          }
+                          return Text(
+                            'Halo, Tamu',
+                            style: GoogleFonts.rubik(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500,
+                              color: whiteColor,
+                            ),
+                          );
+                        },
                       ),
                       GestureDetector(
                         onTap: () {
