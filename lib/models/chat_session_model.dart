@@ -1,4 +1,4 @@
-import 'package:calico/utils/getCurrentDate.dart';
+import 'package:calico/utils/date_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatSession {
@@ -20,7 +20,6 @@ class ChatSession {
     required DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   }) {
-    // var list = json['messages'] as List;
     final data = snapshot.data();
     if (data == null) throw Exception("Chat Session not found!");
     var id = snapshot.id;
