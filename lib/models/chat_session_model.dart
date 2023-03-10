@@ -6,12 +6,14 @@ class ChatSession {
   List<ChatMessage> messages;
   DateTime session;
   Timestamp firebaseSession;
+  String userId;
 
   ChatSession({
     this.id,
     required this.messages,
     required DateTime session,
-  })  : session = getCurrentDate(),
+    required this.userId,
+  })  : session = DateUtil.getCurrentDate(),
         firebaseSession = Timestamp.fromDate(session);
 
   factory ChatSession.fromFirestore({
@@ -24,11 +26,13 @@ class ChatSession {
     var id = snapshot.id;
     var list = data['messages'] as List;
     var session = data['session'];
+    var userId = data['userId'];
     DateTime sessionDate = DateTime.parse(session);
 
     List<ChatMessage> messages =
         list.map((message) => ChatMessage.fromJson(message)).toList();
-    return ChatSession(id: id, messages: messages, session: sessionDate);
+    return ChatSession(
+        id: id, messages: messages, session: sessionDate, userId: userId);
   }
 
   // tojson
@@ -36,6 +40,7 @@ class ChatSession {
     return {
       'messages': messages.map((e) => e.toJson()).toList(),
       'session': session.toString(),
+      'userId': userId,
       'firebaseSession': firebaseSession,
     };
   }

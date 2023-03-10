@@ -1,5 +1,4 @@
 import 'package:calico/controllers/theme_controller.dart';
-import 'package:calico/controllers/user_controller.dart';
 import 'package:calico/firebase_options.dart';
 import 'package:calico/views/goto_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
