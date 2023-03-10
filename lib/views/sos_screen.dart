@@ -15,7 +15,7 @@ class SosScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         flexibleSpace: SafeArea(
           child: Container(
             height: 65,
