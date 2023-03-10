@@ -1,5 +1,6 @@
 import 'package:calico/controllers/mood_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
+import 'package:calico/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,7 +58,7 @@ class _MoodBoardState extends State<MoodBoard> {
                             GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  _moodController.clearMood();
+                                  _moodController.selectedMood.value = '';
                                 });
                               },
                               child: Text(
@@ -89,7 +90,7 @@ class _MoodBoardState extends State<MoodBoard> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _moodController.selectMood('senang');
+                              _moodController.selectedMood('senang');
                             });
                           },
                           child: Image.asset(
@@ -102,7 +103,7 @@ class _MoodBoardState extends State<MoodBoard> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _moodController.selectMood('biasa');
+                              _moodController.selectedMood('biasa');
                             });
                           },
                           child: Image.asset(
@@ -115,7 +116,7 @@ class _MoodBoardState extends State<MoodBoard> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _moodController.selectMood('sedih');
+                              _moodController.selectedMood('sedih');
                             });
                           },
                           child: Image.asset(
@@ -128,7 +129,7 @@ class _MoodBoardState extends State<MoodBoard> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _moodController.selectMood('marah');
+                              _moodController.selectedMood('marah');
                             });
                           },
                           child: Image.asset(
@@ -141,7 +142,7 @@ class _MoodBoardState extends State<MoodBoard> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _moodController.selectMood('cemas');
+                              _moodController.selectedMood('cemas');
                             });
                           },
                           child: Image.asset(
@@ -159,7 +160,7 @@ class _MoodBoardState extends State<MoodBoard> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _moodController.selectMood('lelah');
+                              _moodController.selectedMood('lelah');
                             });
                           },
                           child: Image.asset(
@@ -172,7 +173,7 @@ class _MoodBoardState extends State<MoodBoard> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _moodController.selectMood('kecewa');
+                              _moodController.selectedMood('kecewa');
                             });
                           },
                           child: Image.asset(
@@ -185,7 +186,7 @@ class _MoodBoardState extends State<MoodBoard> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _moodController.selectMood('takut');
+                              _moodController.selectedMood('takut');
                             });
                           },
                           child: Image.asset(
@@ -198,7 +199,7 @@ class _MoodBoardState extends State<MoodBoard> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _moodController.selectMood('hampa');
+                              _moodController.selectedMood('hampa');
                             });
                           },
                           child: Image.asset(
@@ -211,7 +212,7 @@ class _MoodBoardState extends State<MoodBoard> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              _moodController.selectMood('semangat');
+                              _moodController.selectedMood('semangat');
                             });
                           },
                           child: Image.asset(
