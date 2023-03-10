@@ -1,7 +1,12 @@
+import 'package:calico/controllers/calendar_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-class MoodController extends GetxController {
+import '../utils/date_util.dart';
+import 'authentication_controller.dart';
 
+class MoodController extends GetxController {
+  static MoodController instance = Get.put(MoodController());
   final _db = FirebaseFirestore.instance;
   Rx<String> selectedMood = ''.obs;
 
@@ -19,7 +24,34 @@ class MoodController extends GetxController {
 
     QuerySnapshot querySnapshot = await ref.get();
 
-  void selectMood(String mood) {
+    if (querySnapshot.docs.isEmpty) {
+      // create new mood
+      createMoodDb('', DateUtil.getCurrentDate());
+      selectedMood.value = '';
+      update();
+    } else {
+      // update mood
+      selectedMood.value = querySnapshot.docs.first['mood'];
+      update();
+    }
+  }
+
+  Future<String> getMoodByDate(DateTime date) async {
+    final ref = _db
+        .collection("moods")
+        .where("date", isEqualTo: Timestamp.fromDate(date))
+        .where("userId", isEqualTo: AuthController.instance.user!.uid);
+
+    QuerySnapshot querySnapshot = await ref.get();
+
+    if (querySnapshot.docs.isEmpty) {
+      return '';
+    } else {
+      return querySnapshot.docs.first['mood'];
+    }
+  }
+
+  Future<void> selectMood(String mood) async {
     selectedMood.value = mood;
 
     // update db
@@ -49,6 +81,8 @@ class MoodController extends GetxController {
       // update mood
       updateMoodDb(mood, querySnapshot.docs.first.id);
     }
+
+    Get.find<CalendarController>().updateData(date);
   }
 
   Future<void> updateMoodDb(String mood, String id) async {
@@ -71,6 +105,5 @@ class MoodController extends GetxController {
     }).catchError((error, stackTrace) {
       print(error.toString());
     });
-
   }
 }
