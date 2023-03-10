@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-import '../utils/date_util.dart';
-import 'authentication_controller.dart';
-
 class MoodController extends GetxController {
+
   final _db = FirebaseFirestore.instance;
   Rx<String> selectedMood = ''.obs;
 
@@ -22,19 +19,7 @@ class MoodController extends GetxController {
 
     QuerySnapshot querySnapshot = await ref.get();
 
-    if (querySnapshot.docs.isEmpty) {
-      // create new mood
-      createMoodDb('', DateUtil.getCurrentDate());
-      selectedMood.value = '';
-      update();
-    } else {
-      // update mood
-      selectedMood.value = querySnapshot.docs.first['mood'];
-      update();
-    }
-  }
-
-  Future<void> selectMood(String mood) async {
+  void selectMood(String mood) {
     selectedMood.value = mood;
 
     // update db
@@ -86,5 +71,6 @@ class MoodController extends GetxController {
     }).catchError((error, stackTrace) {
       print(error.toString());
     });
+
   }
 }

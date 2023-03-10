@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 import '../models/chat_session_model.dart';
-import '../utils/date_util.dart';
+import '../utils/getCurrentDate.dart';
 
 class ChatSessionController extends GetxController {
   static ChatSessionController instance = Get.put(ChatSessionController());
