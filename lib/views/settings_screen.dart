@@ -14,6 +14,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  AuthController authController = Get.find<AuthController>();
   final ThemeController _themeController = Get.find<ThemeController>();
   final ColorController _colorController = Get.put(ColorController());
   @override
@@ -74,13 +75,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         width: 45,
                       ),
                       Text(
-                        'SadGirl21',
+                        authController.user?.displayName ?? 'Tamu',
                         style: GoogleFonts.rubik(
-                            fontSize: 22, fontWeight: FontWeight.w400),
+                            fontSize: 20, fontWeight: FontWeight.w400),
                       ),
                       SizedBox(height: 4),
                       Text(
-                        'user51267839120',
+                        authController.user?.email ?? 'anonim',
                         style: GoogleFonts.rubik(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,

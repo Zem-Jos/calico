@@ -1,11 +1,17 @@
+import 'package:calico/controllers/authentication_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 import '../models/user_model.dart';
+import '../views/login_screen.dart';
 
 class UserController extends GetxController {
-  static UserController instance = UserController();
-  UserModel? user;
+  static UserController instance = Get.put(UserController());
+  // UserModel? user;
+  Rx<UserModel> user = const UserModel(
+    email: '',
+    name: '',
+  ).obs;
   final _db = FirebaseFirestore.instance;
 
   Future<void> createUser(UserModel user) async {
@@ -27,22 +33,27 @@ class UserController extends GetxController {
   }
 
   Future<UserModel?> getUser(String id) async {
-    final QuerySnapshot result = await FirebaseFirestore.instance
-        .collection('users')
-        .where('id', isEqualTo: id)
-        .get();
+    try {
+      final QuerySnapshot result = await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: id)
+          .get();
 
-    if (result.docs.isEmpty) {
+      if (result.docs.isEmpty) {
+        Get.offAll(() => LoginScreen());
+        throw Exception('User not found');
+      }
+
+      UserModel user = UserModel.fromFirestore(result.docs.first);
+
+      return user;
+    } catch (e) {
       return null;
     }
-
-    UserModel user = UserModel.fromFirestore(result.docs.first);
-
-    return user;
   }
 
   Future<void> setUser(UserModel user) async {
-    this.user = user;
+    this.user.value = user;
     update();
   }
 }

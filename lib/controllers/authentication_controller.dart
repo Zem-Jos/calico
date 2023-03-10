@@ -16,6 +16,8 @@ class AuthController extends GetxController {
   late Rx<User?> _user;
   FirebaseAuth auth = FirebaseAuth.instance;
 
+  User? get user => _user.value;
+
   @override
   void onReady() {
     super.onReady();
@@ -69,19 +71,6 @@ class AuthController extends GetxController {
     }
   }
 
-  // void loginWithGoogle() async {
-  //   try {
-  //     await auth.signInWithPopup(GoogleAuthProvider());
-  //   } catch (e) {
-  //     Get.snackbar('About Login', 'Login message',
-  //         backgroundColor: Colors.redAccent,
-  //         snackPosition: SnackPosition.BOTTOM,
-  //         titleText: Text('Login failed',
-  //             style: GoogleFonts.roboto(color: Colors.white)),
-  //         messageText: Text(e.toString(),
-  //             style: GoogleFonts.roboto(color: Colors.white)));
-  //   }
-  // }
   Future<UserCredential?> loginWithGoogle() async {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 

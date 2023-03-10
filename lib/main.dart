@@ -31,9 +31,6 @@ class MainApp extends StatelessWidget {
       home: const Scaffold(
         body: GotoScreen(),
       ),
-      initialBinding: BindingsBuilder(() {
-        Get.put(UserController());
-      }),
     );
   }
 }
