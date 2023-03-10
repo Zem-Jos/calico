@@ -1,3 +1,4 @@
+import 'package:calico/controllers/mood_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/settings_screen.dart';
@@ -16,6 +17,7 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   final ThemeController _themeController = Get.find<ThemeController>();
   final ColorController _colorController = Get.put(ColorController());
+  MoodController _moodController = Get.put(MoodController());
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -114,6 +116,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     lastDay: DateTime.now().add(const Duration(days: 365)),
                     focusedDay: _focusedDay,
                     calendarFormat: _calendarFormat,
+                    calendarStyle: CalendarStyle(
+                      isTodayHighlighted: true,
+                      todayDecoration: BoxDecoration(
+                        color: lightBrownColor,
+                        shape: BoxShape.circle,
+                      ),
+                      selectedDecoration: BoxDecoration(
+                        color: brownColor,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
                     selectedDayPredicate: (day) {
                       // Use `selectedDayPredicate` to determine which day is currently selected.
                       // If this returns true, then `day` will be marked as selected.
@@ -144,6 +157,91 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       _focusedDay = focusedDay;
                     },
                   ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Column(
+                  children: [
+                    // Obx(
+                    //   () {
+                    //     return Container(
+                    //       padding: EdgeInsets.symmetric(
+                    //           vertical: 15, horizontal: 16),
+                    //       decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(15),
+                    //         color: _colorController.getContainerColor(),
+                    //         boxShadow: [
+                    //           BoxShadow(
+                    //             color: Color(0xff433230).withOpacity(0.15),
+                    //             spreadRadius: 0,
+                    //             blurRadius: 12,
+                    //             offset:
+                    //                 Offset(0, 4), // changes position of shadow
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       child: Row(children: [
+                    //         Image.asset(
+                    //           'assets/images/mood/${_moodController.selectedMood.toString()}_icon.png',
+                    //           width: 35,
+                    //         ),
+                    //         SizedBox(width: 16),
+                    //         Text(
+                    //           'Hari ini anda merasa ${_moodController.selectedMood.toString()}',
+                    //           style: GoogleFonts.rubik(
+                    //               fontSize: 17,
+                    //               color: _colorController.getTextColor()),
+                    //         ),
+                    //       ]),
+                    //     );
+                    //   },
+                    // ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: _colorController.getContainerColor(),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff433230).withOpacity(0.15),
+                            spreadRadius: 0,
+                            blurRadius: 12,
+                            offset: Offset(0, 4), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Row(children: [
+                        Image.asset(
+                          'assets/images/icon/paw.png',
+                          width: 35,
+                        ),
+                        SizedBox(width: 16),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Percakapan dengan Calico',
+                              style: GoogleFonts.rubik(
+                                  fontSize: 17,
+                                  color: _colorController.getTextColor()),
+                            ),
+                            Text(
+                              '02.17 AM',
+                              style: GoogleFonts.rubik(
+                                  fontSize: 12, color: grayColor),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Icon(Icons.arrow_forward_ios),
+                      ]),
+                    ),
+                  ],
                 ),
               ],
             ),

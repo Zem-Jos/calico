@@ -28,7 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Container(
             height: 65,
             color: Colors.transparent,
-            padding: EdgeInsets.only(right: 16),
+            padding: const EdgeInsets.only(right: 16),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
