@@ -81,7 +81,6 @@ class MoodController extends GetxController {
       // update mood
       updateMoodDb(mood, querySnapshot.docs.first.id);
     }
-
     Get.find<CalendarController>().updateData(date);
   }
 
