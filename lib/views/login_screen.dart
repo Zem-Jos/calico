@@ -49,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         child: TextFormField(
-                          // controller: emailController,
+                          controller: emailController,
                           cursorColor: lightBrownColor,
                           decoration: InputDecoration(
                               hintText: 'Email atau Nomor Telepon',

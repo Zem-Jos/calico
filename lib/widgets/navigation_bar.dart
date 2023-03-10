@@ -7,8 +7,6 @@ import 'package:calico/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/user_controller.dart';
-
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
 

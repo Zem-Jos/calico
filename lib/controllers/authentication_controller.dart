@@ -1,5 +1,4 @@
 import 'package:calico/views/login_screen.dart';
-import 'package:calico/controllers/user_controller.dart';
 import 'package:calico/models/user_model.dart';
 import 'package:calico/views/register_screen.dart';
 import 'package:calico/widgets/navigation_bar.dart';
@@ -36,16 +35,16 @@ class AuthController extends GetxController {
 
   void register(String email, String name, String password) async {
     try {
-      await auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      UserModel user = UserModel(
-        id: auth.currentUser!.uid,
-        email: email,
-        name: name,
-      );
+      if (userCredential.user == null) {
+        throw Exception('User is null');
+      }
 
-      await UserController().createUser(user);
+      User user = userCredential.user!;
+      await user.updateDisplayName(name);
+      user.reload();
     } catch (e) {
       Get.snackbar('About User', 'User message',
           backgroundColor: Colors.redAccent,
@@ -84,22 +83,6 @@ class AuthController extends GetxController {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-
-      // check if user exists in firestore
-      UserModel? user = await UserController().getUser(googleUser.id);
-
-      if (user == null) {
-        // create user in firestore
-        user = UserModel(
-          id: googleUser.id,
-          email: googleUser.email,
-          name: googleUser.displayName ?? "",
-        );
-
-        await UserController().createUser(user);
-      }
-
-      UserController.instance.setUser(user);
 
       // Sign in to Firebase with the Google credential.
       return await auth.signInWithCredential(credential);
