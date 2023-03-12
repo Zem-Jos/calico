@@ -49,7 +49,7 @@ class _ChatScreenState extends State<ChatScreen> {
         appBar: AppBar(
           elevation: 0,
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
+          backgroundColor: _colorController.getContainerColor(),
           flexibleSpace: SafeArea(
             child: Container(
               height: 65,
@@ -61,9 +61,9 @@ class _ChatScreenState extends State<ChatScreen> {
                 boxShadow: [
                   BoxShadow(
                     color: Color(0xff433230).withOpacity(0.15),
-                    spreadRadius: 0,
+                    spreadRadius: -7,
                     blurRadius: 12,
-                    offset: const Offset(0, 4), // changes position of shadow
+                    offset: const Offset(0, 10), // changes position of shadow
                   ),
                 ],
                 color: _colorController.getContainerColor(),

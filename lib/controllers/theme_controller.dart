@@ -70,4 +70,12 @@ class ColorController extends GetxController {
       return whiteColor;
     }
   }
+
+  Color getActivityBackgroundColor() {
+    if (Get.isDarkMode) {
+      return blackColor;
+    } else {
+      return whiteColor;
+    }
+  }
 }
