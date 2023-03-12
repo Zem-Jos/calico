@@ -1,10 +1,11 @@
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/widgets/article_card.dart';
+import 'package:calico/widgets/category_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:calico/widgets/category_card.dart';
 
 class ActivityScreen extends StatelessWidget {
   ActivityScreen({super.key});
@@ -18,7 +19,7 @@ class ActivityScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: _colorController.getBackgroundColor(),
+        backgroundColor: brownColor,
         flexibleSpace: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -90,6 +91,7 @@ class ActivityScreen extends StatelessWidget {
                 constraints: BoxConstraints(maxHeight: 218),
                 child: Expanded(
                   child: ListView(
+                    clipBehavior: Clip.none,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -120,86 +122,22 @@ class ActivityScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: GridView.count(
-                  physics: const NeverScrollableScrollPhysics(),
+                child: GridView.builder(
                   shrinkWrap: true,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: 141,
-                        height: 123,
-                        color: grayColor,
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: 141,
-                        height: 123,
-                        color: grayColor,
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: 141,
-                        height: 123,
-                        color: grayColor,
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: 141,
-                        height: 123,
-                        color: grayColor,
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: 141,
-                        height: 123,
-                        color: grayColor,
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: 141,
-                        height: 123,
-                        color: grayColor,
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: 141,
-                        height: 123,
-                        color: grayColor,
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: 141,
-                        height: 123,
-                        color: grayColor,
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        width: 141,
-                        height: 123,
-                        color: grayColor,
-                      ),
-                    ),
-                  ],
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 20,
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.5,
+                  ),
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) {
+                    String category = categories.keys.elementAt(index);
+                    Color color = categories.values.elementAt(index);
+                    return CategoryCard(
+                        category: category, backgroundColor: color);
+                  },
                 ),
               )
             ]),
