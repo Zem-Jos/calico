@@ -31,75 +31,79 @@ class _NavigationPageState extends State<NavigationPage> {
   Widget build(BuildContext context) {
     final ThemeController _themeController = Get.find<ThemeController>();
     final ColorController _colorController = Get.put(ColorController());
-    return Scaffold(
-      backgroundColor: _colorController.getBackgroundColor(),
-      body: Obx(
-        () => IndexedStack(
+    return Obx(
+      () => Scaffold(
+        backgroundColor: bottomNavigationController.selectedIndex.value == 1
+            ? _colorController.getActivityBackgroundColor()
+            : _colorController.getBackgroundColor(),
+        body: IndexedStack(
           index: bottomNavigationController.selectedIndex.value,
           children: screen,
         ),
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-          boxShadow: [
-            BoxShadow(
-                color: Color(0x26000000), spreadRadius: 0, blurRadius: 15),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+            boxShadow: [
+              BoxShadow(
+                  color: Color(0x26000000), spreadRadius: 0, blurRadius: 15),
+            ],
           ),
-          child: Obx(
-            () => SizedBox(
-              height: MediaQuery.of(context).size.height * 0.12,
-              child: BottomNavigationBar(
-                elevation: 0.0,
-                type: BottomNavigationBarType.fixed,
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Image.asset(
-                      'assets/images/icon/home.png',
-                      width: 32,
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
+            ),
+            child: Obx(
+              () => SizedBox(
+                height: MediaQuery.of(context).size.height * 0.12,
+                child: BottomNavigationBar(
+                  elevation: 0.0,
+                  type: BottomNavigationBarType.fixed,
+                  items: <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: Image.asset(
+                        'assets/images/icon/home.png',
+                        width: 32,
+                      ),
+                      activeIcon: Image.asset(
+                        'assets/images/icon/home_active.png',
+                        width: 32,
+                      ),
+                      label: 'Home',
                     ),
-                    activeIcon: Image.asset(
-                      'assets/images/icon/home_active.png',
-                      width: 32,
+                    BottomNavigationBarItem(
+                      icon: Image.asset('assets/images/icon/activities.png',
+                          width: 32),
+                      activeIcon: Image.asset(
+                          'assets/images/icon/activities_active.png',
+                          width: 32),
+                      label: 'Activity',
                     ),
-                    label: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icon/activities.png',
-                        width: 32),
-                    activeIcon: Image.asset(
-                        'assets/images/icon/activities_active.png',
-                        width: 32),
-                    label: 'Activity',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icon/chat.png', width: 32),
-                    activeIcon: Image.asset(
-                        'assets/images/icon/chat_active.png',
-                        width: 32),
-                    label: 'Chat',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icon/calendar.png',
-                        width: 32),
-                    activeIcon: Image.asset(
-                        'assets/images/icon/calendar_active.png',
-                        width: 32),
-                    label: 'Calendar',
-                  ),
-                ],
-                showUnselectedLabels: false,
-                showSelectedLabels: false,
-                currentIndex: bottomNavigationController.selectedIndex.value,
-                selectedItemColor: const Color(0xff157FFB),
-                onTap: (index) => bottomNavigationController.changeIndex(index),
+                    BottomNavigationBarItem(
+                      icon:
+                          Image.asset('assets/images/icon/chat.png', width: 32),
+                      activeIcon: Image.asset(
+                          'assets/images/icon/chat_active.png',
+                          width: 32),
+                      label: 'Chat',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Image.asset('assets/images/icon/calendar.png',
+                          width: 32),
+                      activeIcon: Image.asset(
+                          'assets/images/icon/calendar_active.png',
+                          width: 32),
+                      label: 'Calendar',
+                    ),
+                  ],
+                  showUnselectedLabels: false,
+                  showSelectedLabels: false,
+                  currentIndex: bottomNavigationController.selectedIndex.value,
+                  selectedItemColor: const Color(0xff157FFB),
+                  onTap: (index) =>
+                      bottomNavigationController.changeIndex(index),
+                ),
               ),
             ),
           ),

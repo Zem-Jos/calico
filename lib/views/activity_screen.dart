@@ -1,8 +1,10 @@
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
-import 'package:calico/widgets/movie_card.dart';
+import 'package:calico/widgets/article_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ActivityScreen extends StatelessWidget {
   ActivityScreen({super.key});
@@ -12,152 +14,197 @@ class ActivityScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _colorController.getBackgroundColor(),
-      body: SafeArea(
-        child: Column(children: [
-          SizedBox(
-            height: 66,
-          ),
-          Container(
-            width: double.infinity,
-            height: 250,
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    color: _colorController.getContainerColor(),
-                  ),
-                  width: 243,
-                  height: 250,
-                  margin: EdgeInsets.only(left: 24),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/images/article/article.png',
-                        width: 243,
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        height: 80,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '5 Hal yang dapat membantu kecemasanmu!',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: _colorController.getTextColor(),
-                              ),
-                            ),
-                            Text(
-                              'Kecemasan',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: grayColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+      backgroundColor: _colorController.getActivityBackgroundColor(),
+      appBar: AppBar(
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        backgroundColor: _colorController.getBackgroundColor(),
+        flexibleSpace: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: _themeController.isDarkMode.value
+                    ? darkBackground
+                    : whiteColor,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: TextFormField(
+                style: GoogleFonts.rubik(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w400,
+                  color: _colorController.getTextColor(),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    color: _colorController.getContainerColor(),
+                cursorColor: brownColor,
+                // controller: messageController,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: grayColor,
                   ),
-                  width: 243,
-                  height: 250,
-                  margin: EdgeInsets.only(left: 24),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/images/article/article.png',
-                        width: 243,
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        height: 80,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '5 Hal yang dapat membantu kecemasanmu!',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: _colorController.getTextColor(),
-                              ),
-                            ),
-                            Text(
-                              'Kecemasan',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: grayColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                  border: InputBorder.none,
+                  labelText: null,
+                  hintText: 'Cari artikel',
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  alignLabelWithHint: true,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    color: _colorController.getContainerColor(),
-                  ),
-                  width: 243,
-                  height: 250,
-                  margin: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/images/article/article.png',
-                        width: 243,
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        height: 80,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              '5 Hal yang dapat membantu kecemasanmu!',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: _colorController.getTextColor(),
-                              ),
-                            ),
-                            Text(
-                              'Kecemasan',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: grayColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
+                maxLines: null,
+              ),
             ),
           ),
-        ]),
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 26),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Artikel Pilihan',
+                      style: GoogleFonts.rubik(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: _colorController.getTextColor()),
+                    ),
+                    Text(
+                      'Pahami topik kesehatan mental dengan lebih baik.',
+                      style: GoogleFonts.rubik(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: grayColor),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 11,
+              ),
+              Container(
+                constraints: BoxConstraints(maxHeight: 218),
+                child: Expanded(
+                  child: ListView(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      ArticleCard(),
+                      ArticleCard(),
+                      SizedBox(
+                        width: 24,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 26,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Text(
+                  'Kategori',
+                  style: GoogleFonts.rubik(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: _colorController.getTextColor()),
+                ),
+              ),
+              SizedBox(
+                height: 11,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: GridView.count(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: 141,
+                        height: 123,
+                        color: grayColor,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: 141,
+                        height: 123,
+                        color: grayColor,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: 141,
+                        height: 123,
+                        color: grayColor,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: 141,
+                        height: 123,
+                        color: grayColor,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: 141,
+                        height: 123,
+                        color: grayColor,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: 141,
+                        height: 123,
+                        color: grayColor,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: 141,
+                        height: 123,
+                        color: grayColor,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: 141,
+                        height: 123,
+                        color: grayColor,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        width: 141,
+                        height: 123,
+                        color: grayColor,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ]),
+          ),
+        ),
       ),
     );
   }
