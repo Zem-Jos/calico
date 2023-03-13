@@ -21,7 +21,7 @@ class ArticleList extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withOpacity(0.2),
               spreadRadius: 0,
               blurRadius: 15,
               offset: Offset(0, 0),

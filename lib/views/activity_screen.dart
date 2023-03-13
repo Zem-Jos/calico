@@ -22,7 +22,8 @@ class ActivityScreen extends StatelessWidget {
         backgroundColor: brownColor,
         flexibleSpace: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
             child: Container(
               decoration: BoxDecoration(
                 color: _themeController.isDarkMode.value
@@ -31,6 +32,7 @@ class ActivityScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
               ),
               width: MediaQuery.of(context).size.width * 0.7,
+              height: 43,
               child: TextFormField(
                 style: GoogleFonts.rubik(
                   fontSize: 17,
@@ -123,6 +125,7 @@ class ActivityScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: GridView.builder(
+                  clipBehavior: Clip.none,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,4 +1,5 @@
 import 'package:calico/controllers/theme_controller.dart';
+import 'package:calico/theme.dart';
 import 'package:calico/views/category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 Map<String, Color> categories = {
   'Stress': Color(0xffF1A69A),
   'Kecemasan': Color(0xffD5C5F5),
-  'Motivasi': Color(0xffFFD481),
+  'Motivasi Diri': Color(0xffFFD481),
   'Tidur': Color(0xff95B2DF),
   'Depresi': Color(0xff9897D1),
   'Mindfulness': Color(0xffBBF6DA),
@@ -25,21 +26,47 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorController _colorController = Get.put(ColorController());
     return GestureDetector(
-      onTap: () => Get.to(() => CategoryScreen()),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Container(
-          width: 160,
-          height: 140,
+      onTap: () => Get.to(() => CategoryScreen(), arguments: category),
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
           color: backgroundColor,
-          child: Center(
-            child: Text(
-              category,
-              style: GoogleFonts.rubik(
-                color: _colorController.getTextColor(),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(
+                'assets/images/category/${category}.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
               ),
             ),
-          ),
+            Center(
+              child: Text(
+                category == 'Motivasi Diri'
+                    ? 'MOTIVASI\nDIRI'
+                    : category == 'Strategi Coping'
+                        ? 'STRATEGI\nCOPING'
+                        : category.toUpperCase(),
+                style: GoogleFonts.roboto(
+                    color: whiteColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 17,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black.withOpacity(0.3),
+                        offset: const Offset(0, 0),
+                        blurRadius: 20,
+                      ),
+                    ]),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
         ),
       ),
     );

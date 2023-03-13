@@ -65,7 +65,9 @@ class CalendarScreen extends StatelessWidget {
                               Text(
                                 authController.user?.displayName ?? 'Tamu',
                                 style: GoogleFonts.rubik(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: _colorController.getTextColor()),
                               ),
                               const SizedBox(height: 4),
                               Text(
