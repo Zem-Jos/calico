@@ -2,6 +2,7 @@ import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/article_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +15,7 @@ class ArticleList extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.to(ArticleScreen());
+        // Get.to(MarkdownScreen());
       },
       child: Container(
         decoration: BoxDecoration(

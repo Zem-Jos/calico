@@ -1,15 +1,36 @@
+import 'package:calico/controllers/article_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ArticleScreen extends StatelessWidget {
+class ArticleScreen extends StatefulWidget {
   const ArticleScreen({super.key});
+
+  @override
+  State<ArticleScreen> createState() => _ArticleScreenState();
+}
+
+class _ArticleScreenState extends State<ArticleScreen> {
+  String _markdownData = '';
+  Future<void> _loadMarkdownFile() async {
+    final String markdownData =
+        await rootBundle.loadString('assets/article.md');
+
+    setState(() {
+      _markdownData = markdownData;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final ColorController _colorController = Get.put(ColorController());
+    // final ArticleController _articleController = Get.put(ArticleController());
+    _loadMarkdownFile();
+    // final _markdownData = _articleController.articles;
     return Scaffold(
       backgroundColor: _colorController.getContainerColor(),
       appBar: AppBar(
@@ -39,7 +60,7 @@ class ArticleScreen extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
-              '5 Hal yang dapat membantu kecemasanmu!',
+              'Manajemen Emosi dengan Teknik Reframing',
               style: GoogleFonts.rubik(
                 fontSize: 22,
                 fontWeight: FontWeight.w600,
@@ -59,18 +80,26 @@ class ArticleScreen extends StatelessWidget {
                 color: grayColor,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Image.asset('assets/images/test2.png'),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Text(
-              'Lorem ipsum dolor sit amet, consectetur\n\nadipiscing elit. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut \n\naliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. \n\nSed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nunc ut aliquam tincidunt, nunc nisl aliquam nisl, eget aliquam nisl n',
-              style: GoogleFonts.rubik(
-                  fontSize: 15, color: _colorController.getTextColor()),
-            ),
+            SingleChildScrollView(
+              physics: NeverScrollableScrollPhysics(),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Markdown(
+                  selectable: true,
+                  shrinkWrap: true,
+                  padding: EdgeInsets.only(bottom: 20),
+                  data: _markdownData,
+                ),
+              ),
+            )
           ]),
         ),
       )),

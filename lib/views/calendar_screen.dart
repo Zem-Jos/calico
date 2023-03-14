@@ -133,7 +133,7 @@ class CalendarScreen extends StatelessWidget {
                               Text(
                                 'Hari ini anda merasa ${calendarController.selectedMood.value.toString()}',
                                 style: GoogleFonts.rubik(
-                                    fontSize: 17,
+                                    fontSize: 15,
                                     color: _colorController.getTextColor()),
                               ),
                             ]),
@@ -172,7 +172,7 @@ class CalendarScreen extends StatelessWidget {
                             Text(
                               'Percakapan dengan Calico',
                               style: GoogleFonts.rubik(
-                                  fontSize: 17,
+                                  fontSize: 15,
                                   color: _colorController.getTextColor()),
                             ),
                             Text(

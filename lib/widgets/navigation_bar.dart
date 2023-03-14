@@ -6,6 +6,7 @@ import 'package:calico/views/expert_screen.dart';
 import 'package:calico/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -19,11 +20,22 @@ class _NavigationPageState extends State<NavigationPage> {
       Get.put(BottomNavigationController());
 
   final screen = [
-    const HomeScreen(),
     ActivityScreen(),
-    ExpertScreen(),
+    const HomeScreen(),
     CalendarScreen(),
   ];
+
+  // final tabs = [
+  //   MoltenTab(
+  //     icon: Image.asset('assets/images/icon/activities.png', width: 12),
+  //   ),
+  //   MoltenTab(
+  //     icon: Image.asset('assets/images/icon/home.png', width: 12),
+  //   ),
+  //   MoltenTab(
+  //     icon: Image.asset('assets/images/icon/calendar.png', width: 12),
+  //   ),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +51,7 @@ class _NavigationPageState extends State<NavigationPage> {
           children: screen,
         ),
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(30), topLeft: Radius.circular(30)),
             boxShadow: [
@@ -48,7 +60,7 @@ class _NavigationPageState extends State<NavigationPage> {
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30.0),
               topRight: Radius.circular(30.0),
             ),
@@ -60,6 +72,14 @@ class _NavigationPageState extends State<NavigationPage> {
                   type: BottomNavigationBarType.fixed,
                   items: <BottomNavigationBarItem>[
                     BottomNavigationBarItem(
+                      icon: Image.asset('assets/images/icon/activities.png',
+                          width: 32),
+                      activeIcon: Image.asset(
+                          'assets/images/icon/activities_active.png',
+                          width: 32),
+                      label: 'Activity',
+                    ),
+                    BottomNavigationBarItem(
                       icon: Image.asset(
                         'assets/images/icon/home.png',
                         width: 32,
@@ -69,22 +89,6 @@ class _NavigationPageState extends State<NavigationPage> {
                         width: 32,
                       ),
                       label: 'Home',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Image.asset('assets/images/icon/activities.png',
-                          width: 32),
-                      activeIcon: Image.asset(
-                          'assets/images/icon/activities_active.png',
-                          width: 32),
-                      label: 'Activity',
-                    ),
-                    BottomNavigationBarItem(
-                      icon:
-                          Image.asset('assets/images/icon/chat.png', width: 32),
-                      activeIcon: Image.asset(
-                          'assets/images/icon/chat_active.png',
-                          width: 32),
-                      label: 'Chat',
                     ),
                     BottomNavigationBarItem(
                       icon: Image.asset('assets/images/icon/calendar.png',
