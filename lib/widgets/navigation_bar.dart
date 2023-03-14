@@ -20,7 +20,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
   final screen = [
     const HomeScreen(),
-    const ActivityScreen(),
+    ActivityScreen(),
     ExpertScreen(),
     CalendarScreen(),
   ];

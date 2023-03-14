@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/authentication_controller.dart';
+import '../controllers/test_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  TestController testController = Get.put(TestController());
   AuthController authController = Get.find<AuthController>();
   final ThemeController _themeController = Get.find<ThemeController>();
   final ColorController _colorController = Get.put(ColorController());
@@ -160,6 +162,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 97,
                     ),
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton.icon(
+                      onPressed: () {
+                        testController.detectIntent();
+                      },
+                      icon: Icon(Icons.favorite),
+                      label: Text("Test dialog flow"))
                 ],
               ),
             ),
