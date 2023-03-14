@@ -25,25 +25,13 @@ class _NavigationPageState extends State<NavigationPage> {
     CalendarScreen(),
   ];
 
-  // final tabs = [
-  //   MoltenTab(
-  //     icon: Image.asset('assets/images/icon/activities.png', width: 12),
-  //   ),
-  //   MoltenTab(
-  //     icon: Image.asset('assets/images/icon/home.png', width: 12),
-  //   ),
-  //   MoltenTab(
-  //     icon: Image.asset('assets/images/icon/calendar.png', width: 12),
-  //   ),
-  // ];
-
   @override
   Widget build(BuildContext context) {
     final ThemeController _themeController = Get.find<ThemeController>();
     final ColorController _colorController = Get.put(ColorController());
     return Obx(
       () => Scaffold(
-        backgroundColor: bottomNavigationController.selectedIndex.value == 1
+        backgroundColor: bottomNavigationController.selectedIndex.value != 2
             ? _colorController.getActivityBackgroundColor()
             : _colorController.getBackgroundColor(),
         body: IndexedStack(

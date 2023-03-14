@@ -83,7 +83,14 @@ class _ArticleScreenState extends State<ArticleScreen> {
             const SizedBox(
               height: 30,
             ),
-            Image.asset('assets/images/test2.png'),
+            // Image.asset('assets/images/test2.png'),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(
+                'assets/images/article/article-default.png',
+              ),
+            ),
+
             const SizedBox(
               height: 30,
             ),

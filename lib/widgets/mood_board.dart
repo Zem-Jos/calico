@@ -1,5 +1,6 @@
 import 'package:calico/controllers/mood_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
+import 'package:calico/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,10 +21,16 @@ class _MoodBoardState extends State<MoodBoard> {
 
     return Container(
       width: double.infinity,
-      // height: MediaQuery.of(context).size.height * 0.22,
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: grayColor.withOpacity(0.3),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
+        ],
         color: _colorController.getContainerColor(),
       ),
       child: GetBuilder<MoodController>(

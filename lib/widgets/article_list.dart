@@ -15,7 +15,6 @@ class ArticleList extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.to(ArticleScreen());
-        // Get.to(MarkdownScreen());
       },
       child: Container(
         decoration: BoxDecoration(
@@ -35,7 +34,18 @@ class ArticleList extends StatelessWidget {
             height: 90,
             child: Row(
               children: [
-                Image.asset('assets/images/test.png'),
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                  ),
+                  child: Image.asset(
+                    'assets/images/article/article-default.png',
+                    width: MediaQuery.of(context).size.width * 0.23,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(

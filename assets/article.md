@@ -16,7 +16,7 @@ Manajemen Emosi adalah suatu cara yang dikembangkan dan dapat dipelajari untuk b
 
 Reframing adalah upaya untuk membingkai ulang sebuah kejadian, dengan mengubah sudut pandang tanpa merubah kejadian itu sendiri.
 
-Reframing mengajarkan kepada kita untuk melihat dan mempertimbangkan sudut pandang dari kacamata orang lain, untuk tidak memaksakan mengukur kaki orang lain dengan sepatu kita.
+###Reframing mengajarkan kepada kita untuk melihat dan mempertimbangkan sudut pandang dari kacamata orang lain, untuk tidak memaksakan mengukur kaki orang lain dengan sepatu kita.
 
 Sebagian besar dari kita terlalu sibuk menyalahkan orang lain atas timbulnya suatu permasalahan dan menuntut agar orang lain lah yang harus berubah, orang lain lah yang harus mengerti kita. Hanya kalau kita berubah maka orang lain juga akan ikut berubah.
 

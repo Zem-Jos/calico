@@ -82,7 +82,7 @@ class CategoryScreen extends StatelessWidget {
                               clipBehavior: Clip.none,
                               controller: scrollController,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: 10,
+                              itemCount: 4,
                               separatorBuilder: (context, index) {
                                 return const SizedBox(height: 14);
                               },

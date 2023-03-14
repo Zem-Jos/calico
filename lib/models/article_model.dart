@@ -8,6 +8,7 @@ class ArticleModel {
   String date;
   String? imageUrl;
   String content;
+  String category;
 
   ArticleModel({
     required this.author,
@@ -15,17 +16,19 @@ class ArticleModel {
     required this.date,
     this.imageUrl,
     required this.content,
+    required this.category,
   });
 
   factory ArticleModel.fromFirestore(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
     return ArticleModel(
-      author: data['author'] as String?,
-      title: data['title'] as String?,
-      date: data['date'] as String?,
-      imageUrl: data['imageUrl'] as String?,
-      content: data['content'] as String?,
+      author: data['author'],
+      title: data['title'],
+      date: data['date'],
+      imageUrl: data['imageUrl'],
+      content: data['content'],
+      category: data['category'],
     );
   }
 }

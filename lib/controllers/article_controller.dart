@@ -14,21 +14,26 @@ class ArticleController extends GetxController {
     _loadArticles();
   }
 
-  void _loadArticles() {
+  void _loadArticles() async {
     try {
       isLoading.value = true;
 
       var ref = _db.collection("articles");
+
+      QuerySnapshot querySnapshot = await ref.get();
+
+      if (querySnapshot.docs.isEmpty) {
+        print('No articles found');
+      } else {
+        articles.assignAll(querySnapshot.docs
+            .map((doc) => ArticleModel.fromFirestore(doc))
+            .toList());
+      }
     } catch (e) {
       print(e);
     } finally {
       isLoading.value = false;
     }
-    isLoading.value = true;
-    // _firestoreService.getArticles().listen((articlesData) {
-    //   articles.assignAll(articlesData);
-    //   isLoading.value = false;
-    // });
   }
 
   void getArticle() {}
