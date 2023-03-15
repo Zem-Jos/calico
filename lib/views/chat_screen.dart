@@ -16,32 +16,19 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final ChatSessionController chatSessionController =
+      Get.put(ChatSessionController());
   final ThemeController _themeController = Get.find<ThemeController>();
   final ColorController _colorController = Get.put(ColorController());
 
-  late List<ChatMessage> _messages = [];
   var messageController = TextEditingController();
   RxBool soundOn = true.obs;
-
-  @override
-  initState() {
-    super.initState();
-    _loadMessages();
-  }
-
-  _loadMessages() async {
-    List<ChatMessage> messages =
-        await ChatSessionController.instance.getChatMessages();
-    setState(() {
-      _messages = messages;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.offAll(NavigationPage());
+        Get.offAll(const NavigationPage());
         return false;
       },
       child: Scaffold(
@@ -60,7 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Color(0xff433230).withOpacity(0.15),
+                    color: const Color(0xff433230).withOpacity(0.15),
                     spreadRadius: 0,
                     blurRadius: 12,
                     offset: const Offset(0, 4), // changes position of shadow
@@ -68,7 +55,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ],
                 color: _colorController.getContainerColor(),
               ),
-              padding: EdgeInsets.only(right: 16),
+              padding: const EdgeInsets.only(right: 16),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,7 +64,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          Get.offAll(NavigationPage());
+                          Get.offAll(const NavigationPage());
                         },
                         icon: Icon(
                           Icons.arrow_back,
@@ -126,59 +113,64 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         body: Stack(
           children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.only(bottom: 98.0),
-                child: Expanded(
-                  child: ListView.builder(
-                    itemCount: _messages.length,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.only(
-                            left: 14, right: 14, top: 10, bottom: 10),
-                        child: Align(
-                          alignment: (_messages[index].messageSender == 'calico'
-                              ? Alignment.topLeft
-                              : Alignment.topRight),
-                          child: Container(
-                            constraints: BoxConstraints(
-                              maxWidth:
-                                  MediaQuery.of(context).size.width * 0.75,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  (_messages[index].messageSender == 'calico'
-                                      ? const BorderRadius.only(
-                                          bottomRight: Radius.circular(20),
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20))
-                                      : const BorderRadius.only(
-                                          bottomLeft: Radius.circular(20),
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20))),
-                              color: (_messages[index].messageSender == 'calico'
-                                  ? _colorController.getCalicoChatColor()
-                                  : _colorController.getUserChatColor()),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 16),
-                            child: SelectableText(
-                              _messages[index].messageContent,
-                              style: GoogleFonts.rubik(
-                                fontSize: 17,
-                                color: (_messages[index].messageSender ==
-                                        'calico'
-                                    ? _colorController.getCalicoChatTextColor()
-                                    : _colorController.getUserChatTextColor()),
-                              ),
-                            ),
+            Obx(
+              () => ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: chatSessionController.chatMessages.length,
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: const EdgeInsets.only(
+                        left: 14, right: 14, top: 10, bottom: 10),
+                    child: Align(
+                      alignment: (chatSessionController
+                                  .chatMessages[index].messageSender ==
+                              'calico'
+                          ? Alignment.topLeft
+                          : Alignment.topRight),
+                      child: Container(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.75,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: (chatSessionController
+                                      .chatMessages[index].messageSender ==
+                                  'calico'
+                              ? const BorderRadius.only(
+                                  bottomRight: Radius.circular(20),
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20))
+                              : const BorderRadius.only(
+                                  bottomLeft: Radius.circular(20),
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20))),
+                          color: (chatSessionController
+                                      .chatMessages[index].messageSender ==
+                                  'calico'
+                              ? _colorController.getCalicoChatColor()
+                              : _colorController.getUserChatColor()),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 16),
+                        child: SelectableText(
+                          chatSessionController
+                              .chatMessages[index].messageContent,
+                          style: GoogleFonts.rubik(
+                            fontSize: 17,
+                            color: (chatSessionController
+                                        .chatMessages[index].messageSender ==
+                                    'calico'
+                                ? _colorController.getCalicoChatTextColor()
+                                : _colorController.getUserChatTextColor()),
                           ),
                         ),
-                      );
-                    },
-                  ),
-                )),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
             Align(
               alignment: Alignment.bottomLeft,
               child: Container(
@@ -230,15 +222,17 @@ class _ChatScreenState extends State<ChatScreen> {
                                 messageSender: "user");
 
                             setState(() {
-                              _messages.insert(
-                                  _messages.length,
+                              chatSessionController.chatMessages.insert(
+                                  chatSessionController.chatMessages.length,
                                   ChatMessage(
                                       messageContent: messageController.text,
                                       messageSender: 'user'));
                               messageController.clear();
                             });
                             // update firebase db
-                            ChatSessionController.instance
+                            // ChatSessionController.instance
+                            //     .insertChatMessage(chatMessage);
+                            chatSessionController
                                 .insertChatMessage(chatMessage);
                           }
                         },

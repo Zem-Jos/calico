@@ -8,11 +8,22 @@ import '../utils/date_util.dart';
 
 class ChatSessionController extends GetxController {
   static ChatSessionController instance = Get.put(ChatSessionController());
+  late Rx<ChatSession> chatSession = ChatSession(
+    messages: [],
+    session: DateUtil.getCurrentDate(),
+    userId: "",
+  ).obs;
+
   final _db = FirebaseFirestore.instance;
   late final DialogflowCxApi dialogflow;
 
+  List<ChatMessage> get chatMessages => chatSession.value.messages;
+
   @override
   onInit() {
+    // fetch chat session
+    _loadChatSession();
+
     DialogflowCxApi dialogflow = DialogflowCxApi(
       location: "us-central1",
       agentId: "de8eb146-d4e2-40da-bafd-f599842c6e9b",
@@ -28,6 +39,14 @@ class ChatSessionController extends GetxController {
   @override
   onClose() {
     // dispose dialogflow connection
+  }
+
+  _loadChatSession() async {
+    ChatSession? cs = await getChatSession(DateUtil.getCurrentDate());
+
+    if (cs == null) throw Exception("Failed to load Chat Session");
+
+    chatSession.value = cs;
   }
 
   Future<ChatSession?> getChatSession(DateTime session) async {
