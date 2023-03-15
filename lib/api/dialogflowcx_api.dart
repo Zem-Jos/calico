@@ -6,26 +6,28 @@ class DialogflowCxApi {
   final String location;
   final String agentId;
   final String sessionId;
+  final String languageCode;
   late String projectId;
-  late final AutoRefreshingAuthClient authenticatedHttpClient;
+  late final AutoRefreshingAuthClient? authenticatedHttpClient;
 
   DialogflowCxApi({
     required this.location,
     required this.agentId,
     required this.sessionId,
+    required this.languageCode,
   });
 
   Future<void> initialize() async {
     final String jsonFileContents =
         await rootBundle.loadString('assets/dialog_flow_auth.json');
-
     final jsonData = json.decode(jsonFileContents);
-
     final credentials = ServiceAccountCredentials.fromJson(jsonData);
 
     List<String> scopes = ["https://www.googleapis.com/auth/dialogflow"];
 
     final httpClient = await clientViaServiceAccount(credentials, scopes);
+
+    print(jsonData);
 
     projectId = jsonData["project_id"];
     // _credentials = httpClient.credentials;
@@ -39,24 +41,32 @@ class DialogflowCxApi {
       'queryInput': {
         'text': {
           'text': query,
-          'languageCode': 'en-US',
+          'languageCode': languageCode,
         },
-        'languageCode': 'en-US',
+        'languageCode': languageCode,
       }
     });
 
-    final response = await authenticatedHttpClient.post(
+    if (authenticatedHttpClient == null) {
+      throw Exception("Unauthenticated http client!");
+    }
+
+    final response = await authenticatedHttpClient!.post(
       Uri.parse(url),
       body: body,
     );
 
     print(response.body);
     if (response.statusCode == 200) {
-      print(response.body);
       return json.decode(response.body);
     } else {
       throw Exception(
           'Failed to detect intent: ${response.statusCode} ${response.reasonPhrase}');
     }
+  }
+
+  void dispose() {
+    authenticatedHttpClient?.close();
+    authenticatedHttpClient = null;
   }
 }

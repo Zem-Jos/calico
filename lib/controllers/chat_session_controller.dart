@@ -2,12 +2,33 @@ import 'package:calico/controllers/authentication_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
+import '../api/dialogflowcx_api.dart';
 import '../models/chat_session_model.dart';
 import '../utils/date_util.dart';
 
 class ChatSessionController extends GetxController {
   static ChatSessionController instance = Get.put(ChatSessionController());
   final _db = FirebaseFirestore.instance;
+  late final DialogflowCxApi dialogflow;
+
+  @override
+  onInit() {
+    DialogflowCxApi dialogflow = DialogflowCxApi(
+      location: "us-central1",
+      agentId: "de8eb146-d4e2-40da-bafd-f599842c6e9b",
+      languageCode: "id",
+      sessionId: "test-session-123",
+    );
+
+    dialogflow.initialize();
+
+    super.onInit();
+  }
+
+  @override
+  onClose() {
+    // dispose dialogflow connection
+  }
 
   Future<ChatSession?> getChatSession(DateTime session) async {
     final ref = _db
@@ -29,7 +50,6 @@ class ChatSessionController extends GetxController {
 
     ChatSession chatSession =
         ChatSession.fromFirestore(snapshot: querySnapshot.docs.first);
-    print("chatSession adf: ${chatSession.id}");
     return chatSession;
   }
 

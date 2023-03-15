@@ -6,6 +6,7 @@ class TestController extends GetxController {
   DialogflowCxApi dialogflow = DialogflowCxApi(
     location: "us-central1",
     agentId: "de8eb146-d4e2-40da-bafd-f599842c6e9b",
+    languageCode: "id",
     sessionId: "test-session-123",
   );
 
