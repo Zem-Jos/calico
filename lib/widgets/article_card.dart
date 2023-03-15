@@ -12,13 +12,13 @@ class ArticleCard extends StatelessWidget {
       padding: const EdgeInsets.only(left: 24),
       child: Container(
         decoration: BoxDecoration(
-          color: _colorController.getBackgroundColor(),
+          color: _colorController.getContainerColor(),
           borderRadius: BorderRadius.circular(17),
           boxShadow: [
             BoxShadow(
-              color: Color(0xff433230).withOpacity(0.15),
+              color: Colors.black.withOpacity(0.20),
               spreadRadius: 0,
-              blurRadius: 12,
+              blurRadius: 15,
               offset: const Offset(0, 4), // changes position of shadow
             ),
           ],

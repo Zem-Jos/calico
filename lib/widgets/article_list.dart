@@ -2,6 +2,7 @@ import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/article_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,7 +22,7 @@ class ArticleList extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withOpacity(0.2),
               spreadRadius: 0,
               blurRadius: 15,
               offset: Offset(0, 0),
@@ -33,7 +34,18 @@ class ArticleList extends StatelessWidget {
             height: 90,
             child: Row(
               children: [
-                Image.asset('assets/images/test.png'),
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
+                  ),
+                  child: Image.asset(
+                    'assets/images/article/article-default.png',
+                    width: MediaQuery.of(context).size.width * 0.23,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(

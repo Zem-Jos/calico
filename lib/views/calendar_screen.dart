@@ -65,7 +65,9 @@ class CalendarScreen extends StatelessWidget {
                               Text(
                                 authController.user?.displayName ?? 'Tamu',
                                 style: GoogleFonts.rubik(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: _colorController.getTextColor()),
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -131,7 +133,7 @@ class CalendarScreen extends StatelessWidget {
                               Text(
                                 'Hari ini anda merasa ${calendarController.selectedMood.value.toString()}',
                                 style: GoogleFonts.rubik(
-                                    fontSize: 17,
+                                    fontSize: 15,
                                     color: _colorController.getTextColor()),
                               ),
                             ]),
@@ -170,7 +172,7 @@ class CalendarScreen extends StatelessWidget {
                             Text(
                               'Percakapan dengan Calico',
                               style: GoogleFonts.rubik(
-                                  fontSize: 17,
+                                  fontSize: 15,
                                   color: _colorController.getTextColor()),
                             ),
                             Text(
