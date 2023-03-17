@@ -45,3 +45,4 @@ app.*.map.json
 
 # Keys
 dialog_flow_auth.json
+.env

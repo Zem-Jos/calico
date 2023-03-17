@@ -13,6 +13,7 @@ dependencies:
   firebase_core: ^2.6.1
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.0.2
   flutter_native_splash: ^2.2.19
   flutter_phone_direct_caller: ^2.1.1
   get: ^4.6.5
@@ -36,6 +37,7 @@ flutter:
     - assets/images/nav/
     - assets/images/icon/
     - assets/dialog_flow_auth.json
+    - .env
 
 flutter_native_splash:
   image: assets/images/splash.png

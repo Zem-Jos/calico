@@ -1,13 +1,16 @@
 import 'package:calico/controllers/chat_session_controller.dart';
 import 'package:calico/controllers/mood_controller.dart';
 import 'package:calico/utils/date_util.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../models/chat_session_model.dart';
+import 'authentication_controller.dart';
 
 class CalendarController extends GetxController {
   static CalendarController instance = Get.put(CalendarController());
+  final _db = FirebaseFirestore.instance;
 
   Rx<CalendarFormat> calendarFormat = CalendarFormat.month.obs;
   Rx<DateTime> focusedDay = DateUtil.getCurrentDate().obs;
@@ -51,7 +54,9 @@ class CalendarController extends GetxController {
     final List<ChatMessage>? messages =
         await ChatSessionController.instance.getChatMessagesByDate(date);
 
+    // fetch mood
     final String mood = await MoodController.instance.getMoodByDate(date);
+
     selectedMood.value = mood;
     selectedMessages.value = messages ?? [];
     update();

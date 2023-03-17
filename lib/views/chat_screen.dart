@@ -186,6 +186,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // input message
                       Container(
                         decoration: BoxDecoration(
                           color: _themeController.isDarkMode.value
@@ -220,6 +221,9 @@ class _ChatScreenState extends State<ChatScreen> {
                             ChatMessage chatMessage = ChatMessage(
                                 messageContent: messageController.text,
                                 messageSender: "user");
+
+                            chatSessionController
+                                .sendMessage(messageController.text);
 
                             setState(() {
                               chatSessionController.chatMessages.insert(

@@ -1,5 +1,6 @@
 import 'package:calico/controllers/authentication_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 import '../api/dialogflowcx_api.dart';
@@ -9,29 +10,21 @@ import '../utils/date_util.dart';
 class ChatSessionController extends GetxController {
   static ChatSessionController instance = Get.put(ChatSessionController());
   late Rx<ChatSession> chatSession = ChatSession(
+    id: "test-session-123",
     messages: [],
     session: DateUtil.getCurrentDate(),
     userId: "",
   ).obs;
 
   final _db = FirebaseFirestore.instance;
-  late final DialogflowCxApi dialogflow;
+  late final DialogflowCxApi? dialogflow;
 
   List<ChatMessage> get chatMessages => chatSession.value.messages;
 
   @override
   onInit() {
-    // fetch chat session
+    // load chat session
     _loadChatSession();
-
-    DialogflowCxApi dialogflow = DialogflowCxApi(
-      location: "us-central1",
-      agentId: "de8eb146-d4e2-40da-bafd-f599842c6e9b",
-      languageCode: "id",
-      sessionId: "test-session-123",
-    );
-
-    dialogflow.initialize();
 
     super.onInit();
   }
@@ -39,14 +32,36 @@ class ChatSessionController extends GetxController {
   @override
   onClose() {
     // dispose dialogflow connection
+    if (dialogflow == null) return;
+    dialogflow!.dispose();
+
+    super.onClose();
   }
 
   _loadChatSession() async {
     ChatSession? cs = await getChatSession(DateUtil.getCurrentDate());
 
     if (cs == null) throw Exception("Failed to load Chat Session");
+    if (cs.id == null) throw Exception("Failed to get Chat Session ID");
 
+    print(cs);
     chatSession.value = cs;
+
+    // init dialogflow
+    await _initDialogflow(cs.id!);
+  }
+
+  _initDialogflow(String sessionId) async {
+    DialogflowCxApi dialogflow = DialogflowCxApi(
+      location: dotenv.env['DIALOGFLOW_LOCATION']!,
+      agentId: dotenv.env['DIALOGFLOW_AGENT_ID']!,
+      languageCode: "id",
+      sessionId: sessionId,
+    );
+
+    dialogflow.initialize();
+
+    this.dialogflow = dialogflow;
   }
 
   Future<ChatSession?> getChatSession(DateTime session) async {
@@ -157,5 +172,12 @@ class ChatSessionController extends GetxController {
     }, onError: (error) {
       print("Failed to delete chat session: $error");
     });
+  }
+
+  void sendMessage(String message) async {
+    if (dialogflow == null) throw Exception("Dialogflow not initialized.");
+
+    var response = await dialogflow!.detectIntent(message);
+    print(response);
   }
 }

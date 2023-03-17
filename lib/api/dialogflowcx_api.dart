@@ -8,7 +8,7 @@ class DialogflowCxApi {
   final String sessionId;
   final String languageCode;
   late String projectId;
-  late final AutoRefreshingAuthClient? authenticatedHttpClient;
+  late AutoRefreshingAuthClient? authenticatedHttpClient;
 
   DialogflowCxApi({
     required this.location,
