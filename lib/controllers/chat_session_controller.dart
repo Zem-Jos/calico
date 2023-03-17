@@ -47,6 +47,8 @@ class ChatSessionController extends GetxController {
 
   _loadChatSession() async {
     try {
+      isLoading.value = true;
+      update();
       ChatSession? cs = await getChatSession(DateUtil.getCurrentDate());
 
       if (cs == null) throw Exception("Failed to load Chat Session");
@@ -60,6 +62,9 @@ class ChatSessionController extends GetxController {
     } catch (e) {
       // TODO Handle error
       print(e);
+    } finally {
+      isLoading.value = false;
+      update();
     }
   }
 
@@ -126,9 +131,10 @@ class ChatSessionController extends GetxController {
 
     if (querySnapshot.docs.isEmpty) {
       print("No chat session found!");
-      createNewChatSession();
+      String id = await createNewChatSession();
       // return empty ChatSession
       return ChatSession(
+          id: id,
           messages: [],
           session: DateUtil.getCurrentDate(),
           userId: AuthController.instance.user!.uid);
@@ -156,19 +162,25 @@ class ChatSessionController extends GetxController {
     return chatSession;
   }
 
-  Future<void> createNewChatSession() async {
+  Future<String> createNewChatSession() async {
     ChatSession chatSession = ChatSession(
       messages: [],
       session: DateUtil.getCurrentDate(),
       userId: AuthController.instance.user!.uid,
     );
+
+    String id = "";
     await _db
         .collection('chatSessions')
         .add(chatSession.toJson())
-        .whenComplete(() {})
-        .catchError((error, stackTrace) {
+        .then((documentsnapshot) {
+      // get new chat session
+      id = documentsnapshot.id;
+    }).catchError((error, stackTrace) {
       print(error.toString());
     });
+
+    return id;
   }
 
   Future<List<ChatMessage>> getChatMessages() async {
