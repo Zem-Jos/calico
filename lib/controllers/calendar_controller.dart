@@ -50,9 +50,8 @@ class CalendarController extends GetxController {
   }
 
   Future<void> updateData(DateTime date) async {
-    // fetch mood and messages
-    final List<ChatMessage>? messages =
-        await ChatSessionController.instance.getChatMessagesByDate(date);
+    // fetch messages
+    final List<ChatMessage>? messages = await getChatMessagesByDate(date);
 
     // fetch mood
     final String mood = await MoodController.instance.getMoodByDate(date);
@@ -69,5 +68,32 @@ class CalendarController extends GetxController {
 
     updateData(formattedDate);
     update();
+  }
+
+  Future<List<ChatMessage>?> getChatMessagesByDate(DateTime date) async {
+    ChatSession? chatSession = await findChatSession(date);
+
+    if (chatSession == null) {
+      return null;
+    }
+
+    return chatSession.messages;
+  }
+
+  Future<ChatSession?> findChatSession(DateTime session) async {
+    final ref = _db
+        .collection("chatSessions")
+        .where("firebaseSession", isEqualTo: Timestamp.fromDate(session))
+        .where("userId", isEqualTo: AuthController.instance.user!.uid);
+
+    final querySnapshot = await ref.get();
+
+    if (querySnapshot.docs.isEmpty) {
+      return null;
+    }
+
+    ChatSession chatSession =
+        ChatSession.fromFirestore(snapshot: querySnapshot.docs.first);
+    return chatSession;
   }
 }
