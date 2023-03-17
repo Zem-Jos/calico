@@ -27,10 +27,7 @@ class DialogflowCxApi {
 
     final httpClient = await clientViaServiceAccount(credentials, scopes);
 
-    print(jsonData);
-
     projectId = jsonData["project_id"];
-    // _credentials = httpClient.credentials;
     authenticatedHttpClient = httpClient;
   }
 
@@ -56,7 +53,6 @@ class DialogflowCxApi {
       body: body,
     );
 
-    print(response.body);
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {

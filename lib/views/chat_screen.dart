@@ -118,7 +118,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 physics: const BouncingScrollPhysics(),
                 itemCount: chatSessionController.chatMessages.length,
                 shrinkWrap: true,
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                padding: const EdgeInsets.only(bottom: 10),
                 itemBuilder: (context, index) {
                   return Container(
                     padding: const EdgeInsets.only(
@@ -222,8 +222,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 messageContent: messageController.text,
                                 messageSender: "user");
 
-                            chatSessionController
-                                .sendMessage(messageController.text);
+                            chatSessionController.sendMessage(chatMessage);
 
                             setState(() {
                               chatSessionController.chatMessages.insert(

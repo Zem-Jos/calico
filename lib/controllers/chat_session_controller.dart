@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../api/dialogflowcx_api.dart';
 import '../models/chat_session_model.dart';
+import '../models/dialogflow_response.dart';
 import '../utils/date_util.dart';
 
 class ChatSessionController extends GetxController {
@@ -15,6 +16,7 @@ class ChatSessionController extends GetxController {
     session: DateUtil.getCurrentDate(),
     userId: "",
   ).obs;
+  RxBool isLoading = false.obs;
 
   final _db = FirebaseFirestore.instance;
   late final DialogflowCxApi? dialogflow;
@@ -39,16 +41,21 @@ class ChatSessionController extends GetxController {
   }
 
   _loadChatSession() async {
-    ChatSession? cs = await getChatSession(DateUtil.getCurrentDate());
+    try {
+      ChatSession? cs = await getChatSession(DateUtil.getCurrentDate());
 
-    if (cs == null) throw Exception("Failed to load Chat Session");
-    if (cs.id == null) throw Exception("Failed to get Chat Session ID");
+      if (cs == null) throw Exception("Failed to load Chat Session");
+      if (cs.id == null) throw Exception("Failed to get Chat Session ID");
 
-    print(cs);
-    chatSession.value = cs;
+      print(cs);
+      chatSession.value = cs;
 
-    // init dialogflow
-    await _initDialogflow(cs.id!);
+      // init dialogflow
+      await _initDialogflow(cs.id!);
+    } catch (e) {
+      // TODO Handle error
+      print(e);
+    }
   }
 
   _initDialogflow(String sessionId) async {
@@ -62,6 +69,29 @@ class ChatSessionController extends GetxController {
     dialogflow.initialize();
 
     this.dialogflow = dialogflow;
+  }
+
+  void sendMessage(ChatMessage message) async {
+    try {
+      // insert chat message to db
+      await insertChatMessage(message);
+
+      if (dialogflow == null) throw Exception("Dialogflow not initialized.");
+
+      var response = await dialogflow!.detectIntent(message.messageContent);
+
+      DialogflowResponse dialogflowResponse =
+          DialogflowResponse.fromJson(response);
+
+      // insert responseMessages to chatSession
+
+      print(dialogflowResponse.responseMessages.first.text);
+
+      // insert response to db
+    } catch (e) {
+      // TODO Handle error
+      print(e);
+    }
   }
 
   Future<ChatSession?> getChatSession(DateTime session) async {
@@ -96,7 +126,6 @@ class ChatSessionController extends GetxController {
     final querySnapshot = await ref.get();
 
     if (querySnapshot.docs.isEmpty) {
-      print("No chat session found!");
       return null;
     }
 
@@ -114,9 +143,8 @@ class ChatSessionController extends GetxController {
     await _db
         .collection('chatSessions')
         .add(chatSession.toJson())
-        .whenComplete(() {
-      print("Successfully create chat session!");
-    }).catchError((error, stackTrace) {
+        .whenComplete(() {})
+        .catchError((error, stackTrace) {
       print(error.toString());
     });
   }
@@ -142,13 +170,13 @@ class ChatSessionController extends GetxController {
   }
 
   Future<void> insertChatMessage(ChatMessage message) async {
+    // TODO handle success and error
     try {
       // get current chat session
       ChatSession? chatSession =
           await getChatSession(DateUtil.getCurrentDate());
 
       if (chatSession == null) throw Exception("Failed to get chat session.");
-      print("chatSession id: $chatSession.id");
 
       final ref = _db.collection("chatSessions").doc(chatSession.id);
 
@@ -172,12 +200,5 @@ class ChatSessionController extends GetxController {
     }, onError: (error) {
       print("Failed to delete chat session: $error");
     });
-  }
-
-  void sendMessage(String message) async {
-    if (dialogflow == null) throw Exception("Dialogflow not initialized.");
-
-    var response = await dialogflow!.detectIntent(message);
-    print(response);
   }
 }
