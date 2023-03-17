@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 // import 'package:timezone/browser.dart';
 import 'controllers/authentication_controller.dart';
 // import 'package:timezone/timezone.dart' as tz;
@@ -13,6 +14,7 @@ import 'controllers/authentication_controller.dart';
 // import 'package:timezone/browser.dart' as tz;
 
 Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
 
   // const AndroidInitializationSettings initializationSettingsAndroid =

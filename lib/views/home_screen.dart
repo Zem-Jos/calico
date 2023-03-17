@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // TestController testController = Get.put(TestController());
   AuthController authController = Get.find<AuthController>();
   final ThemeController _themeController = Get.find<ThemeController>();
   final ColorController _colorController = Get.put(ColorController());
@@ -160,6 +161,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 97,
                     ),
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // TODO: Delete comment
+                  // ElevatedButton.icon(
+                  //     onPressed: () {
+                  //       testController.detectIntent();
+                  //     },
+                  //     icon: Icon(Icons.favorite),
+                  //     label: Text("Test dialog flow"))
                 ],
               ),
             ),

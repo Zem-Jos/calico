@@ -16,32 +16,32 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final ChatSessionController chatSessionController =
+      Get.put(ChatSessionController());
+
   final ThemeController _themeController = Get.find<ThemeController>();
+
   final ColorController _colorController = Get.put(ColorController());
 
-  late List<ChatMessage> _messages = [];
-  var messageController = TextEditingController();
-  RxBool soundOn = true.obs;
+  final TextEditingController messageController = TextEditingController();
+
+  final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
-    super.initState();
-    _loadMessages();
-  }
-
-  _loadMessages() async {
-    List<ChatMessage> messages =
-        await ChatSessionController.instance.getChatMessages();
-    setState(() {
-      _messages = messages;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.jumpTo(
+        _scrollController.position.maxScrollExtent,
+      );
     });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.offAll(NavigationPage());
+        Get.offAll(const NavigationPage());
         return false;
       },
       child: Scaffold(
@@ -65,80 +65,103 @@ class _ChatScreenState extends State<ChatScreen> {
                     blurRadius: 12,
                     offset: const Offset(0, 10), // changes position of shadow
                   ),
-                ],
-                color: _colorController.getContainerColor(),
-              ),
-              padding: EdgeInsets.only(right: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Get.offAll(NavigationPage());
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: _colorController.getTextColor(),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xff433230).withOpacity(0.15),
+                      spreadRadius: 0,
+                      blurRadius: 12,
+                      offset: const Offset(0, 4), // changes position of shadow
+                    ),
+                  ],
+                  color: _colorController.getContainerColor(),
+                ),
+                padding: const EdgeInsets.only(right: 16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Get.offAll(const NavigationPage());
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: _colorController.getTextColor(),
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 2,
-                      ),
-                      Image.asset(
-                        'assets/images/calico_icon.png',
-                        width: 45,
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      Text(
-                        'Calico',
-                        style: GoogleFonts.rubik(
-                            fontSize: 22, fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
-                  Obx(
-                    () {
-                      return soundOn.isTrue
-                          ? GestureDetector(
-                              onTap: soundOn = false.obs,
-                              child: Image.asset(
-                                'assets/images/icon/sound_on.png',
-                                width: 40,
-                              ),
-                            )
-                          : GestureDetector(
-                              onTap: soundOn = true.obs,
-                              child: Image.asset(
-                                  'assets/images/icon/sound_off.png',
-                                  width: 40),
-                            );
-                    },
-                  )
-                ],
+                        const SizedBox(
+                          width: 2,
+                        ),
+                        Image.asset(
+                          'assets/images/calico_icon.png',
+                          width: 45,
+                        ),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          'Calico',
+                          style: GoogleFonts.rubik(
+                              fontSize: 22, fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    Obx(
+                      () {
+                        return chatSessionController.soundOn.isTrue
+                            ? GestureDetector(
+                                onTap: chatSessionController.soundOn =
+                                    false.obs,
+                                child: Image.asset(
+                                  'assets/images/icon/sound_on.png',
+                                  width: 40,
+                                ),
+                              )
+                            : GestureDetector(
+                                onTap: chatSessionController.soundOn = true.obs,
+                                child: Image.asset(
+                                    'assets/images/icon/sound_off.png',
+                                    width: 40),
+                              );
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        body: Stack(
-          children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.only(bottom: 98.0),
-                child: Expanded(
+          body: GetBuilder<ChatSessionController>(
+            builder: (chatSessionController) => Column(
+              children: [
+                Expanded(
                   child: ListView.builder(
-                    itemCount: _messages.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: chatSessionController.chatMessages.length + 1,
                     shrinkWrap: true,
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(bottom: 10),
+                    controller: _scrollController,
                     itemBuilder: (context, index) {
+                      if (index == chatSessionController.chatMessages.length) {
+                        if (chatSessionController.isLoading.isTrue) {
+                          return const SizedBox(
+                            height: 100,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        }
+                        // return nothing
+                        return const SizedBox.shrink();
+                      }
                       return Container(
                         padding: const EdgeInsets.only(
                             left: 14, right: 14, top: 10, bottom: 10),
                         child: Align(
-                          alignment: (_messages[index].messageSender == 'calico'
+                          alignment: (chatSessionController
+                                      .chatMessages[index].messageSender ==
+                                  'calico'
                               ? Alignment.topLeft
                               : Alignment.topRight),
                           child: Container(
@@ -147,27 +170,33 @@ class _ChatScreenState extends State<ChatScreen> {
                                   MediaQuery.of(context).size.width * 0.75,
                             ),
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  (_messages[index].messageSender == 'calico'
-                                      ? const BorderRadius.only(
-                                          bottomRight: Radius.circular(20),
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20))
-                                      : const BorderRadius.only(
-                                          bottomLeft: Radius.circular(20),
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20))),
-                              color: (_messages[index].messageSender == 'calico'
+                              borderRadius: (chatSessionController
+                                          .chatMessages[index].messageSender ==
+                                      'calico'
+                                  ? const BorderRadius.only(
+                                      bottomRight: Radius.circular(20),
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20))
+                                  : const BorderRadius.only(
+                                      bottomLeft: Radius.circular(20),
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20))),
+                              color: (chatSessionController
+                                          .chatMessages[index].messageSender ==
+                                      'calico'
                                   ? _colorController.getCalicoChatColor()
                                   : _colorController.getUserChatColor()),
                             ),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                             child: SelectableText(
-                              _messages[index].messageContent,
+                              chatSessionController
+                                  .chatMessages[index].messageContent,
                               style: GoogleFonts.rubik(
                                 fontSize: 17,
-                                color: (_messages[index].messageSender ==
+                                color: (chatSessionController
+                                            .chatMessages[index]
+                                            .messageSender ==
                                         'calico'
                                     ? _colorController.getCalicoChatTextColor()
                                     : _colorController.getUserChatTextColor()),
@@ -178,112 +207,74 @@ class _ChatScreenState extends State<ChatScreen> {
                       );
                     },
                   ),
-                )),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
-                height: 98,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(20)),
-                    color: _colorController.getContainerColor()),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: _themeController.isDarkMode.value
-                              ? darkBackground
-                              : lightGrayColor,
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        width: MediaQuery.of(context).size.width * 0.7,
-                        child: TextFormField(
-                          style: GoogleFonts.rubik(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400,
-                            color: _colorController.getTextColor(),
+                ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 22, vertical: 10),
+                    height: 98,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(20)),
+                        color: _colorController.getContainerColor()),
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // input message
+                          Container(
+                            decoration: BoxDecoration(
+                              color: _themeController.isDarkMode.value
+                                  ? darkBackground
+                                  : lightGrayColor,
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            child: TextFormField(
+                              style: GoogleFonts.rubik(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w400,
+                                color: _colorController.getTextColor(),
+                              ),
+                              cursorColor: brownColor,
+                              controller: messageController,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                labelText: null,
+                                hintText: 'Ketik pesan anda',
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                alignLabelWithHint: true,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 4),
+                              ),
+                              maxLines: null,
+                            ),
                           ),
-                          cursorColor: brownColor,
-                          controller: messageController,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            labelText: null,
-                            hintText: 'Ketik pesan anda',
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                            alignLabelWithHint: true,
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 4),
-                          ),
-                          maxLines: null,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          if (messageController.text.isNotEmpty) {
-                            ChatMessage chatMessage = ChatMessage(
-                                messageContent: messageController.text,
-                                messageSender: "user");
+                          GestureDetector(
+                            onTap: () {
+                              if (messageController.text.isNotEmpty) {
+                                ChatMessage chatMessage = ChatMessage(
+                                    messageContent: messageController.text,
+                                    messageSender: "user");
 
-                            setState(() {
-                              _messages.insert(
-                                  _messages.length,
-                                  ChatMessage(
-                                      messageContent: messageController.text,
-                                      messageSender: 'user'));
-                              messageController.clear();
-                            });
-                            // update firebase db
-                            ChatSessionController.instance
-                                .insertChatMessage(chatMessage);
-                          }
-                        },
-                        child: Image.asset(
-                          'assets/images/icon/send_icon.png',
-                          width: 45,
-                        ),
-                      ),
-                    ]),
-              ),
+                                chatSessionController.sendMessage(chatMessage);
+                                messageController.clear();
+                              }
+                            },
+                            child: Image.asset(
+                              'assets/images/icon/send_icon.png',
+                              width: 45,
+                            ),
+                          ),
+                        ]),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          )),
     );
   }
 }
-
-List<ChatMessage> messages = [
-  ChatMessage(
-      messageContent:
-          "Halo Izora! Perkenalkan aku Urai, chatbot yang siap menemanimu dalam mengatasi kecemasan",
-      messageSender: "calico"),
-  ChatMessage(
-      messageContent:
-          "Ceritakan keluh kesahmu! Aku akan meringkas percakapan harian kita menjadi jurnal. Bisa diakses di halaman riwayat",
-      messageSender: "calico"),
-  ChatMessage(messageContent: "Salam kenal!", messageSender: "calico"),
-  ChatMessage(messageContent: "Halo juga, Urai!", messageSender: "user"),
-  ChatMessage(
-      messageContent: "Jadi, bagaimana perasaanmu hari ini, Izora?",
-      messageSender: "calico"),
-  ChatMessage(messageContent: "Sedih", messageSender: "user"),
-  ChatMessage(
-      messageContent:
-          "Halo Izora! Perkenalkan aku Urai, chatbot yang siap menemanimu dalam mengatasi kecemasan",
-      messageSender: "calico"),
-  ChatMessage(
-      messageContent:
-          "Ceritakan keluh kesahmu! Aku akan meringkas percakapan harian kita menjadi jurnal. Bisa diakses di halaman riwayat",
-      messageSender: "calico"),
-  ChatMessage(messageContent: "Salam kenal!", messageSender: "calico"),
-  ChatMessage(messageContent: "Halo juga, Urai!", messageSender: "user"),
-  ChatMessage(
-      messageContent: "Jadi, bagaimana perasaanmu hari ini, Izora?",
-      messageSender: "calico"),
-  ChatMessage(messageContent: "Sedih", messageSender: "user"),
-];
