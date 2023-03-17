@@ -8,34 +8,15 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/chat_session_controller.dart';
 import '../models/chat_session_model.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+class ChatScreen extends StatelessWidget {
+  ChatScreen({super.key});
 
-  @override
-  State<ChatScreen> createState() => _ChatScreenState();
-}
-
-class _ChatScreenState extends State<ChatScreen> {
   final ChatSessionController chatSessionController =
       Get.put(ChatSessionController());
 
   final ThemeController _themeController = Get.find<ThemeController>();
-
   final ColorController _colorController = Get.put(ColorController());
-
   final TextEditingController messageController = TextEditingController();
-
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.jumpTo(
-        _scrollController.position.maxScrollExtent,
-      );
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,25 +26,18 @@ class _ChatScreenState extends State<ChatScreen> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: _colorController.getBackgroundColor(),
-        appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          backgroundColor: _colorController.getContainerColor(),
-          flexibleSpace: SafeArea(
-            child: Container(
-              height: 65,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xff433230).withOpacity(0.15),
-                    spreadRadius: -7,
-                    blurRadius: 12,
-                    offset: const Offset(0, 10), // changes position of shadow
+          backgroundColor: _colorController.getBackgroundColor(),
+          appBar: AppBar(
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: SafeArea(
+              child: Container(
+                height: 65,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -141,9 +115,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     itemCount: chatSessionController.chatMessages.length + 1,
                     shrinkWrap: true,
                     padding: const EdgeInsets.only(bottom: 10),
-                    controller: _scrollController,
+                    reverse: true,
                     itemBuilder: (context, index) {
-                      if (index == chatSessionController.chatMessages.length) {
+                      List<dynamic> messageList = ["padding"];
+                      messageList.insertAll(1,
+                          chatSessionController.chatMessages.reversed.toList());
+                      if (index == 0) {
                         if (chatSessionController.isLoading.isTrue) {
                           return const SizedBox(
                             height: 100,
@@ -159,44 +136,38 @@ class _ChatScreenState extends State<ChatScreen> {
                         padding: const EdgeInsets.only(
                             left: 14, right: 14, top: 10, bottom: 10),
                         child: Align(
-                          alignment: (chatSessionController
-                                      .chatMessages[index].messageSender ==
-                                  'calico'
-                              ? Alignment.topLeft
-                              : Alignment.topRight),
+                          alignment:
+                              (messageList[index].messageSender == 'calico'
+                                  ? Alignment.topLeft
+                                  : Alignment.topRight),
                           child: Container(
                             constraints: BoxConstraints(
                               maxWidth:
                                   MediaQuery.of(context).size.width * 0.75,
                             ),
                             decoration: BoxDecoration(
-                              borderRadius: (chatSessionController
-                                          .chatMessages[index].messageSender ==
-                                      'calico'
-                                  ? const BorderRadius.only(
-                                      bottomRight: Radius.circular(20),
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20))
-                                  : const BorderRadius.only(
-                                      bottomLeft: Radius.circular(20),
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20))),
-                              color: (chatSessionController
-                                          .chatMessages[index].messageSender ==
-                                      'calico'
-                                  ? _colorController.getCalicoChatColor()
-                                  : _colorController.getUserChatColor()),
+                              borderRadius:
+                                  (messageList[index].messageSender == 'calico'
+                                      ? const BorderRadius.only(
+                                          bottomRight: Radius.circular(20),
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20))
+                                      : const BorderRadius.only(
+                                          bottomLeft: Radius.circular(20),
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20))),
+                              color:
+                                  (messageList[index].messageSender == 'calico'
+                                      ? _colorController.getCalicoChatColor()
+                                      : _colorController.getUserChatColor()),
                             ),
                             padding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                             child: SelectableText(
-                              chatSessionController
-                                  .chatMessages[index].messageContent,
+                              messageList[index].messageContent,
                               style: GoogleFonts.rubik(
                                 fontSize: 17,
-                                color: (chatSessionController
-                                            .chatMessages[index]
-                                            .messageSender ==
+                                color: (messageList[index].messageSender ==
                                         'calico'
                                     ? _colorController.getCalicoChatTextColor()
                                     : _colorController.getUserChatTextColor()),
