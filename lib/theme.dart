@@ -14,24 +14,3 @@ const Color greenColor = Color(0xff71A77A);
 const Color shadeGrayColor = Color(0xffF2F2F2);
 const Color darkBackground = Color(0xff505050);
 const double edge = 24.0;
-
-// TextStyle blackTextStyle = GoogleFonts.rubik(
-//   color: blackColor,
-//   fontWeight: FontWeight.w500,
-// );
-// TextStyle greyTextStyle = GoogleFonts.rubik(
-//   color: greyColor,
-//   fontWeight: FontWeight.w300,
-// );
-// TextStyle whiteTextStyle = GoogleFonts.rubik(
-//   color: whiteColor,
-//   fontWeight: FontWeight.w500,
-// );
-// TextStyle purpleTextStyle = GoogleFonts.rubik(
-//   color: purpleColor,
-//   fontWeight: FontWeight.w500,
-// );
-// TextStyle regularTextStyle = GoogleFonts.rubik(
-//   color: blackColor,
-//   fontWeight: FontWeight.w400,
-// );
