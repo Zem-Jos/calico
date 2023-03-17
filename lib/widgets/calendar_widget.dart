@@ -13,6 +13,22 @@ class CalendarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     CalendarController calendarController = Get.find<CalendarController>();
     final ColorController colorController = Get.put(ColorController());
+    // Get.locale = const Locale('id', 'ID');
+    final Map<String, String> _calendarLocale = {
+      'month': 'Bulan',
+      'week': 'Minggu',
+      'day': 'Hari',
+      'today': 'Hari ini',
+      'previous': 'Sebelumnya',
+      'next': 'Selanjutnya',
+      'Monday': 'Senin',
+      'Tuesday': 'Selasa',
+      'Wednesday': 'Rabu',
+      'Thursday': 'Kamis',
+      'Friday': 'Jumat',
+      'Saturday': 'Sabtu',
+      'Sunday': 'Minggu',
+    };
 
     return GetBuilder<CalendarController>(builder: (_) {
       return Container(
@@ -29,11 +45,13 @@ class CalendarWidget extends StatelessWidget {
           ],
         ),
         child: Obx(() => TableCalendar(
-              locale: 'en_US',
+              // locale: 'id_ID',
               firstDay: DateTime.now().subtract(const Duration(days: 365)),
               lastDay: DateTime.now().add(const Duration(days: 365)),
               focusedDay: calendarController.focusedDay.value,
               calendarFormat: calendarController.calendarFormat.value,
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              // locale: _calendarLocale,
               calendarStyle: const CalendarStyle(
                 isTodayHighlighted: true,
                 todayDecoration: BoxDecoration(

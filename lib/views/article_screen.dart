@@ -95,16 +95,12 @@ class _ArticleScreenState extends State<ArticleScreen> {
               height: 30,
             ),
             SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Markdown(
-                  selectable: true,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.only(bottom: 20),
-                  data: _markdownData,
-                ),
+              child: Markdown(
+                selectable: true,
+                padding: EdgeInsets.only(bottom: 20),
+                data: _markdownData,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
               ),
             )
           ]),

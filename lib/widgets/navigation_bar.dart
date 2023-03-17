@@ -6,7 +6,6 @@ import 'package:calico/views/expert_screen.dart';
 import 'package:calico/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);

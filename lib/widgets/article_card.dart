@@ -36,7 +36,7 @@ class ArticleCard extends StatelessWidget {
                     topRight: Radius.circular(17),
                   ),
                   child: Image.asset(
-                    'assets/images/article/article.png',
+                    'assets/images/article/article-default.png',
                     width: 243,
                     height: 135,
                     fit: BoxFit.cover,

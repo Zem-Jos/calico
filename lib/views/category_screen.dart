@@ -12,6 +12,7 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorController _colorController = Get.put(ColorController());
     final category = Get.arguments;
+
     return Scaffold(
       body: SafeArea(
         bottom: false,
