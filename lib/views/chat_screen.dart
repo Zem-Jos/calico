@@ -4,6 +4,7 @@ import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jumping_dot/jumping_dot.dart';
 
 import '../controllers/chat_session_controller.dart';
 import '../models/chat_session_model.dart';
@@ -122,10 +123,31 @@ class ChatScreen extends StatelessWidget {
                           chatSessionController.chatMessages.reversed.toList());
                       if (index == 0) {
                         if (chatSessionController.isLoading.isTrue) {
-                          return const SizedBox(
-                            height: 100,
-                            child: Center(
-                              child: CircularProgressIndicator(),
+                          return Container(
+                            padding: const EdgeInsets.only(
+                                left: 14, right: 14, top: 10, bottom: 10),
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Container(
+                                constraints: BoxConstraints(
+                                  maxWidth:
+                                      MediaQuery.of(context).size.width * 0.22,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.only(
+                                      bottomRight: Radius.circular(20),
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20)),
+                                  color: _colorController.getCalicoChatColor(),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 12, horizontal: 16),
+                                child: const JumpingDots(
+                                  color: grayColor,
+                                  radius: 10,
+                                  numberOfDots: 3,
+                                ),
+                              ),
                             ),
                           );
                         }

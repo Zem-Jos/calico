@@ -23,11 +23,11 @@ dependencies:
   google_sign_in: ^6.0.2
   googleapis: ^10.1.0
   googleapis_auth: ^1.4.0
-  http: ^0.13.5
   html: ^0.15.2
+  http: ^0.13.5
+  jumping_dot: ^0.0.4
   shimmer: ^2.0.0
   table_calendar: ^3.0.1
-  # timezone: ^0.9.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
