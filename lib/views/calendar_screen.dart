@@ -1,5 +1,6 @@
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
+import 'package:calico/views/chat_recap_screen.dart';
 import 'package:calico/views/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -144,47 +145,52 @@ class CalendarScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 16),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: _colorController.getContainerColor(),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xff433230).withOpacity(0.15),
-                            spreadRadius: 0,
-                            blurRadius: 12,
-                            offset: const Offset(
-                                0, 4), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(children: [
-                        Image.asset(
-                          'assets/images/icon/paw.png',
-                          width: 35,
-                        ),
-                        const SizedBox(width: 16),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Percakapan dengan Calico',
-                              style: GoogleFonts.rubik(
-                                  fontSize: 15,
-                                  color: _colorController.getTextColor()),
-                            ),
-                            Text(
-                              '02.17 AM',
-                              style: GoogleFonts.rubik(
-                                  fontSize: 12, color: grayColor),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(const ChatRecapScreen());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: _colorController.getContainerColor(),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xff433230).withOpacity(0.15),
+                              spreadRadius: 0,
+                              blurRadius: 12,
+                              offset: const Offset(
+                                  0, 4), // changes position of shadow
                             ),
                           ],
                         ),
-                        const Spacer(),
-                        const Icon(Icons.arrow_forward_ios),
-                      ]),
+                        child: Row(children: [
+                          Image.asset(
+                            'assets/images/icon/paw.png',
+                            width: 35,
+                          ),
+                          const SizedBox(width: 16),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Percakapan dengan Calico',
+                                style: GoogleFonts.rubik(
+                                    fontSize: 15,
+                                    color: _colorController.getTextColor()),
+                              ),
+                              Text(
+                                '02.17 AM',
+                                style: GoogleFonts.rubik(
+                                    fontSize: 12, color: grayColor),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          const Icon(Icons.arrow_forward_ios),
+                        ]),
+                      ),
                     ),
                   ],
                 ),

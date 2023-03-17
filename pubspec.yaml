@@ -23,7 +23,7 @@ dependencies:
   html: ^0.15.2
   shimmer: ^2.0.0
   table_calendar: ^3.0.1
-  timezone: ^0.9.1
+  # timezone: ^0.9.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
