@@ -1,5 +1,6 @@
 import 'package:calico/controllers/authentication_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,8 @@ class ChatSessionController extends GetxController {
     session: DateUtil.getCurrentDate(),
     userId: "",
   ).obs;
+  final scrollController = ScrollController().obs;
+  RxBool soundOn = true.obs;
   RxBool isLoading = false.obs;
 
   final _db = FirebaseFirestore.instance;
@@ -36,6 +39,8 @@ class ChatSessionController extends GetxController {
     // dispose dialogflow connection
     if (dialogflow == null) return;
     dialogflow!.dispose();
+
+    scrollController.value.dispose();
 
     super.onClose();
   }
@@ -71,8 +76,13 @@ class ChatSessionController extends GetxController {
     this.dialogflow = dialogflow;
   }
 
-  void sendMessage(ChatMessage message) async {
+  Future<void> sendMessage(ChatMessage message) async {
     try {
+      isLoading.value = true;
+      // insert chatmessage to state
+      chatSession.value.messages.add(message);
+      update();
+
       // insert chat message to db
       await insertChatMessage(message);
 
@@ -84,13 +94,25 @@ class ChatSessionController extends GetxController {
           DialogflowResponse.fromJson(response);
 
       // insert responseMessages to chatSession
+      for (var message in dialogflowResponse.responseMessages) {
+        ChatMessage chatMessage = ChatMessage(
+          messageContent: message.text,
+          messageSender: "calico",
+        );
 
-      print(dialogflowResponse.responseMessages.first.text);
+        // insert chatmessage to state
+        chatSession.value.messages.add(chatMessage);
+        isLoading.value = false;
+        update();
 
-      // insert response to db
+        // insert chat message to db
+        await insertChatMessage(chatMessage);
+      }
     } catch (e) {
       // TODO Handle error
       print(e);
+    } finally {
+      isLoading.value = false;
     }
   }
 
