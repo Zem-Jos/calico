@@ -14,6 +14,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
+  flutter_local_notifications: ^13.0.0
+  flutter_markdown: ^0.6.14
   flutter_native_splash: ^2.2.19
   flutter_phone_direct_caller: ^2.1.1
   get: ^4.6.5
@@ -22,7 +24,10 @@ dependencies:
   googleapis: ^10.1.0
   googleapis_auth: ^1.4.0
   http: ^0.13.5
+  html: ^0.15.2
+  shimmer: ^2.0.0
   table_calendar: ^3.0.1
+  # timezone: ^0.9.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -32,12 +37,15 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/
     - assets/images/
     - assets/images/mood/
     - assets/images/nav/
     - assets/images/icon/
     - assets/dialog_flow_auth.json
     - .env
+    - assets/images/article/
+    - assets/images/category/
 
 flutter_native_splash:
   image: assets/images/splash.png

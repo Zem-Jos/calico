@@ -45,18 +45,25 @@ class _ChatScreenState extends State<ChatScreen> {
         return false;
       },
       child: Scaffold(
-          backgroundColor: _colorController.getBackgroundColor(),
-          appBar: AppBar(
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            flexibleSpace: SafeArea(
-              child: Container(
-                height: 65,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15),
+        backgroundColor: _colorController.getBackgroundColor(),
+        appBar: AppBar(
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: _colorController.getContainerColor(),
+          flexibleSpace: SafeArea(
+            child: Container(
+              height: 65,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xff433230).withOpacity(0.15),
+                    spreadRadius: -7,
+                    blurRadius: 12,
+                    offset: const Offset(0, 10), // changes position of shadow
                   ),
                   boxShadow: [
                     BoxShadow(

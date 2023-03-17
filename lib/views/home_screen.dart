@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(60)),
-                color: _colorController.getBackgroundColor(),
+                color: _colorController.getActivityBackgroundColor(),
               ),
             ),
           ),

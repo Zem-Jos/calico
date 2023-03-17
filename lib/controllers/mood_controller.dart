@@ -1,7 +1,6 @@
 import 'package:calico/controllers/calendar_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-
 import '../utils/date_util.dart';
 import 'authentication_controller.dart';
 
