@@ -88,7 +88,7 @@ class ArticleCard extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        '${article.category} • 5 Menit',
+                        '${article.category} • ${article.readTime} Menit',
                         style: GoogleFonts.rubik(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,

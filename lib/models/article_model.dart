@@ -7,6 +7,7 @@ class ArticleModel {
   String? imageUrl;
   String content;
   String category;
+  int readTime;
 
   ArticleModel({
     required this.author,
@@ -15,6 +16,7 @@ class ArticleModel {
     this.imageUrl,
     required this.content,
     required this.category,
+    required this.readTime,
   });
 
   factory ArticleModel.fromFirestore(DocumentSnapshot document) {
@@ -27,6 +29,7 @@ class ArticleModel {
       imageUrl: data['imageUrl'],
       content: data['content'],
       category: data['category'],
+      readTime: data['readTime'],
     );
   }
 }

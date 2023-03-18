@@ -39,7 +39,7 @@ class ArticleItem extends StatelessWidget {
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 0,
               blurRadius: 15,
-              offset: Offset(0, 0),
+              offset: const Offset(0, 0),
             ),
           ],
         ),
@@ -89,11 +89,11 @@ class ArticleItem extends StatelessWidget {
                               maxLines: 3,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 4,
                           ),
                           Text(
-                            '5 Menit • oleh ${article.author}',
+                            '${article.readTime} Menit • oleh ${article.author}',
                             style: GoogleFonts.rubik(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -129,7 +129,7 @@ class ArticleItemShimmer extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        period: Duration(seconds: 3),
+        period: const Duration(seconds: 3),
         direction: ShimmerDirection.ltr,
         child: Container(
           decoration: BoxDecoration(
@@ -140,7 +140,7 @@ class ArticleItemShimmer extends StatelessWidget {
                 color: Colors.black.withOpacity(0.2),
                 spreadRadius: 0,
                 blurRadius: 15,
-                offset: Offset(0, 0),
+                offset: const Offset(0, 0),
               ),
             ],
           ),
@@ -180,7 +180,7 @@ class ArticleItemShimmer extends StatelessWidget {
                             maxLines: 3,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 4,
                         ),
                         Text(

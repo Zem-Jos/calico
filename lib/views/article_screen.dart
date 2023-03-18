@@ -61,7 +61,7 @@ class ArticleScreen extends StatelessWidget {
                 height: 4,
               ),
               Text(
-                '5 Menit • oleh ${article.author}',
+                '${article.readTime} Menit • oleh ${article.author}',
                 style: GoogleFonts.rubik(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
