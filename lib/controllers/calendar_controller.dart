@@ -19,6 +19,8 @@ class CalendarController extends GetxController {
   Rx<String> selectedMood = ''.obs;
   RxList<ChatMessage> selectedMessages = <ChatMessage>[].obs;
 
+  RxBool isLoading = false.obs;
+
   @override
   onInit() {
     super.onInit();
@@ -49,18 +51,6 @@ class CalendarController extends GetxController {
     update();
   }
 
-  Future<void> updateData(DateTime date) async {
-    // fetch messages
-    final List<ChatMessage>? messages = await getChatMessagesByDate(date);
-
-    // fetch mood
-    final String mood = await MoodController.instance.getMoodByDate(date);
-
-    selectedMood.value = mood;
-    selectedMessages.value = messages ?? [];
-    update();
-  }
-
   Future<void> fetchSelectedData() async {
     // fetch mood and messages
     final DateTime formattedDate =
@@ -68,6 +58,26 @@ class CalendarController extends GetxController {
 
     updateData(formattedDate);
     update();
+  }
+
+  Future<void> updateData(DateTime date) async {
+    try {
+      isLoading.value = true;
+      update();
+      // fetch messages
+      final List<ChatMessage>? messages = await getChatMessagesByDate(date);
+
+      // fetch mood
+      final String mood = await MoodController.instance.getMoodByDate(date);
+
+      selectedMood.value = mood;
+      selectedMessages.value = messages ?? [];
+    } catch (e) {
+      Get.snackbar("Error Loading Data History", "error: $e");
+    } finally {
+      isLoading.value = false;
+      update();
+    }
   }
 
   Future<List<ChatMessage>?> getChatMessagesByDate(DateTime date) async {
