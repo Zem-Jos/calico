@@ -23,16 +23,16 @@ class _ChatRecapScreenState extends State<ChatRecapScreen> {
   @override
   initState() {
     super.initState();
-    _loadMessages();
+    // _loadMessages();
   }
 
-  _loadMessages() async {
-    List<ChatMessage> messages =
-        await ChatSessionController.instance.getChatMessages();
-    setState(() {
-      _messages = messages;
-    });
-  }
+  // _loadMessages() async {
+  //   List<ChatMessage> messages =
+  //       await ChatSessionController.instance.getChatMessages();
+  //   setState(() {
+  //     _messages = messages;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

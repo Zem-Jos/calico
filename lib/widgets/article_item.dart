@@ -7,30 +7,43 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ArticleList extends StatelessWidget {
-  const ArticleList({super.key});
+import '../controllers/article_controller.dart';
+import '../models/article_model.dart';
+import 'article_image.dart';
+
+class ArticleItem extends StatelessWidget {
+  final ArticleController articleController = Get.find();
+  final ArticleModel article;
+
+  ArticleItem({
+    super.key,
+    required this.article,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final ColorController _colorController = Get.put(ColorController());
+    final ColorController colorController = Get.put(ColorController());
     return GestureDetector(
       onTap: () {
-        Get.to(ArticleScreen());
+        articleController.fetchMarkdownFile(article.content);
+        Get.to(() => ArticleScreen(
+              article: article,
+            ));
       },
       child: Container(
         decoration: BoxDecoration(
-          color: _colorController.getContainerColor(),
+          color: colorController.getContainerColor(),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 0,
               blurRadius: 15,
-              offset: Offset(0, 0),
+              offset: const Offset(0, 0),
             ),
           ],
         ),
-        child: Container(
+        child: SizedBox(
             width: double.infinity,
             height: 90,
             child: Row(
@@ -40,37 +53,47 @@ class ArticleList extends StatelessWidget {
                     topLeft: Radius.circular(16),
                     bottomLeft: Radius.circular(16),
                   ),
-                  child: Image.asset(
-                    'assets/images/article/article-default.png',
-                    width: MediaQuery.of(context).size.width * 0.23,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                  child: article.imageUrl != null
+                      ? SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.23,
+                          height: double.infinity,
+                          child: ArticleImage(
+                            imageUrl: article.imageUrl!,
+                            width: MediaQuery.of(context).size.width * 0.23,
+                            height: double.infinity,
+                          ),
+                        )
+                      : Image.asset(
+                          'assets/images/article/article-default.png',
+                          width: MediaQuery.of(context).size.width * 0.23,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Container(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.56,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Text(
-                              '5 Hal yang dapat membantu kecemasanmu!',
+                              article.title,
                               style: GoogleFonts.rubik(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
-                                color: _colorController.getTextColor(),
+                                color: colorController.getTextColor(),
                               ),
                               softWrap: true,
                               maxLines: 3,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 4,
                           ),
                           Text(
-                            '5 Menit • oleh Anonymous',
+                            '${article.readTime} Menit • oleh ${article.author}',
                             style: GoogleFonts.rubik(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -87,15 +110,15 @@ class ArticleList extends StatelessWidget {
   }
 }
 
-class ArticleListShimmer extends StatelessWidget {
-  const ArticleListShimmer({Key? key}) : super(key: key);
+class ArticleItemShimmer extends StatelessWidget {
+  const ArticleItemShimmer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ColorController _colorController = Get.put(ColorController());
+    final ColorController colorController = Get.put(ColorController());
     return GestureDetector(
       onTap: () {
-        Get.to(ArticleScreen());
+        // Get.to(ArticleScreen());
       },
       child: Shimmer(
         gradient: LinearGradient(
@@ -106,22 +129,22 @@ class ArticleListShimmer extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        period: Duration(seconds: 3),
+        period: const Duration(seconds: 3),
         direction: ShimmerDirection.ltr,
         child: Container(
           decoration: BoxDecoration(
-            color: _colorController.getContainerColor(),
+            color: colorController.getContainerColor(),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
                 spreadRadius: 0,
                 blurRadius: 15,
-                offset: Offset(0, 0),
+                offset: const Offset(0, 0),
               ),
             ],
           ),
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             height: 90,
             child: Row(
@@ -140,7 +163,7 @@ class ArticleListShimmer extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Container(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.56,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,13 +174,13 @@ class ArticleListShimmer extends StatelessWidget {
                             style: GoogleFonts.rubik(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: _colorController.getTextColor(),
+                              color: colorController.getTextColor(),
                             ),
                             softWrap: true,
                             maxLines: 3,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 4,
                         ),
                         Text(
