@@ -147,7 +147,7 @@ class CalendarScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.to(const ChatRecapScreen());
+                        Get.to(() => ChatRecapScreen());
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
