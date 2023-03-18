@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class ArticleController extends GetxController {
   final _db = FirebaseFirestore.instance;
 
-  RxList<ArticleModel> articles = RxList<ArticleModel>([]);
+  RxList<ArticleModel?> recommendedArticles = RxList<ArticleModel>([]);
   RxBool isLoading = RxBool(false);
 
   @override
@@ -17,24 +17,32 @@ class ArticleController extends GetxController {
   void _loadArticles() async {
     try {
       isLoading.value = true;
+      update();
 
-      var ref = _db.collection("articles");
-
-      QuerySnapshot querySnapshot = await ref.get();
-
-      if (querySnapshot.docs.isEmpty) {
-        print('No articles found');
-      } else {
-        articles.assignAll(querySnapshot.docs
-            .map((doc) => ArticleModel.fromFirestore(doc))
-            .toList());
-      }
+      List<ArticleModel?> articles = await getArticles();
+      print(articles.length);
+      recommendedArticles = articles.obs;
     } catch (e) {
       print(e);
     } finally {
       isLoading.value = false;
+      update();
     }
   }
 
-  void getArticle() {}
+  Future<List<ArticleModel?>> getArticles() async {
+    var ref = _db.collection("articles");
+
+    QuerySnapshot querySnapshot = await ref.get();
+
+    if (querySnapshot.docs.isEmpty) {
+      print('No articles found');
+      return [];
+    }
+
+    var articles = querySnapshot.docs
+        .map((doc) => ArticleModel.fromFirestore(doc))
+        .toList();
+    return articles;
+  }
 }

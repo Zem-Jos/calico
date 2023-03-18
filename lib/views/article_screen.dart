@@ -56,54 +56,56 @@ class _ArticleScreenState extends State<ArticleScreen> {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              'Manajemen Emosi dengan Teknik Reframing',
-              style: GoogleFonts.rubik(
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: _colorController.getTextColor(),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Manajemen Emosi dengan Teknik Reframing',
+                style: GoogleFonts.rubik(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                  color: _colorController.getTextColor(),
+                ),
+                softWrap: true,
+                maxLines: 3,
               ),
-              softWrap: true,
-              maxLines: 3,
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            Text(
-              '5 Menit • oleh Anonymous',
-              style: GoogleFonts.rubik(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: grayColor,
+              const SizedBox(
+                height: 4,
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            // Image.asset('assets/images/test2.png'),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                'assets/images/article/article-default.png',
+              Text(
+                '5 Menit • oleh Anonymous',
+                style: GoogleFonts.rubik(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: grayColor,
+                ),
               ),
-            ),
+              const SizedBox(
+                height: 30,
+              ),
+              // Image.asset('assets/images/test2.png'),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  'assets/images/article/article-default.png',
+                ),
+              ),
 
-            const SizedBox(
-              height: 30,
-            ),
-            SingleChildScrollView(
-              child: Markdown(
-                selectable: true,
-                padding: EdgeInsets.only(bottom: 20),
-                data: _markdownData,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+              const SizedBox(
+                height: 30,
               ),
-            )
-          ]),
+              SingleChildScrollView(
+                child: Markdown(
+                  selectable: true,
+                  padding: const EdgeInsets.only(bottom: 20),
+                  data: _markdownData,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                ),
+              )
+            ],
+          ),
         ),
       )),
     );

@@ -13,8 +13,8 @@ import '../widgets/calendar_widget.dart';
 class CalendarScreen extends StatelessWidget {
   CalendarScreen({super.key});
 
-  AuthController authController = Get.find<AuthController>();
-  CalendarController calendarController = Get.put(CalendarController());
+  final AuthController authController = Get.find<AuthController>();
+  final CalendarController calendarController = Get.put(CalendarController());
   final ColorController _colorController = Get.put(ColorController());
 
   @override
@@ -84,7 +84,7 @@ class CalendarScreen extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {
-                          Get.to(const SettingsScreen());
+                          Get.to(() => const SettingsScreen());
                         },
                         icon: Image.asset(
                           'assets/images/icon/settings.png',

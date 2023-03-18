@@ -1,18 +1,22 @@
 import 'package:calico/controllers/theme_controller.dart';
+import 'package:calico/models/article_model.dart';
 import 'package:calico/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ArticleCard extends StatelessWidget {
+  final ArticleModel article;
+  const ArticleCard({super.key, required this.article});
+
   @override
   Widget build(BuildContext context) {
-    final ColorController _colorController = Get.put(ColorController());
+    final ColorController colorController = Get.put(ColorController());
     return Padding(
       padding: const EdgeInsets.only(left: 24),
       child: Container(
         decoration: BoxDecoration(
-          color: _colorController.getContainerColor(),
+          color: colorController.getContainerColor(),
           borderRadius: BorderRadius.circular(17),
           boxShadow: [
             BoxShadow(
@@ -24,7 +28,6 @@ class ArticleCard extends StatelessWidget {
           ],
         ),
         width: 243,
-        height: 240,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -55,18 +58,18 @@ class ArticleCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '5 Hal yang dapat membantu kecemasanmu!',
+                      article.title,
                       style: GoogleFonts.rubik(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: _colorController.getTextColor(),
+                        color: colorController.getTextColor(),
                       ),
                     ),
                     const SizedBox(
                       height: 4,
                     ),
                     Text(
-                      'Kecemasan • 5 Menit',
+                      '${article.category} • 5 Menit',
                       style: GoogleFonts.rubik(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,

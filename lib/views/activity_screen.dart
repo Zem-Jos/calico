@@ -1,3 +1,4 @@
+import 'package:calico/controllers/article_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/widgets/article_card.dart';
@@ -8,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:calico/widgets/category_card.dart';
 
 class ActivityScreen extends StatelessWidget {
+  final ArticleController articleController = Get.put(ArticleController());
   ActivityScreen({super.key});
 
   final ThemeController _themeController = Get.find<ThemeController>();
@@ -86,27 +88,31 @@ class ActivityScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 11,
               ),
               Container(
-                constraints: BoxConstraints(maxHeight: 218),
-                child: Expanded(
-                  child: ListView(
-                    clipBehavior: Clip.none,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      ArticleCard(),
-                      ArticleCard(),
-                      SizedBox(
-                        width: 24,
-                      )
-                    ],
-                  ),
+                constraints: const BoxConstraints(maxHeight: 243),
+                child: GetBuilder<ArticleController>(
+                  builder: (controller) {
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.recommendedArticles.length,
+                      itemBuilder: (context, index) {
+                        if (controller.recommendedArticles[index] == null) {
+                          // return empty widget
+                          return const SizedBox.shrink();
+                        }
+
+                        return ArticleCard(
+                          article: controller.recommendedArticles[index]!,
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 26,
               ),
               Padding(
@@ -119,7 +125,7 @@ class ActivityScreen extends StatelessWidget {
                       color: _colorController.getTextColor()),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 11,
               ),
               Padding(
