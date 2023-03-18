@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 
 class ArticleModel {
   String author;
   String title;
   String date;
-  // String? imageUrl;
-  String? imageName;
+  String? imageUrl;
   String content;
   String category;
 
@@ -15,7 +12,7 @@ class ArticleModel {
     required this.author,
     required this.title,
     required this.date,
-    this.imageName,
+    this.imageUrl,
     required this.content,
     required this.category,
   });
@@ -27,21 +24,13 @@ class ArticleModel {
       author: data['author'],
       title: data['title'],
       date: data['date'],
-      imageName: data['imageUrl'],
+      imageUrl: data['imageUrl'],
       content: data['content'],
       category: data['category'],
     );
   }
 }
 
-class FirestoreService {
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
-
-  Stream<List<ArticleModel>> getArticles() {
-    return _db.collection('articles').snapshots().map((snapshot) =>
-        snapshot.docs.map((doc) => ArticleModel.fromFirestore(doc)).toList());
-  }
-}
 
 // String _markdownData = '';
 // Future<void> _loadMarkdownFile() async {

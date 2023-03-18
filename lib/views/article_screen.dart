@@ -2,12 +2,12 @@ import 'package:calico/controllers/article_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../models/article_model.dart';
+import '../widgets/article_image.dart';
 
 class ArticleScreen extends StatelessWidget {
   final ArticleController articleController = Get.find();
@@ -15,15 +15,11 @@ class ArticleScreen extends StatelessWidget {
 
   ArticleScreen({super.key, required this.article});
 
-  // String _markdownData = '';
   @override
   Widget build(BuildContext context) {
-    final ColorController _colorController = Get.put(ColorController());
-    // final ArticleController _articleController = Get.put(ArticleController());
-    // _loadMarkdownFile();
-    // final _markdownData = _articleController.articles;
+    final ColorController colorController = Get.put(ColorController());
     return Scaffold(
-      backgroundColor: _colorController.getContainerColor(),
+      backgroundColor: colorController.getContainerColor(),
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
@@ -37,7 +33,7 @@ class ArticleScreen extends StatelessWidget {
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  color: _colorController.getTextColor(),
+                  color: colorController.getTextColor(),
                 ),
               ),
             ],
@@ -56,7 +52,7 @@ class ArticleScreen extends StatelessWidget {
                 style: GoogleFonts.rubik(
                   fontSize: 22,
                   fontWeight: FontWeight.w600,
-                  color: _colorController.getTextColor(),
+                  color: colorController.getTextColor(),
                 ),
                 softWrap: true,
                 maxLines: 3,
@@ -78,22 +74,19 @@ class ArticleScreen extends StatelessWidget {
               // Image.asset('assets/images/test2.png'),
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
-                  'assets/images/article/article-default.png',
-                ),
+                child: article.imageUrl != null
+                    ? ArticleImage(
+                        imageUrl: article.imageUrl!,
+                      )
+                    : Image.asset(
+                        'assets/images/article/article-default.png',
+                      ),
               ),
 
               const SizedBox(
                 height: 30,
               ),
               SingleChildScrollView(
-                // child: Markdown(
-                //   selectable: true,
-                //   padding: const EdgeInsets.only(bottom: 20),
-                //   data: _markdownData,
-                //   shrinkWrap: true,
-                //   physics: const NeverScrollableScrollPhysics(),
-                // ),
                 child: GetBuilder<ArticleController>(
                   builder: (controller) {
                     if (controller.isLoading.value) {
@@ -101,12 +94,6 @@ class ArticleScreen extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       );
                     }
-
-                    // if (controller.selectedMarkdownFile.isEmpty) {
-                    //   return const Center(
-                    //     child: Text('No data'),
-                    //   );
-                    // }
                     return Markdown(
                       selectable: true,
                       padding: const EdgeInsets.only(bottom: 20),

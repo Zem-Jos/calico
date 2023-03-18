@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'article_image.dart';
+
 class ArticleCard extends StatelessWidget {
   final ArticleModel article;
   const ArticleCard({super.key, required this.article});
@@ -38,12 +40,18 @@ class ArticleCard extends StatelessWidget {
                     topLeft: Radius.circular(17),
                     topRight: Radius.circular(17),
                   ),
-                  child: Image.asset(
-                    'assets/images/article/article-default.png',
-                    width: 243,
-                    height: 135,
-                    fit: BoxFit.cover,
-                  ),
+                  child: article.imageUrl != null
+                      ? ArticleImage(
+                          imageUrl: article.imageUrl!,
+                          width: 243,
+                          height: 135,
+                        )
+                      : Image.asset(
+                          'assets/images/article/article-default.png',
+                          width: 243,
+                          height: 135,
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ],
             ),

@@ -2,13 +2,10 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:calico/models/article_model.dart';
-import 'package:calico/views/article_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-
-import '../views/article_category_screen.dart';
 
 class ArticleController extends GetxController {
   final _db = FirebaseFirestore.instance;
@@ -16,8 +13,8 @@ class ArticleController extends GetxController {
 
   RxList<ArticleModel?> recommendedArticles = RxList<ArticleModel>([]);
   RxList<ArticleModel?> articlesByCategory = RxList<ArticleModel>([]);
-  // RxList<Uint8List?> recommendedArticlesImages = RxList<Uint8List>([]);
   Rx<String> selectedMarkdownFile = "".obs;
+
   RxBool isLoading = RxBool(false);
 
   @override
@@ -75,11 +72,6 @@ class ArticleController extends GetxController {
           .map((doc) => ArticleModel.fromFirestore(doc))
           .toList();
       articlesByCategory = articles.obs;
-
-      // Get.to(() => ArticleCategoryScreen(
-      //       category: category,
-      //       key: Key(category),
-      //     ));
     } catch (e) {
       print(e);
     } finally {
@@ -88,26 +80,11 @@ class ArticleController extends GetxController {
     }
   }
 
-  void fetchImage(String imageName) async {
-    // name.jpg
-    final storageRef = _storage.ref().child(imageName);
-
-    try {
-      final Uint8List? data = await storageRef.getData();
-
-      print(data);
-    } on FirebaseException catch (e) {
-      print(
-          'Firebase Storage Exception - code: ${e.code}, message: ${e.message}');
-      Get.snackbar("Failed to load articles image.", "error: ${e.message}");
-    }
-  }
-
   void fetchMarkdownFile(String fileName) async {
     isLoading.value = true;
     update();
 
-    final ref = FirebaseStorage.instance.ref().child(fileName);
+    final ref = _storage.ref().child(fileName);
     try {
       final Uint8List? data = await ref.getData();
       if (data == null) {

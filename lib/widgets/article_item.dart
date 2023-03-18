@@ -9,6 +9,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../controllers/article_controller.dart';
 import '../models/article_model.dart';
+import 'article_image.dart';
 
 class ArticleItem extends StatelessWidget {
   final ArticleController articleController = Get.find();
@@ -21,7 +22,7 @@ class ArticleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorController _colorController = Get.put(ColorController());
+    final ColorController colorController = Get.put(ColorController());
     return GestureDetector(
       onTap: () {
         articleController.fetchMarkdownFile(article.content);
@@ -31,7 +32,7 @@ class ArticleItem extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: _colorController.getContainerColor(),
+          color: colorController.getContainerColor(),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -42,7 +43,7 @@ class ArticleItem extends StatelessWidget {
             ),
           ],
         ),
-        child: Container(
+        child: SizedBox(
             width: double.infinity,
             height: 90,
             child: Row(
@@ -52,16 +53,26 @@ class ArticleItem extends StatelessWidget {
                     topLeft: Radius.circular(16),
                     bottomLeft: Radius.circular(16),
                   ),
-                  child: Image.asset(
-                    'assets/images/article/article-default.png',
-                    width: MediaQuery.of(context).size.width * 0.23,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                  child: article.imageUrl != null
+                      ? SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.23,
+                          height: double.infinity,
+                          child: ArticleImage(
+                            imageUrl: article.imageUrl!,
+                            width: MediaQuery.of(context).size.width * 0.23,
+                            height: double.infinity,
+                          ),
+                        )
+                      : Image.asset(
+                          'assets/images/article/article-default.png',
+                          width: MediaQuery.of(context).size.width * 0.23,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Container(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.56,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +83,7 @@ class ArticleItem extends StatelessWidget {
                               style: GoogleFonts.rubik(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
-                                color: _colorController.getTextColor(),
+                                color: colorController.getTextColor(),
                               ),
                               softWrap: true,
                               maxLines: 3,
@@ -104,7 +115,7 @@ class ArticleItemShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorController _colorController = Get.put(ColorController());
+    final ColorController colorController = Get.put(ColorController());
     return GestureDetector(
       onTap: () {
         // Get.to(ArticleScreen());
@@ -122,7 +133,7 @@ class ArticleItemShimmer extends StatelessWidget {
         direction: ShimmerDirection.ltr,
         child: Container(
           decoration: BoxDecoration(
-            color: _colorController.getContainerColor(),
+            color: colorController.getContainerColor(),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -133,7 +144,7 @@ class ArticleItemShimmer extends StatelessWidget {
               ),
             ],
           ),
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             height: 90,
             child: Row(
@@ -152,7 +163,7 @@ class ArticleItemShimmer extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Container(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.56,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,7 +174,7 @@ class ArticleItemShimmer extends StatelessWidget {
                             style: GoogleFonts.rubik(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: _colorController.getTextColor(),
+                              color: colorController.getTextColor(),
                             ),
                             softWrap: true,
                             maxLines: 3,
