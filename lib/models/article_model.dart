@@ -6,7 +6,8 @@ class ArticleModel {
   String author;
   String title;
   String date;
-  String? imageUrl;
+  // String? imageUrl;
+  String? imageName;
   String content;
   String category;
 
@@ -14,7 +15,7 @@ class ArticleModel {
     required this.author,
     required this.title,
     required this.date,
-    this.imageUrl,
+    this.imageName,
     required this.content,
     required this.category,
   });
@@ -26,7 +27,7 @@ class ArticleModel {
       author: data['author'],
       title: data['title'],
       date: data['date'],
-      imageUrl: data['imageUrl'],
+      imageName: data['imageUrl'],
       content: data['content'],
       category: data['category'],
     );

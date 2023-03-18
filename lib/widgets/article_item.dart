@@ -7,15 +7,27 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ArticleList extends StatelessWidget {
-  const ArticleList({super.key});
+import '../controllers/article_controller.dart';
+import '../models/article_model.dart';
+
+class ArticleItem extends StatelessWidget {
+  final ArticleController articleController = Get.find();
+  final ArticleModel article;
+
+  ArticleItem({
+    super.key,
+    required this.article,
+  });
 
   @override
   Widget build(BuildContext context) {
     final ColorController _colorController = Get.put(ColorController());
     return GestureDetector(
       onTap: () {
-        Get.to(ArticleScreen());
+        articleController.fetchMarkdownFile(article.content);
+        Get.to(() => ArticleScreen(
+              article: article,
+            ));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -56,7 +68,7 @@ class ArticleList extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              '5 Hal yang dapat membantu kecemasanmu!',
+                              article.title,
                               style: GoogleFonts.rubik(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
@@ -70,7 +82,7 @@ class ArticleList extends StatelessWidget {
                             height: 4,
                           ),
                           Text(
-                            '5 Menit • oleh Anonymous',
+                            '5 Menit • oleh ${article.author}',
                             style: GoogleFonts.rubik(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -87,15 +99,15 @@ class ArticleList extends StatelessWidget {
   }
 }
 
-class ArticleListShimmer extends StatelessWidget {
-  const ArticleListShimmer({Key? key}) : super(key: key);
+class ArticleItemShimmer extends StatelessWidget {
+  const ArticleItemShimmer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ColorController _colorController = Get.put(ColorController());
     return GestureDetector(
       onTap: () {
-        Get.to(ArticleScreen());
+        // Get.to(ArticleScreen());
       },
       child: Shimmer(
         gradient: LinearGradient(

@@ -7,29 +7,20 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ArticleScreen extends StatefulWidget {
-  const ArticleScreen({super.key});
+import '../models/article_model.dart';
 
-  @override
-  State<ArticleScreen> createState() => _ArticleScreenState();
-}
+class ArticleScreen extends StatelessWidget {
+  final ArticleController articleController = Get.find();
+  final ArticleModel article;
 
-class _ArticleScreenState extends State<ArticleScreen> {
-  String _markdownData = '';
-  Future<void> _loadMarkdownFile() async {
-    final String markdownData =
-        await rootBundle.loadString('assets/article.md');
+  ArticleScreen({super.key, required this.article});
 
-    setState(() {
-      _markdownData = markdownData;
-    });
-  }
-
+  // String _markdownData = '';
   @override
   Widget build(BuildContext context) {
     final ColorController _colorController = Get.put(ColorController());
     // final ArticleController _articleController = Get.put(ArticleController());
-    _loadMarkdownFile();
+    // _loadMarkdownFile();
     // final _markdownData = _articleController.articles;
     return Scaffold(
       backgroundColor: _colorController.getContainerColor(),
@@ -61,7 +52,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Manajemen Emosi dengan Teknik Reframing',
+                article.title,
                 style: GoogleFonts.rubik(
                   fontSize: 22,
                   fontWeight: FontWeight.w600,
@@ -74,7 +65,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 height: 4,
               ),
               Text(
-                '5 Menit • oleh Anonymous',
+                '5 Menit • oleh ${article.author}',
                 style: GoogleFonts.rubik(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
@@ -96,12 +87,34 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 height: 30,
               ),
               SingleChildScrollView(
-                child: Markdown(
-                  selectable: true,
-                  padding: const EdgeInsets.only(bottom: 20),
-                  data: _markdownData,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
+                // child: Markdown(
+                //   selectable: true,
+                //   padding: const EdgeInsets.only(bottom: 20),
+                //   data: _markdownData,
+                //   shrinkWrap: true,
+                //   physics: const NeverScrollableScrollPhysics(),
+                // ),
+                child: GetBuilder<ArticleController>(
+                  builder: (controller) {
+                    if (controller.isLoading.value) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    // if (controller.selectedMarkdownFile.isEmpty) {
+                    //   return const Center(
+                    //     child: Text('No data'),
+                    //   );
+                    // }
+                    return Markdown(
+                      selectable: true,
+                      padding: const EdgeInsets.only(bottom: 20),
+                      data: controller.selectedMarkdownFile.value,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                    );
+                  },
                 ),
               )
             ],
