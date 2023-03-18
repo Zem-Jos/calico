@@ -1,18 +1,15 @@
-import 'package:calico/controllers/chat_session_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
-import 'package:calico/models/chat_session_model.dart';
 import 'package:calico/theme.dart';
-import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jumping_dot/jumping_dot.dart';
 
 import '../controllers/calendar_controller.dart';
 import '../utils/date_util.dart';
 
 class ChatRecapScreen extends StatelessWidget {
   ChatRecapScreen({super.key});
+  final RxBool isVisible = true.obs;
 
   final CalendarController calendarController = Get.find();
 
@@ -137,26 +134,35 @@ class ChatRecapScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: edge),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(7.0),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  width: double.infinity,
-                  color: whiteColor.withOpacity(0.7),
-                  child: Text(
-                    DateUtil.instance.getFormattedDateStr(
-                        calendarController.selectedDay.value!),
-                    style: GoogleFonts.rubik(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: grayColor,
+            Obx(
+              () {
+                Future.delayed(const Duration(seconds: 2)).then((_) {
+                  isVisible.value = false;
+                });
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: edge),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(7.0),
+                    child: AnimatedContainer(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      height: isVisible.value ? 40 : 0,
+                      width: double.infinity,
+                      color: whiteColor.withOpacity(0.7),
+                      duration: const Duration(milliseconds: 500),
+                      child: Text(
+                        DateUtil.instance.getFormattedDateStr(
+                            calendarController.selectedDay.value!),
+                        style: GoogleFonts.rubik(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: grayColor,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),
