@@ -3,10 +3,12 @@ import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/widgets/article_card.dart';
 import 'package:calico/widgets/category_card.dart';
+import 'package:calico/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:calico/widgets/category_card.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ActivityScreen extends StatelessWidget {
   final ArticleController articleController = Get.put(ArticleController());
@@ -95,20 +97,32 @@ class ActivityScreen extends StatelessWidget {
                 constraints: const BoxConstraints(maxHeight: 243),
                 child: GetBuilder<ArticleController>(
                   builder: (controller) {
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: controller.recommendedArticles.length,
-                      itemBuilder: (context, index) {
-                        if (controller.recommendedArticles[index] == null) {
-                          // return empty widget
-                          return const SizedBox.shrink();
-                        }
+                    if (controller.isLoading.value == true) {
+                      // show shimmer loading effect
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount:
+                            3, // you can adjust this number to show more or fewer shimmers
+                        itemBuilder: (context, index) {
+                          return ShimmerArticleCard();
+                        },
+                      );
+                    } else {
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.recommendedArticles.length,
+                        itemBuilder: (context, index) {
+                          if (controller.recommendedArticles[index] == null) {
+                            // return empty widget
+                            return const SizedBox.shrink();
+                          }
 
-                        return ArticleCard(
-                          article: controller.recommendedArticles[index]!,
-                        );
-                      },
-                    );
+                          return ArticleCard(
+                            article: controller.recommendedArticles[index]!,
+                          );
+                        },
+                      );
+                    }
                   },
                 ),
               ),
