@@ -97,7 +97,7 @@ class ActivityScreen extends StatelessWidget {
                 constraints: const BoxConstraints(maxHeight: 243),
                 child: GetBuilder<ArticleController>(
                   builder: (controller) {
-                    if (controller.isLoading.value == false) {
+                    if (controller.isLoading.value == true) {
                       // show shimmer loading effect
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,

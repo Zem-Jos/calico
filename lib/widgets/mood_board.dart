@@ -108,7 +108,7 @@ class _MoodBoardState extends State<MoodBoard> {
                                 });
                               },
                               child: Text(
-                                'Lihat statistik',
+                                'Batalkan Pilihan',
                                 style: GoogleFonts.rubik(
                                   fontSize: 12,
                                   color: brownColor,

@@ -15,6 +15,7 @@ class ExpertScreen extends StatefulWidget {
 
 class _ExpertScreenState extends State<ExpertScreen> {
   final ThemeController _themeController = Get.find<ThemeController>();
+  final ColorController _colorController = Get.put(ColorController());
   var searchController = TextEditingController();
   RangeValues _currentRangeValues = RangeValues(40, 80);
 
@@ -22,11 +23,11 @@ class _ExpertScreenState extends State<ExpertScreen> {
   Widget build(BuildContext context) {
     String searchValue = '';
     return Scaffold(
-      backgroundColor: Color(0xffFAF2ED),
+      backgroundColor: _colorController.getBackgroundColor(),
       appBar: EasySearchBar(
           searchCursorColor: Color(0xffE0A071),
           searchBackIconTheme: IconThemeData(color: Color(0xffE0A071)),
-          backgroundColor: Color(0xffFDFCFC),
+          backgroundColor: _colorController.getBackgroundColor(),
           title: Text('hinted search text'),
           onSearch: (value) => setState(() => searchValue = value)),
       body: SafeArea(
@@ -34,7 +35,12 @@ class _ExpertScreenState extends State<ExpertScreen> {
           padding: const EdgeInsets.symmetric(
             horizontal: edge,
           ),
-          child: ListView.builder(
+          child: ListView.separated(
+              separatorBuilder: (context, index) {
+                return SizedBox(
+                  height: 10,
+                );
+              },
               itemCount: 10,
               itemBuilder: (context, index) {
                 return ExpertCard();
@@ -46,7 +52,7 @@ class _ExpertScreenState extends State<ExpertScreen> {
         height: MediaQuery.of(context).size.height,
         color: Colors.white,
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: edge),
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

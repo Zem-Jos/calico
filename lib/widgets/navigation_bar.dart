@@ -19,8 +19,9 @@ class _NavigationPageState extends State<NavigationPage> {
       Get.put(BottomNavigationController());
 
   final screen = [
-    ActivityScreen(),
     const HomeScreen(),
+    ActivityScreen(),
+    ExpertScreen(),
     CalendarScreen(),
   ];
 
@@ -30,7 +31,8 @@ class _NavigationPageState extends State<NavigationPage> {
     final ColorController _colorController = Get.put(ColorController());
     return Obx(
       () => Scaffold(
-        backgroundColor: bottomNavigationController.selectedIndex.value != 2
+        backgroundColor: bottomNavigationController.selectedIndex.value == 0 ||
+                bottomNavigationController.selectedIndex.value == 1
             ? _colorController.getActivityBackgroundColor()
             : _colorController.getBackgroundColor(),
         body: IndexedStack(
@@ -59,14 +61,6 @@ class _NavigationPageState extends State<NavigationPage> {
                   type: BottomNavigationBarType.fixed,
                   items: <BottomNavigationBarItem>[
                     BottomNavigationBarItem(
-                      icon: Image.asset('assets/images/icon/activities.png',
-                          width: 32),
-                      activeIcon: Image.asset(
-                          'assets/images/icon/activities_active.png',
-                          width: 32),
-                      label: 'Activity',
-                    ),
-                    BottomNavigationBarItem(
                       icon: Image.asset(
                         'assets/images/icon/home.png',
                         width: 32,
@@ -76,6 +70,22 @@ class _NavigationPageState extends State<NavigationPage> {
                         width: 32,
                       ),
                       label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Image.asset('assets/images/icon/activities.png',
+                          width: 32),
+                      activeIcon: Image.asset(
+                          'assets/images/icon/activities_active.png',
+                          width: 32),
+                      label: 'Activity',
+                    ),
+                    BottomNavigationBarItem(
+                      icon:
+                          Image.asset('assets/images/icon/chat.png', width: 32),
+                      activeIcon: Image.asset(
+                          'assets/images/icon/chat_active.png',
+                          width: 32),
+                      label: 'Professional',
                     ),
                     BottomNavigationBarItem(
                       icon: Image.asset('assets/images/icon/calendar.png',
