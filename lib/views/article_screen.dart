@@ -47,7 +47,7 @@ class ArticleScreen extends StatelessWidget {
                 height: 4,
               ),
               Text(
-                '${article.readTime} Menit • oleh ${article.author}',
+                '${article.readTime} Menit • oleh ${article.author.isEmpty ? 'Anonim' : article.author}',
                 style: GoogleFonts.rubik(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
