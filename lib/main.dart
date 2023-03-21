@@ -2,6 +2,7 @@ import 'package:calico/controllers/notification_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/firebase_options.dart';
 import 'package:calico/views/goto_screen.dart';
+import 'package:calico/views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +31,7 @@ class MainApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       home: const Scaffold(
-        body: GotoScreen(),
+        body: SplashScreen(),
       ),
     );
   }

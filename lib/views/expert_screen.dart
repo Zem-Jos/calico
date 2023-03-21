@@ -50,7 +50,7 @@ class _ExpertScreenState extends State<ExpertScreen> {
       drawer: Container(
         width: MediaQuery.of(context).size.width * 0.8,
         height: MediaQuery.of(context).size.height,
-        color: Colors.white,
+        color: _colorController.getBackgroundColor(),
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: edge),
           children: [
@@ -87,14 +87,14 @@ class _ExpertScreenState extends State<ExpertScreen> {
                   style: GoogleFonts.rubik(
                       fontSize: 17,
                       fontWeight: FontWeight.w400,
-                      color: Color(0x993C3C43)),
+                      color: _colorController.getTextColor()),
                 ),
                 SizedBox(
                   height: 6,
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      color: Color(0xffFAF2ED),
+                      color: _colorController.getContainerColor(),
                       borderRadius: BorderRadius.circular(6)),
                   width: double.infinity,
                   child: Padding(
@@ -119,7 +119,7 @@ class _ExpertScreenState extends State<ExpertScreen> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      color: Color(0xffFAF2ED),
+                      color: _colorController.getContainerColor(),
                       borderRadius: BorderRadius.circular(6)),
                   width: double.infinity,
                   child: Padding(
@@ -147,14 +147,14 @@ class _ExpertScreenState extends State<ExpertScreen> {
                   style: GoogleFonts.rubik(
                       fontSize: 17,
                       fontWeight: FontWeight.w400,
-                      color: Color(0x993C3C43)),
+                      color: _colorController.getTextColor()),
                 ),
                 SizedBox(
                   height: 6,
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      color: Color(0xffFAF2ED),
+                      color: _colorController.getContainerColor(),
                       borderRadius: BorderRadius.circular(6)),
                   width: double.infinity,
                   child: Padding(
@@ -182,7 +182,7 @@ class _ExpertScreenState extends State<ExpertScreen> {
                   style: GoogleFonts.rubik(
                       fontSize: 17,
                       fontWeight: FontWeight.w400,
-                      color: Color(0x993C3C43)),
+                      color: _colorController.getTextColor()),
                 ),
                 SizedBox(
                   height: 6,
@@ -190,7 +190,7 @@ class _ExpertScreenState extends State<ExpertScreen> {
                 Container(
                   height: 45,
                   decoration: BoxDecoration(
-                      color: Color(0xffFAF2ED),
+                      color: _colorController.getContainerColor(),
                       borderRadius: BorderRadius.circular(6)),
                   width: double.infinity,
                   child: Center(
