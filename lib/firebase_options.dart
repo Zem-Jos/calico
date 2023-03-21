@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '563255320612',
     projectId: 'calico-80b62',
     storageBucket: 'calico-80b62.appspot.com',
-    iosClientId: '563255320612-tofo2udcfve79fphi602vh6ra0ool0kj.apps.googleusercontent.com',
+    iosClientId:
+        '563255320612-tofo2udcfve79fphi602vh6ra0ool0kj.apps.googleusercontent.com',
     iosBundleId: 'com.example.calico',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '563255320612',
     projectId: 'calico-80b62',
     storageBucket: 'calico-80b62.appspot.com',
-    iosClientId: '563255320612-tofo2udcfve79fphi602vh6ra0ool0kj.apps.googleusercontent.com',
+    iosClientId:
+        '563255320612-tofo2udcfve79fphi602vh6ra0ool0kj.apps.googleusercontent.com',
     iosBundleId: 'com.example.calico',
   );
 }

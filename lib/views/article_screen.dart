@@ -25,18 +25,14 @@ class ArticleScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         flexibleSpace: SafeArea(
-          child: Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: colorController.getTextColor(),
-                ),
-              ),
-            ],
+          child: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: colorController.getTextColor(),
+            ),
           ),
         ),
       ),

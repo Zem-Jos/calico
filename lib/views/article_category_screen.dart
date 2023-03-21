@@ -4,8 +4,10 @@ import 'package:calico/widgets/article_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../controllers/article_controller.dart';
+import '../widgets/shimmer.dart';
 
 class ArticleCategoryScreen extends StatelessWidget {
   final String category;
@@ -31,7 +33,6 @@ class ArticleCategoryScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.35,
             child: Center(
               child: Text(
-                // 'KECEMASAN',
                 category == 'Motivasi Diri'
                     ? 'MOTIVASI\nDIRI'
                     : category == 'Strategi Coping'
@@ -85,10 +86,11 @@ class ArticleCategoryScreen extends StatelessWidget {
                           Expanded(
                             child: GetBuilder<ArticleController>(
                                 builder: (controller) {
-                              if (controller.isLoading.value) {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
+                              if (controller.isLoading.value == true) {
+                                // return const Center(
+                                //   child: CircularProgressIndicator(),
+                                // );
+                                return ShimmerArticleItem();
                               }
                               ;
 

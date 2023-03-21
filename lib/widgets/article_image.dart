@@ -1,4 +1,6 @@
+import 'package:calico/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ArticleImage extends StatelessWidget {
   final String? imageUrl;
@@ -24,18 +26,7 @@ class ArticleImage extends StatelessWidget {
       ) {
         if (loadingProgress == null) return child;
         // TODO: replace loading animation with shimmer
-        return SizedBox(
-          width: width,
-          height: height,
-          child: Center(
-            child: CircularProgressIndicator(
-              value: loadingProgress.expectedTotalBytes != null
-                  ? loadingProgress.cumulativeBytesLoaded /
-                      loadingProgress.expectedTotalBytes!
-                  : null,
-            ),
-          ),
-        );
+        return ShimmerArticleCard();
       },
     );
   }

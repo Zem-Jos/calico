@@ -49,7 +49,6 @@ flutter:
     - assets/images/category/
 
 flutter_native_splash:
-  image: assets/images/splash.png
-  color: "#F0E8D5"
+  background_image: assets/images/splash.png
   android: true
   ios: true
