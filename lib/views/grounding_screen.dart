@@ -1,6 +1,7 @@
 import 'package:calico/controllers/grounding_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
+import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -85,10 +86,13 @@ class _GroundingScreenState extends State<GroundingScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  _groundingController.updateIndex();
+                  _groundingController.index < 5
+                      ? _groundingController.updateIndex()
+                      : Get.offAll(NavigationPage());
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: brownColor,
@@ -96,7 +100,7 @@ class _GroundingScreenState extends State<GroundingScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Lanjut',
+                      _groundingController.index != 5 ? 'Lanjut' : 'Kembali',
                       style: GoogleFonts.rubik(
                           color: whiteColor,
                           fontSize: 15,
