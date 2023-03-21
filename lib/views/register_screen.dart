@@ -79,10 +79,10 @@ class _RegisterUiState extends State<RegisterScreen> {
                           Container(
                             height: 44,
                             decoration: BoxDecoration(
-                              color: Color(0x1AE0A071),
+                              color: const Color(0x1AE0A071),
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                color: Color(0xffE0A071),
+                                color: const Color(0xffE0A071),
                               ),
                             ),
                             // Email or Phone Number
@@ -90,12 +90,11 @@ class _RegisterUiState extends State<RegisterScreen> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16.0),
                               child: TextFormField(
-                                cursorColor: Color(0xffE0A071),
+                                cursorColor: const Color(0xffE0A071),
                                 controller: emailController,
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
-                                  labelText: 'Email atau Nomor Telepon',
-                                  hintText: 'Email atau Nomor Telepon',
+                                  hintText: 'Email',
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.never,
                                 ),
@@ -108,15 +107,15 @@ class _RegisterUiState extends State<RegisterScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           // Name input
                           Container(
                             height: 44,
                             decoration: BoxDecoration(
-                              color: Color(0x1AE0A071),
+                              color: const Color(0x1AE0A071),
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                color: Color(0xffE0A071),
+                                color: const Color(0xffE0A071),
                               ),
                             ),
                             // Email or Phone Number
@@ -124,7 +123,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16.0),
                               child: TextFormField(
-                                cursorColor: Color(0xffE0A071),
+                                cursorColor: const Color(0xffE0A071),
                                 controller: nameController,
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
@@ -142,22 +141,22 @@ class _RegisterUiState extends State<RegisterScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           // Password
                           Container(
                             height: 44,
                             decoration: BoxDecoration(
-                              color: Color(0x1AE0A071),
+                              color: const Color(0x1AE0A071),
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                color: Color(0xffE0A071),
+                                color: const Color(0xffE0A071),
                               ),
                             ),
                             child: Padding(
                               padding:
                                   const EdgeInsets.only(left: 16.0, right: 4.0),
                               child: TextFormField(
-                                cursorColor: Color(0xffE0A071),
+                                cursorColor: const Color(0xffE0A071),
                                 controller: passwordController,
                                 obscureText: _obscureTextPassword,
                                 decoration: InputDecoration(
@@ -168,7 +167,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                                       _obscureTextPassword
                                           ? Icons.visibility
                                           : Icons.visibility_off,
-                                      color: Color(0xffE0A071),
+                                      color: const Color(0xffE0A071),
                                     ),
                                   ),
                                   labelText: 'Kata Sandi',
@@ -189,39 +188,39 @@ class _RegisterUiState extends State<RegisterScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           // Confirm Password
                           Container(
                             height: 44,
                             decoration: BoxDecoration(
-                              color: Color(0x1AE0A071),
+                              color: const Color(0x1AE0A071),
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                color: Color(0xffE0A071),
+                                color: const Color(0xffE0A071),
                               ),
                             ),
                             child: Padding(
                               padding:
                                   const EdgeInsets.only(left: 16.0, right: 4.0),
                               child: TextFormField(
-                                cursorColor: Color(0xffE0A071),
+                                cursorColor: const Color(0xffE0A071),
                                 controller: passwordConfirmController,
                                 obscureText: _obscureTextConfirmPassword,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
                                   suffixIcon: InkWell(
                                     onTap: _togglePasswordConfirm,
                                     child: Icon(
                                       _obscureTextConfirmPassword
                                           ? Icons.visibility
                                           : Icons.visibility_off,
-                                      color: Color(0xffE0A071),
+                                      color: const Color(0xffE0A071),
                                     ),
                                   ),
                                   labelText: 'Konfirmasi Kata Sandi',
                                   hintText: 'Konfirmasi Kata Sandi',
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
                                 ),
                                 validator: (val) {
                                   if (val == null || val.isEmpty) {
@@ -238,12 +237,11 @@ class _RegisterUiState extends State<RegisterScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           // Register Button
                           GestureDetector(
                             onTap: () {
                               // TODO: check if allowed to register
-                              print(_formKey.currentState!.validate());
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
 
@@ -257,7 +255,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                             child: Container(
                               width: double.infinity,
                               height: 44,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   color: brownColor,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
@@ -309,7 +307,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: Divider(
                                     thickness: 2,
                                     color: blackColor,
@@ -327,7 +325,7 @@ class _RegisterUiState extends State<RegisterScreen> {
                                     ),
                                   ),
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Divider(
                                     thickness: 2,
                                     color: blackColor,
@@ -346,13 +344,14 @@ class _RegisterUiState extends State<RegisterScreen> {
                               height: 44,
                               decoration: BoxDecoration(
                                 color: whiteColor,
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Image.asset('assets/images/google.png',
                                       width: 19),
-                                  SizedBox(width: 6),
+                                  const SizedBox(width: 6),
                                   Text(
                                     'Daftar dengan Google',
                                     style: GoogleFonts.roboto(
