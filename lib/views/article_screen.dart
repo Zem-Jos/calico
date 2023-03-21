@@ -22,19 +22,9 @@ class ArticleScreen extends StatelessWidget {
       backgroundColor: colorController.getContainerColor(),
       appBar: AppBar(
         elevation: 0,
-        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(color: colorController.getTextColor()),
+        shadowColor: Colors.transparent,
         backgroundColor: Colors.transparent,
-        flexibleSpace: SafeArea(
-          child: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              color: colorController.getTextColor(),
-            ),
-          ),
-        ),
       ),
       body: SafeArea(
           child: SingleChildScrollView(

@@ -171,21 +171,11 @@ class CalendarScreen extends StatelessWidget {
                             width: 35,
                           ),
                           const SizedBox(width: 16),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Percakapan dengan Calico',
-                                style: GoogleFonts.rubik(
-                                    fontSize: 15,
-                                    color: _colorController.getTextColor()),
-                              ),
-                              Text(
-                                '02.17 AM',
-                                style: GoogleFonts.rubik(
-                                    fontSize: 12, color: grayColor),
-                              ),
-                            ],
+                          Text(
+                            'Percakapan dengan Calico',
+                            style: GoogleFonts.rubik(
+                                fontSize: 15,
+                                color: _colorController.getTextColor()),
                           ),
                           const Spacer(),
                           const Icon(Icons.arrow_forward_ios),

@@ -159,7 +159,7 @@ class ChatRecapScreen extends StatelessWidget {
                     style: GoogleFonts.rubik(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: grayColor,
+                      color: blackColor,
                     ),
                     textAlign: TextAlign.center,
                   ),

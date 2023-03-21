@@ -28,7 +28,7 @@ class _ExpertScreenState extends State<ExpertScreen> {
           searchCursorColor: Color(0xffE0A071),
           searchBackIconTheme: IconThemeData(color: Color(0xffE0A071)),
           backgroundColor: _colorController.getBackgroundColor(),
-          title: Text('hinted search text'),
+          title: Text('Cari Psikolog'),
           onSearch: (value) => setState(() => searchValue = value)),
       body: SafeArea(
         child: Padding(
