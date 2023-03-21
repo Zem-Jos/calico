@@ -4,7 +4,7 @@
 	<dict>
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
-  			<string>tel</string>
+			<string>tel</string>
 		</array>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>

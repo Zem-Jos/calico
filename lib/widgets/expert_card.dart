@@ -27,7 +27,7 @@ class ExpertCard extends StatelessWidget {
           child: Row(children: [
             Image.asset(
               'assets/images/icon/activities.png',
-              width: 80,
+              width: MediaQuery.of(context).size.width * 0.15,
             ),
             SizedBox(
               width: 20,
