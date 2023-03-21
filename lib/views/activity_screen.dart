@@ -6,7 +6,6 @@ import 'package:calico/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:calico/widgets/category_card.dart';
 
 class ActivityScreen extends StatelessWidget {
   final ArticleController articleController = Get.put(ArticleController());
@@ -92,12 +91,19 @@ class ActivityScreen extends StatelessWidget {
                 height: 11,
               ),
               Container(
-                constraints: const BoxConstraints(maxHeight: 243),
+                constraints: const BoxConstraints(maxHeight: 272),
                 child: GetBuilder<ArticleController>(
                   builder: (controller) {
-                    return ListView.builder(
+                    return ListView.separated(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, top: 10, bottom: 10),
                       scrollDirection: Axis.horizontal,
                       itemCount: controller.recommendedArticles.length,
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          width: 20,
+                        );
+                      },
                       itemBuilder: (context, index) {
                         if (controller.recommendedArticles[index] == null) {
                           // return empty widget

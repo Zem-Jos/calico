@@ -25,80 +25,77 @@ class ArticleCard extends StatelessWidget {
               article: article,
             ));
       },
-      child: Padding(
-        padding: const EdgeInsets.only(left: 24),
-        child: Container(
-          decoration: BoxDecoration(
-            color: colorController.getContainerColor(),
-            borderRadius: BorderRadius.circular(17),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.20),
-                spreadRadius: 0,
-                blurRadius: 15,
-                offset: const Offset(0, 4), // changes position of shadow
-              ),
-            ],
-          ),
-          width: 243,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(17),
-                      topRight: Radius.circular(17),
-                    ),
-                    child: article.imageUrl != null
-                        ? ArticleImage(
-                            imageUrl: article.imageUrl!,
-                            width: 243,
-                            height: 135,
-                          )
-                        : Image.asset(
-                            'assets/images/article/article-default.png',
-                            width: 243,
-                            height: 135,
-                            fit: BoxFit.cover,
-                          ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: colorController.getContainerColor(),
+          borderRadius: BorderRadius.circular(17),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.20),
+              spreadRadius: 0,
+              blurRadius: 15,
+              offset: const Offset(0, 4), // changes position of shadow
+            ),
+          ],
+        ),
+        width: 243,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(17),
+                    topRight: Radius.circular(17),
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 14,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
+                  child: article.imageUrl != null
+                      ? ArticleImage(
+                          imageUrl: article.imageUrl!,
+                          width: 243,
+                          height: 135,
+                        )
+                      : Image.asset(
+                          'assets/images/article/article-default.png',
+                          width: 243,
+                          height: 135,
+                          fit: BoxFit.cover,
+                        ),
                 ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        article.title,
-                        style: GoogleFonts.rubik(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: colorController.getTextColor(),
-                        ),
+              ],
+            ),
+            const SizedBox(
+              height: 14,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+              ),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      article.title,
+                      style: GoogleFonts.rubik(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: colorController.getTextColor(),
                       ),
-                      const SizedBox(
-                        height: 4,
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      '${article.category} • ${article.readTime} Menit',
+                      style: GoogleFonts.rubik(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: grayColor,
                       ),
-                      Text(
-                        '${article.category} • ${article.readTime} Menit',
-                        style: GoogleFonts.rubik(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: grayColor,
-                        ),
-                      )
-                    ]),
-              )
-            ],
-          ),
+                    )
+                  ]),
+            )
+          ],
         ),
       ),
     );
