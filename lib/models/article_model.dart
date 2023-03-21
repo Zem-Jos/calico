@@ -7,7 +7,7 @@ class ArticleModel {
   String? imageUrl;
   String content;
   String category;
-  int readTime;
+  String readTime;
 
   ArticleModel({
     required this.author,

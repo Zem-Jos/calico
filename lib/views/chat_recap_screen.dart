@@ -76,12 +76,21 @@ class ChatRecapScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: controller.selectedMessages.length,
+                      physics: const AlwaysScrollableScrollPhysics(
+                          parent: BouncingScrollPhysics()),
+                      itemCount: controller.selectedMessages.length + 1,
                       shrinkWrap: true,
                       padding: const EdgeInsets.only(bottom: 10),
                       itemBuilder: (context, index) {
-                        List<dynamic> messageList = controller.selectedMessages;
+                        List<dynamic> messageList = <dynamic>[
+                          const SizedBox(height: 40),
+                        ];
+                        // append all messages to the list
+                        messageList.addAll(controller.selectedMessages);
+
+                        if (index == 0) {
+                          return messageList[index];
+                        }
 
                         return Container(
                           padding: const EdgeInsets.only(
@@ -134,40 +143,32 @@ class ChatRecapScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Obx(
-              () {
-                Future.delayed(const Duration(seconds: 2)).then((_) {
-                  isVisible.value = false;
-                });
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: edge),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(7.0),
-                    child: AnimatedContainer(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      height: isVisible.value ? 40 : 0,
-                      width: double.infinity,
-                      color: whiteColor.withOpacity(0.7),
-                      duration: const Duration(milliseconds: 500),
-                      child: Text(
-                        DateUtil.instance.getFormattedDateStr(
-                            calendarController.selectedDay.value!),
-                        style: GoogleFonts.rubik(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: grayColor,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: edge),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(7.0),
+                child: AnimatedContainer(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  height: isVisible.value ? 40 : 0,
+                  width: double.infinity,
+                  color: whiteColor.withOpacity(0.7),
+                  duration: const Duration(milliseconds: 500),
+                  child: Text(
+                    DateUtil.instance.getFormattedDateStr(
+                        calendarController.selectedDay.value!),
+                    style: GoogleFonts.rubik(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: grayColor,
                     ),
+                    textAlign: TextAlign.center,
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
-    ;
   }
 }
