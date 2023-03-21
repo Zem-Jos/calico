@@ -39,7 +39,7 @@ class ArticleController extends GetxController {
   }
 
   Future<List<ArticleModel?>> getArticles() async {
-    var ref = _db.collection("articles");
+    var ref = _db.collection("articles").limit(3);
 
     QuerySnapshot querySnapshot = await ref.get();
 
@@ -58,6 +58,8 @@ class ArticleController extends GetxController {
     try {
       isLoading.value = true;
       update();
+
+      print(category);
 
       final ref =
           _db.collection("articles").where("category", isEqualTo: category);

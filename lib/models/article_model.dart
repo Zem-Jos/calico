@@ -29,7 +29,7 @@ class ArticleModel {
       imageUrl: data['imageUrl'],
       content: data['content'],
       category: data['category'],
-      readTime: data['readTime'],
+      readTime: int.parse(data['readTime']),
     );
   }
 }

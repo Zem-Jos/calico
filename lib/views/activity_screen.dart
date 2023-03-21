@@ -94,7 +94,7 @@ class ActivityScreen extends StatelessWidget {
                 height: 11,
               ),
               Container(
-                constraints: const BoxConstraints(maxHeight: 243),
+                constraints: const BoxConstraints(maxHeight: 272),
                 child: GetBuilder<ArticleController>(
                   builder: (controller) {
                     if (controller.isLoading.value == true) {
@@ -107,16 +107,21 @@ class ActivityScreen extends StatelessWidget {
                           return ShimmerArticleCard();
                         },
                       );
-                    } else {
-                      return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: controller.recommendedArticles.length,
-                        itemBuilder: (context, index) {
-                          if (controller.recommendedArticles[index] == null) {
-                            // return empty widget
-                            return const SizedBox.shrink();
-                          }
-
+                    } else { return ListView.separated(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, top: 10, bottom: 10),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.recommendedArticles.length,
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          width: 20,
+                        );
+                      },
+                      itemBuilder: (context, index) {
+                        if (controller.recommendedArticles[index] == null) {
+                          // return empty widget
+                          return const SizedBox.shrink();
+                        }
                           return ArticleCard(
                             article: controller.recommendedArticles[index]!,
                           );

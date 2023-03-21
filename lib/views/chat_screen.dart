@@ -112,7 +112,8 @@ class ChatScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
+                    physics: const AlwaysScrollableScrollPhysics(
+                        parent: BouncingScrollPhysics()),
                     itemCount: chatSessionController.chatMessages.length + 1,
                     shrinkWrap: true,
                     padding: const EdgeInsets.only(bottom: 10),
