@@ -2,6 +2,7 @@ import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/chat_screen.dart';
 import 'package:calico/views/sos_screen.dart';
+import 'package:calico/widgets/article_card.dart';
 import 'package:calico/widgets/mood_board.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,4 +1,6 @@
+import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
+import 'package:calico/views/grounding_screen.dart';
 import 'package:calico/views/sos_professional_screen.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +12,9 @@ class SosScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorController _colorController = Get.put(ColorController());
     return Scaffold(
-      backgroundColor: Color(0xffFFE2E8),
+      backgroundColor: _colorController.getBackgroundColor(),
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
@@ -19,7 +22,7 @@ class SosScreen extends StatelessWidget {
         flexibleSpace: SafeArea(
           child: Container(
             height: 65,
-            color: Color(0xffFFE2E8),
+            color: Colors.transparent,
             padding: EdgeInsets.only(right: 16),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,8 +48,7 @@ class SosScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 45.0, vertical: 180.0),
+          padding: const EdgeInsets.symmetric(horizontal: 45.0, vertical: 100),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,7 +56,7 @@ class SosScreen extends StatelessWidget {
               Text(
                 'Apakah kamu dalam keadaan darurat?',
                 style: GoogleFonts.rubik(
-                  color: blackColor,
+                  color: _colorController.getTextColor(),
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 ),
@@ -62,7 +64,7 @@ class SosScreen extends StatelessWidget {
               Text(
                 'Kamu tidak sendiri. Dapatkan bantuan hanya dalam satu panggilan. ',
                 style: GoogleFonts.rubik(
-                  color: blackColor,
+                  color: _colorController.getTextColor(),
                   fontSize: 22,
                   fontWeight: FontWeight.w500,
                 ),
@@ -71,13 +73,16 @@ class SosScreen extends StatelessWidget {
               Text(
                 'Meminta bantuan bukan berarti kamu lemah.',
                 style: GoogleFonts.rubik(
-                  color: blackColor,
+                  color: _colorController.getTextColor(),
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 ),
                 textAlign: TextAlign.center,
               ),
               GestureDetector(
+                onTap: () {
+                  Get.to(GroundingScreen());
+                },
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -130,6 +135,9 @@ class SosScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 100,
+              )
             ],
           ),
         ),

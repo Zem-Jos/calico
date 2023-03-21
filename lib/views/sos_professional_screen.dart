@@ -14,7 +14,7 @@ class SosProfessionalScreen extends StatelessWidget {
     final ThemeController _themeController = Get.find<ThemeController>();
     final ColorController _colorController = Get.put(ColorController());
     return Scaffold(
-      backgroundColor: Color(0xffFFE2E8),
+      backgroundColor: _colorController.getBackgroundColor(),
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
@@ -22,7 +22,7 @@ class SosProfessionalScreen extends StatelessWidget {
         flexibleSpace: SafeArea(
           child: Container(
             height: 65,
-            color: Color(0xffFFE2E8),
+            color: _colorController.getBackgroundColor(),
             padding: EdgeInsets.only(right: 16),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,7 +57,7 @@ class SosProfessionalScreen extends StatelessWidget {
               Text(
                 'Memiliki bantuan yang tepat pada waktu yang tepat dapat membantumu kembali lebih kuat.',
                 style: GoogleFonts.rubik(
-                  color: blackColor,
+                  color: _colorController.getTextColor(),
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 ),
@@ -66,7 +66,7 @@ class SosProfessionalScreen extends StatelessWidget {
               Text(
                 'Jika kamu memerlukan bantuan atau seseorang untuk diajak bicara, berikut adalah daftar hotline',
                 style: GoogleFonts.rubik(
-                  color: blackColor,
+                  color: _colorController.getTextColor(),
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 ),
@@ -80,7 +80,9 @@ class SosProfessionalScreen extends StatelessWidget {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           backgroundColor: _colorController.getContainerColor(),
-                          title: Text('Hotline Pemerintah'),
+                          title: Text(
+                            'Hotline Pemerintah',
+                          ),
                           content:
                               Text('Apakah anda ingin melakukan panggilan?'),
                           actions: [
@@ -124,7 +126,7 @@ class SosProfessionalScreen extends StatelessWidget {
                         Text(
                           'Hotline Pemerintah',
                           style: GoogleFonts.rubik(
-                            color: blackColor,
+                            color: _colorController.getTextColor(),
                             fontSize: 22,
                             fontWeight: FontWeight.w600,
                           ),
@@ -140,7 +142,7 @@ class SosProfessionalScreen extends StatelessWidget {
                               style: GoogleFonts.roboto(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
-                                color: blackColor,
+                                color: _colorController.getTextColor(),
                               ),
                             ),
                             GestureDetector(
@@ -215,7 +217,7 @@ class SosProfessionalScreen extends StatelessWidget {
                         Text(
                           'Kementrian Kesehatan',
                           style: GoogleFonts.rubik(
-                            color: blackColor,
+                            color: _colorController.getTextColor(),
                             fontSize: 22,
                             fontWeight: FontWeight.w600,
                           ),
@@ -231,7 +233,7 @@ class SosProfessionalScreen extends StatelessWidget {
                               style: GoogleFonts.roboto(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
-                                color: blackColor,
+                                color: _colorController.getTextColor(),
                               ),
                             ),
                             GestureDetector(
@@ -308,7 +310,7 @@ class SosProfessionalScreen extends StatelessWidget {
                         Text(
                           'Save Yourselves Indonesia (Jakarta)',
                           style: GoogleFonts.rubik(
-                            color: blackColor,
+                            color: _colorController.getTextColor(),
                             fontSize: 22,
                             fontWeight: FontWeight.w600,
                           ),
@@ -325,7 +327,7 @@ class SosProfessionalScreen extends StatelessWidget {
                               style: GoogleFonts.roboto(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
-                                color: blackColor,
+                                color: _colorController.getTextColor(),
                               ),
                             ),
                             GestureDetector(
