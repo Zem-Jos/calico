@@ -1,10 +1,12 @@
 import 'package:calico/controllers/article_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
+import 'package:calico/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../models/article_model.dart';
 import '../widgets/article_image.dart';
@@ -76,8 +78,13 @@ class ArticleScreen extends StatelessWidget {
                 child: GetBuilder<ArticleController>(
                   builder: (controller) {
                     if (controller.isLoading.value) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      // return const Center(
+                      //   child: CircularProgressIndicator(),
+                      // );
+                      return Container(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        child: ShimmerArticleText(),
                       );
                     }
                     return Markdown(
