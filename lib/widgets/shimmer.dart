@@ -93,3 +93,33 @@ class ShimmerArticleItem extends StatelessWidget {
     );
   }
 }
+
+class ShimmerArticleText extends StatelessWidget {
+  const ShimmerArticleText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: ListView.separated(
+        separatorBuilder: (context, index) {
+          return const SizedBox(height: 6);
+        },
+        scrollDirection: Axis.vertical,
+        itemCount: 30, // number of shimmer items
+        itemBuilder: (context, index) {
+          return ClipRRect(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16), bottomLeft: Radius.circular(16)),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: 8,
+              color: Colors.white,
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
