@@ -3,10 +3,8 @@ import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/breathing_screen.dart';
 import 'package:calico/views/chat_screen.dart';
-import 'package:calico/views/expert_screen.dart';
 import 'package:calico/views/grounding_screen.dart';
 import 'package:calico/views/sos_screen.dart';
-import 'package:calico/widgets/article_card.dart';
 import 'package:calico/widgets/mood_board.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,9 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // TestController testController = Get.put(TestController());
   AuthController authController = Get.find<AuthController>();
-  final ThemeController _themeController = Get.find<ThemeController>();
   final ColorController _colorController = Get.put(ColorController());
   final BottomNavigationController _bottomNavigationController =
       Get.put(BottomNavigationController());
@@ -43,13 +39,14 @@ class _HomeScreenState extends State<HomeScreen> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.8,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(60)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(60)),
                 color: _colorController.getActivityBackgroundColor(),
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: edge),
+            padding: const EdgeInsets.symmetric(horizontal: edge),
             child: Column(
               children: [
                 const SizedBox(
@@ -165,10 +162,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     _bottomNavigationController.changeIndex(2);
                   },
-                  child: Image.asset(
-                    'assets/images/expert_button.png',
-                    width: 342,
-                    height: 97,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xff433230).withOpacity(0.15),
+                          spreadRadius: 0,
+                          blurRadius: 12,
+                          offset:
+                              const Offset(0, 4), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Image.asset(
+                      'assets/images/expert_button.png',
+                      width: 342,
+                      height: 97,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -178,10 +188,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Get.to(BreathingScreen());
                   },
-                  child: Image.asset(
-                    'assets/images/breathing_button.png',
-                    width: 342,
-                    height: 97,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xff433230).withOpacity(0.15),
+                          spreadRadius: 0,
+                          blurRadius: 12,
+                          offset:
+                              const Offset(0, 4), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Image.asset(
+                      'assets/images/breathing_button.png',
+                      width: 342,
+                      height: 97,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -191,10 +214,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Get.to(const GroundingScreen());
                   },
-                  child: Image.asset(
-                    'assets/images/grounding_button.png',
-                    width: 342,
-                    height: 97,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xff433230).withOpacity(0.15),
+                          spreadRadius: 0,
+                          blurRadius: 12,
+                          offset:
+                              const Offset(0, 4), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Image.asset(
+                      'assets/images/grounding_button.png',
+                      width: 342,
+                      height: 97,
+                    ),
                   ),
                 ),
                 const SizedBox(
