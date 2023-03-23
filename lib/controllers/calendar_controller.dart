@@ -5,7 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../api/cloudfunction_api.dart';
 import '../models/chat_session_model.dart';
+import '../models/summary_model.dart';
 import 'authentication_controller.dart';
 
 class CalendarController extends GetxController {
@@ -105,5 +107,14 @@ class CalendarController extends GetxController {
     ChatSession chatSession =
         ChatSession.fromFirestore(snapshot: querySnapshot.docs.first);
     return chatSession;
+  }
+
+  Future<void> fetchChatSummary() async {
+    // fetch mood and messages
+    SummaryResponse? response = await CloudFunctionApi.instance.fetchSummary(
+        AuthController.instance.user!.uid,
+        DateUtil.getFormattedDate(selectedDay.value!));
+
+    print(response);
   }
 }
