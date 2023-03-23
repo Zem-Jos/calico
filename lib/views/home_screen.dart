@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
             child: Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.8,
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(60)),

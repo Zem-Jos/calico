@@ -219,7 +219,7 @@ class ExpertDetailScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.08,
+                    height: MediaQuery.of(context).size.height * 0.085,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 14),
                     // width: double.infinity,
