@@ -1,3 +1,4 @@
+import 'package:calico/controllers/calendar_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/chat_recap_screen.dart';
@@ -15,17 +16,50 @@ class ChatSummaryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: _colorController.getBackgroundColor(),
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: brownColor),
-        title: Text(
-          'Rekap Percakapan',
-          style: GoogleFonts.rubik(
-            color: _colorController.getTextColor(),
-            fontSize: 17,
-            fontWeight: FontWeight.w500,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        flexibleSpace: SafeArea(
+          child: Container(
+            height: 65,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(15),
+                bottomRight: Radius.circular(15),
+              ),
+              color: Colors.transparent,
+            ),
+            padding: const EdgeInsets.only(right: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Get.find<CalendarController>().clearChatSummary();
+                        Get.back();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: brownColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    Text(
+                      'Rekap Percakapan',
+                      style: GoogleFonts.rubik(
+                          fontSize: 17, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-        shadowColor: Colors.transparent,
-        backgroundColor: Colors.transparent,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: edge),
@@ -38,22 +72,40 @@ class ChatSummaryScreen extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: _colorController.getActivityBackgroundColor(),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(8),
                       bottomRight: Radius.circular(8)),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 22, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 22, vertical: 16),
                 width: double.infinity,
-                child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '),
+                child: GetBuilder<CalendarController>(
+                  builder: (controller) {
+                    if (controller.isLoading.value) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    return Text(
+                      controller.selectedSummary.value,
+                      style: GoogleFonts.rubik(
+                        color: _colorController.getTextColor(),
+                        fontSize: 15,
+                        // fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.justify,
+                    );
+                  },
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               GestureDetector(
-                onTap: () => Get.to(ChatRecapScreen()),
+                onTap: () => Get.to(() => ChatRecapScreen()),
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 12.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
                   decoration: BoxDecoration(
                     color: brownColor,
                     borderRadius: BorderRadius.circular(20),
@@ -63,9 +115,10 @@ class ChatSummaryScreen extends StatelessWidget {
                     child: Text(
                       'Lihat Detail Riwayat Percakapan',
                       style: GoogleFonts.rubik(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
-                          color: whiteColor),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        color: whiteColor,
+                      ),
                       textAlign: TextAlign.justify,
                     ),
                   ),

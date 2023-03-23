@@ -7,12 +7,14 @@ class ChatSession {
   DateTime session;
   Timestamp firebaseSession;
   String userId;
+  String? summary;
 
   ChatSession({
     this.id,
     required this.messages,
     required DateTime session,
     required this.userId,
+    this.summary,
   })  : session = DateUtil.getCurrentDate(),
         firebaseSession = Timestamp.fromDate(session);
 
@@ -20,13 +22,13 @@ class ChatSession {
     required DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   }) {
-    // var list = json['messages'] as List;
     final data = snapshot.data();
     if (data == null) throw Exception("Chat Session not found!");
     var id = snapshot.id;
     var list = data['messages'] as List;
     var session = data['session'];
     var userId = data['userId'];
+    var summary = data['summary'];
     DateTime sessionDate = DateTime.parse(session);
 
     List<ChatMessage> messages =
@@ -36,6 +38,7 @@ class ChatSession {
       messages: messages,
       session: sessionDate,
       userId: userId,
+      summary: summary,
     );
   }
 
@@ -51,7 +54,7 @@ class ChatSession {
 
   @override
   String toString() {
-    return "ChatSession(id: $id, messages: $messages, session: $session, userId: $userId)";
+    return "ChatSession(id: $id, messages: $messages, session: $session, userId: $userId, summary: $summary)";
   }
 }
 
