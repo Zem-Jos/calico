@@ -4,28 +4,58 @@ import 'package:calico/widgets/expert_online_offline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:googleapis/keep/v1.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../models/expert_model.dart';
 
 class ExpertDetailScreen extends StatelessWidget {
-  const ExpertDetailScreen({super.key});
+  final ExpertInfo expertInfo;
+  const ExpertDetailScreen({
+    super.key,
+    required this.expertInfo,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final ColorController _colorController = Get.put(ColorController());
+    final ColorController colorController = Get.put(ColorController());
     return Scaffold(
-      backgroundColor: _colorController.getActivityBackgroundColor(),
+      backgroundColor: colorController.getActivityBackgroundColor(),
       body: SafeArea(
         child: Stack(
           children: [
             ListView(
               children: [
-                Image.asset(
-                  'assets/images/article/article-default.png',
-                  fit: BoxFit.cover,
+                Image.network(
+                  expertInfo.image,
                   height: MediaQuery.of(context).size.height * 0.32,
                   width: double.infinity,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (
+                    BuildContext context,
+                    Widget child,
+                    ImageChunkEvent? loadingProgress,
+                  ) {
+                    if (loadingProgress == null) return child;
+                    return SizedBox(
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 Padding(
@@ -34,27 +64,27 @@ class ExpertDetailScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Nama Psikolog',
+                        expertInfo.name,
                         style: GoogleFonts.rubik(
                             fontSize: 24,
-                            color: _colorController.getTextColor(),
+                            color: colorController.getTextColor(),
                             fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'X Tahun Pengalaman',
-                        style: GoogleFonts.rubik(
-                            fontSize: 17,
-                            color: brownColor,
-                            fontWeight: FontWeight.w400),
-                      ),
+                      // Text(
+                      //   'X Tahun Pengalaman',
+                      //   style: GoogleFonts.rubik(
+                      //       fontSize: 17,
+                      //       color: brownColor,
+                      //       fontWeight: FontWeight.w400),
+                      // ),
                       const SizedBox(
                         height: 10,
                       ),
                       Text(
-                        'Psikolog Klinis',
+                        expertInfo.title,
                         style: GoogleFonts.rubik(
                             fontSize: 17,
                             color: brownColor,
@@ -68,8 +98,8 @@ class ExpertDetailScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 14),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: lightBrownColor,
@@ -91,14 +121,14 @@ class ExpertDetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'RS Makmur Keluarga',
+                                  expertInfo.hospital,
                                   style: GoogleFonts.rubik(
                                       color: whiteColor,
                                       fontSize: 17,
                                       fontWeight: FontWeight.w400),
                                 ),
                                 Text(
-                                  'Gondokusuman, Yogyakarta',
+                                  expertInfo.location,
                                   style: GoogleFonts.rubik(
                                       color: whiteColor,
                                       fontSize: 11,
@@ -113,8 +143,8 @@ class ExpertDetailScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 14),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: lightBrownColor,
@@ -143,7 +173,7 @@ class ExpertDetailScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Text(
-                                  '+6281219425680',
+                                  expertInfo.phone,
                                   style: GoogleFonts.rubik(
                                       color: whiteColor,
                                       fontSize: 17,
@@ -158,13 +188,13 @@ class ExpertDetailScreen extends StatelessWidget {
                         height: 30,
                       ),
                       Text(
-                        'A.D Andayanti, S.Psi, P.Si adalah Psikolog Klinis yang aktif melayani pasien di RS Makmur Keluarga Gondokusuman.\n\nBeliau dapat memberikan layanan konsultasi psikologis.\n\nHarga yang tertera merupakan biaya konsultasi dokter, belum termasuk tindakan lain dan biaya admin dari RS/Klinik (apabila ada).\nKondisi dan Minat Klinis:\nGangguan kecemasan (OCD, fobia, serangan panik, atau PTSD)\nGangguan mood (depresi atau bipolar)\nKecanduan (obat-obatan, alkohol ataupun judi)\nGangguan makan (anoreksia, bulimia)\nGangguan kepribadian\nSkizofrenia atau gangguan psikosis\nFobia atau trauma\nKonflik pasien baik dengan pasangan, keluarga, teman ataupun orang lain\n\nProsedur yang dapat dilakukan:\nKonsultasi Psikologi',
+                        expertInfo.description,
                         style: GoogleFonts.rubik(
                             fontSize: 15,
-                            color: _colorController.getTextColor(),
+                            color: colorController.getTextColor(),
                             fontWeight: FontWeight.w400),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 100,
                       ),
                     ],
@@ -178,7 +208,7 @@ class ExpertDetailScreen extends StatelessWidget {
                 onPressed: () {
                   Get.back();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   color: blackColor,
                 ),
@@ -189,9 +219,10 @@ class ExpertDetailScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: Container(
-                    height: 60,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 14),
+                    // width: double.infinity,
                     decoration: BoxDecoration(
                       color: brownColor,
                       borderRadius: BorderRadius.circular(10),
@@ -212,7 +243,7 @@ class ExpertDetailScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '120.000,00',
+                              expertInfo.price,
                               style: GoogleFonts.rubik(
                                   color: whiteColor,
                                   fontSize: 17,

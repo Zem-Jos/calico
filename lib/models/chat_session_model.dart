@@ -32,7 +32,11 @@ class ChatSession {
     List<ChatMessage> messages =
         list.map((message) => ChatMessage.fromJson(message)).toList();
     return ChatSession(
-        id: id, messages: messages, session: sessionDate, userId: userId);
+      id: id,
+      messages: messages,
+      session: sessionDate,
+      userId: userId,
+    );
   }
 
   // tojson

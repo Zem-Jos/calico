@@ -7,8 +7,6 @@ import 'package:calico/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:calico/widgets/category_card.dart';
-import 'package:shimmer/shimmer.dart';
 
 class ActivityScreen extends StatelessWidget {
   final ArticleController articleController = Get.put(ArticleController());
@@ -104,24 +102,25 @@ class ActivityScreen extends StatelessWidget {
                         itemCount:
                             3, // you can adjust this number to show more or fewer shimmers
                         itemBuilder: (context, index) {
-                          return ShimmerArticleCard();
+                          return const ShimmerArticleCard();
                         },
                       );
-                    } else { return ListView.separated(
-                      padding: const EdgeInsets.only(
-                          left: 20, right: 20, top: 10, bottom: 10),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: controller.recommendedArticles.length,
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          width: 20,
-                        );
-                      },
-                      itemBuilder: (context, index) {
-                        if (controller.recommendedArticles[index] == null) {
-                          // return empty widget
-                          return const SizedBox.shrink();
-                        }
+                    } else {
+                      return ListView.separated(
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, top: 10, bottom: 10),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.recommendedArticles.length,
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            width: 20,
+                          );
+                        },
+                        itemBuilder: (context, index) {
+                          if (controller.recommendedArticles[index] == null) {
+                            // return empty widget
+                            return const SizedBox.shrink();
+                          }
                           return ArticleCard(
                             article: controller.recommendedArticles[index]!,
                           );
