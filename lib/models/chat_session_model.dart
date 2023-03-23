@@ -44,6 +44,11 @@ class ChatSession {
       'firebaseSession': firebaseSession,
     };
   }
+
+  @override
+  String toString() {
+    return "ChatSession(id: $id, messages: $messages, session: $session, userId: $userId)";
+  }
 }
 
 class ChatMessage {
