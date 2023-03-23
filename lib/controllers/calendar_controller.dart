@@ -1,4 +1,3 @@
-import 'package:calico/controllers/chat_session_controller.dart';
 import 'package:calico/controllers/mood_controller.dart';
 import 'package:calico/utils/date_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,6 +19,8 @@ class CalendarController extends GetxController {
 
   Rx<String> selectedMood = ''.obs;
   RxList<ChatMessage> selectedMessages = <ChatMessage>[].obs;
+
+  RxString selectedSummary = ''.obs;
 
   RxBool isLoading = false.obs;
 
@@ -109,12 +110,60 @@ class CalendarController extends GetxController {
     return chatSession;
   }
 
-  Future<void> fetchChatSummary() async {
-    // fetch mood and messages
+  Future<void> findChatSummary() async {
+    try {
+      isLoading(true);
+      update();
+
+      // fetch chat session
+      ChatSession? chatSession =
+          await findChatSession(DateUtil.getFormattedDate(selectedDay.value!));
+
+      if (chatSession == null) {
+        throw Exception("Chat session not found.");
+      }
+
+      // if chat session has summary set summary
+      if (chatSession.summary != null) {
+        selectedSummary.value = chatSession.summary!;
+        return;
+      }
+
+      // if chat session doesn't have summary fetch summary from cloud function
+      SummaryResponse? response = await fetchChatSummary();
+
+      if (response == null) {
+        throw Exception("Chat summary not found.");
+      }
+      //  update chat session summary in firestore
+      var ref = _db.collection("chatSessions").doc(chatSession.id);
+
+      await ref.update({"summary": response.summary});
+
+      // set summary
+      selectedSummary.value = response.summary;
+    } catch (e) {
+      Get.snackbar("Error fetching chat summary", "error: $e");
+    } finally {
+      isLoading(false);
+      update();
+    }
+  }
+
+  Future<SummaryResponse?> fetchChatSummary() async {
     SummaryResponse? response = await CloudFunctionApi.instance.fetchSummary(
         AuthController.instance.user!.uid,
         DateUtil.getFormattedDate(selectedDay.value!));
 
-    print(response);
+    if (response == null) {
+      throw Exception("Chat summary available.");
+    }
+
+    return response;
+  }
+
+  void clearChatSummary() {
+    selectedSummary.value = "";
+    update();
   }
 }

@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/authentication_controller.dart';
 import '../controllers/calendar_controller.dart';
+import '../utils/date_util.dart';
 import '../widgets/calendar_widget.dart';
 import 'chat_summary_screen.dart';
 
@@ -148,40 +149,52 @@ class CalendarScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => ChatSummaryScreen());
+                        calendarController.findChatSummary();
+                        Get.to(() => const ChatSummaryScreen());
                       },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 16),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: _colorController.getContainerColor(),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xff433230).withOpacity(0.15),
-                              spreadRadius: 0,
-                              blurRadius: 12,
-                              offset: const Offset(
-                                  0, 4), // changes position of shadow
+                      child: Obx(() {
+                        if (calendarController.selectedDay.value!
+                                .compareTo(DateUtil.getCurrentDate()) >=
+                            0) {
+                          // return empty
+                          return const SizedBox(
+                            height: 0,
+                          );
+                        }
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: _colorController.getContainerColor(),
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    const Color(0xff433230).withOpacity(0.15),
+                                spreadRadius: 0,
+                                blurRadius: 12,
+                                offset: const Offset(
+                                    0, 4), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Row(children: [
+                            Image.asset(
+                              'assets/images/icon/paw.png',
+                              width: 35,
                             ),
-                          ],
-                        ),
-                        child: Row(children: [
-                          Image.asset(
-                            'assets/images/icon/paw.png',
-                            width: 35,
-                          ),
-                          const SizedBox(width: 16),
-                          Text(
-                            'Percakapan dengan Calico',
-                            style: GoogleFonts.rubik(
-                                fontSize: 15,
-                                color: _colorController.getTextColor()),
-                          ),
-                          const Spacer(),
-                          const Icon(Icons.arrow_forward_ios),
-                        ]),
-                      ),
+                            const SizedBox(width: 16),
+                            Text(
+                              'Percakapan dengan Calico',
+                              style: GoogleFonts.rubik(
+                                  fontSize: 15,
+                                  color: _colorController.getTextColor()),
+                            ),
+                            const Spacer(),
+                            const Icon(Icons.arrow_forward_ios),
+                          ]),
+                        );
+                      }),
                     ),
                   ],
                 ),
