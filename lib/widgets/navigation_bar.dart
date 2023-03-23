@@ -2,6 +2,7 @@ import 'package:calico/controllers/navigation_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/views/activity_screen.dart';
 import 'package:calico/views/calendar_screen.dart';
+import 'package:calico/views/chat_summary_screen.dart';
 import 'package:calico/views/expert_screen.dart';
 import 'package:calico/views/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,8 @@ class _NavigationPageState extends State<NavigationPage> {
   final screen = [
     const HomeScreen(),
     ActivityScreen(),
-    ExpertScreen(),
+    // ExpertScreen(),
+    ChatSummaryScreen(),
     CalendarScreen(),
   ];
 

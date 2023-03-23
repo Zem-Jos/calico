@@ -77,7 +77,7 @@ class ExpertCard extends StatelessWidget {
                 Text(
                   expertInfo.name,
                   style: GoogleFonts.rubik(
-                      fontSize: 14, fontWeight: FontWeight.w400),
+                      fontSize: 13, fontWeight: FontWeight.w500),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -85,54 +85,57 @@ class ExpertCard extends StatelessWidget {
                     fontSize: 10,
                   ),
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          expertInfo.title,
-                          style: GoogleFonts.rubik(
-                              fontSize: 10,
-                              color: brownColor,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        Text(
-                          expertInfo.hospital,
-                          style: GoogleFonts.rubik(
-                              fontSize: 10,
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.55,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            expertInfo.title,
+                            style: GoogleFonts.rubik(
+                                fontSize: 10,
+                                color: brownColor,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          Text(
+                            expertInfo.hospital,
+                            style: GoogleFonts.rubik(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                                color: brownColor),
+                          ),
+                          Text(
+                            expertInfo.location,
+                            style: GoogleFonts.rubik(
+                                fontSize: 10,
+                                color: grayColor,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                      Spacer(),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
+                          color: colorController.getBackgroundColor(),
+                          child: Text(
+                            expertInfo.price,
+                            style: GoogleFonts.rubik(
+                              fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: brownColor),
-                        ),
-                        Text(
-                          expertInfo.location,
-                          style: GoogleFonts.rubik(
-                              fontSize: 10,
-                              color: grayColor,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 3),
-                        color: colorController.getBackgroundColor(),
-                        child: Text(
-                          expertInfo.price,
-                          style: GoogleFonts.rubik(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: colorController.getTextColor(),
+                              color: colorController.getTextColor(),
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ],
             )
