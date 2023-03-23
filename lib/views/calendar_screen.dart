@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/authentication_controller.dart';
 import '../controllers/calendar_controller.dart';
 import '../widgets/calendar_widget.dart';
+import 'chat_summary_screen.dart';
 
 class CalendarScreen extends StatelessWidget {
   CalendarScreen({super.key});
@@ -147,7 +148,7 @@ class CalendarScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => ChatRecapScreen());
+                        Get.to(() => ChatSummaryScreen());
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
