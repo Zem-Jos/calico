@@ -51,14 +51,29 @@ class ChatSessionController extends GetxController {
       update();
       ChatSession? cs = await getChatSession(DateUtil.getCurrentDate());
 
-      if (cs == null) throw Exception("Failed to load Chat Session");
+      cs ??= await createNewChatSession();
+
+      if (cs == null) throw Exception("Failed to create new chat session");
       if (cs.id == null) throw Exception("Failed to get Chat Session ID");
 
-      print(cs);
       chatSession.value = cs;
 
       // init dialogflow
       await _initDialogflow(cs.id!);
+
+      // if chat is new, send welcome message
+      print(chatSession.value.messages.isEmpty);
+      if (chatSession.value.messages.isEmpty) {
+        // send initial chat message
+        ChatMessage message = ChatMessage(
+          messageContent: AuthController.instance.user?.displayName != null
+              ? "Halo ${AuthController.instance.user!.displayName?.split(" ")[0]}."
+              : "Halo.",
+          messageSender: "user",
+        );
+
+        await sendMessage(message);
+      }
     } catch (e) {
       // TODO Handle error
       print(e);
@@ -76,7 +91,7 @@ class ChatSessionController extends GetxController {
       sessionId: sessionId,
     );
 
-    dialogflow.initialize();
+    await dialogflow.initialize();
 
     this.dialogflow = dialogflow;
   }
@@ -129,58 +144,48 @@ class ChatSessionController extends GetxController {
 
     final querySnapshot = await ref.get();
 
-    if (querySnapshot.docs.isEmpty) {
-      print("No chat session found!");
-      String id = await createNewChatSession();
-      // return empty ChatSession
-      return ChatSession(
-          id: id,
-          messages: [],
-          session: DateUtil.getCurrentDate(),
-          userId: AuthController.instance.user!.uid);
-    }
+    // if (querySnapshot.docs.isEmpty) {
+    //   // TODO: init chat session
+    //   String id = await createNewChatSession();
+    //   // return empty ChatSession
+    //   return ChatSession(
+    //       id: id,
+    //       messages: [],
+    //       session: DateUtil.getCurrentDate(),
+    //       userId: AuthController.instance.user!.uid);
+    // }
+    if (querySnapshot.docs.isEmpty) return null;
 
     ChatSession chatSession =
         ChatSession.fromFirestore(snapshot: querySnapshot.docs.first);
     return chatSession;
   }
 
-  Future<ChatSession?> findChatSession(DateTime session) async {
-    final ref = _db
-        .collection("chatSessions")
-        .where("firebaseSession", isEqualTo: Timestamp.fromDate(session))
-        .where("userId", isEqualTo: AuthController.instance.user!.uid);
-
-    final querySnapshot = await ref.get();
-
-    if (querySnapshot.docs.isEmpty) {
-      return null;
-    }
-
-    ChatSession chatSession =
-        ChatSession.fromFirestore(snapshot: querySnapshot.docs.first);
-    return chatSession;
-  }
-
-  Future<String> createNewChatSession() async {
+  Future<ChatSession?> createNewChatSession() async {
     ChatSession chatSession = ChatSession(
       messages: [],
       session: DateUtil.getCurrentDate(),
       userId: AuthController.instance.user!.uid,
     );
 
-    String id = "";
-    await _db
+    // String id = "";
+    DocumentSnapshot<Map<String, dynamic>>? documentSnapshot = await _db
         .collection('chatSessions')
         .add(chatSession.toJson())
-        .then((documentsnapshot) {
-      // get new chat session
-      id = documentsnapshot.id;
-    }).catchError((error, stackTrace) {
-      print(error.toString());
-    });
+        .then((value) => value.get());
 
-    return id;
+    // return id;
+
+    if (documentSnapshot == null) {
+      throw Exception("Failed to create chat session.");
+    }
+
+    ChatSession newChatSession =
+        ChatSession.fromFirestore(snapshot: documentSnapshot);
+
+    print(newChatSession);
+
+    return newChatSession;
   }
 
   Future<List<ChatMessage>> getChatMessages() async {
@@ -188,16 +193,6 @@ class ChatSessionController extends GetxController {
 
     if (chatSession == null) {
       return [ChatMessage(messageContent: "", messageSender: "user")];
-    }
-
-    return chatSession.messages;
-  }
-
-  Future<List<ChatMessage>?> getChatMessagesByDate(DateTime date) async {
-    ChatSession? chatSession = await findChatSession(date);
-
-    if (chatSession == null) {
-      return null;
     }
 
     return chatSession.messages;
