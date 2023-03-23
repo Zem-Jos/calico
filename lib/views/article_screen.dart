@@ -93,6 +93,68 @@ class ArticleScreen extends StatelessWidget {
                       data: controller.selectedMarkdownFile.value,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
+                      styleSheet: MarkdownStyleSheet(
+                        p: GoogleFonts.rubik(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                          color: colorController.getTextColor(),
+                        ),
+                        h1: GoogleFonts.rubik(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: colorController.getTextColor(),
+                        ),
+                        h2: GoogleFonts.rubik(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: colorController.getTextColor(),
+                        ),
+                        h3: GoogleFonts.rubik(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: colorController.getTextColor(),
+                        ),
+                        h4: GoogleFonts.rubik(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: colorController.getTextColor(),
+                        ),
+                        h5: GoogleFonts.rubik(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: colorController.getTextColor(),
+                        ),
+                        h6: GoogleFonts.rubik(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: colorController.getTextColor(),
+                        ),
+                        em: GoogleFonts.rubik(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.italic,
+                          color: colorController.getTextColor(),
+                        ),
+                        strong: GoogleFonts.rubik(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: colorController.getTextColor(),
+                        ),
+                        blockquote: GoogleFonts.rubik(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: colorController.getTextColor(),
+                        ),
+                        code: GoogleFonts.rubik(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: colorController.getTextColor(),
+                        ),
+                        codeblockDecoration: BoxDecoration(
+                          color: colorController.getContainerColor(),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
                     );
                   },
                 ),
