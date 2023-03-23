@@ -2,47 +2,83 @@ import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
 import 'package:calico/views/expert_detail_screen.dart';
 import 'package:calico/widgets/expert_online_offline.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
+
+import '../models/expert_model.dart';
 
 class ExpertCard extends StatelessWidget {
-  const ExpertCard({super.key});
+  final ExpertInfo expertInfo;
+
+  const ExpertCard({
+    super.key,
+    required this.expertInfo,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final ColorController _colorController = Get.put(ColorController());
+    final ColorController colorController = Get.put(ColorController());
     return GestureDetector(
       onTap: () {
-        Get.to(ExpertDetailScreen());
+        Get.to(() => ExpertDetailScreen(
+              expertInfo: expertInfo,
+            ));
       },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14),
-          color: _colorController.getContainerColor(),
+          color: colorController.getContainerColor(),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(children: [
-            Image.asset(
-              'assets/images/icon/activities.png',
-              width: MediaQuery.of(context).size.width * 0.15,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image.network(
+                expertInfo.image,
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width * 0.2,
+                fit: BoxFit.cover,
+                loadingBuilder: (
+                  BuildContext context,
+                  Widget child,
+                  ImageChunkEvent? loadingProgress,
+                ) {
+                  if (loadingProgress == null) return child;
+                  return SizedBox(
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.height * 0.1,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'A.D. Andayanti, S.Psi., Psi',
+                  expertInfo.name,
                   style: GoogleFonts.rubik(
-                      fontSize: 17, fontWeight: FontWeight.w400),
+                      fontSize: 14, fontWeight: FontWeight.w400),
                 ),
-                // SizedBox(
-                //   height: 14,
-                // ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: ExpertOnlineOffline(
@@ -51,27 +87,28 @@ class ExpertCard extends StatelessWidget {
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Psikolog Klinis',
+                          expertInfo.title,
                           style: GoogleFonts.rubik(
                               fontSize: 10,
                               color: brownColor,
                               fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          'RS Makmur Keluarga ',
+                          expertInfo.hospital,
                           style: GoogleFonts.rubik(
                               fontSize: 10,
                               fontWeight: FontWeight.w400,
                               color: brownColor),
                         ),
                         Text(
-                          'Sleman, Yogyakarta',
+                          expertInfo.location,
                           style: GoogleFonts.rubik(
                               fontSize: 10,
                               color: grayColor,
@@ -79,21 +116,18 @@ class ExpertCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      width: 40,
-                    ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                        color: _colorController.getBackgroundColor(),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 3),
+                        color: colorController.getBackgroundColor(),
                         child: Text(
-                          '120.000',
+                          expertInfo.price,
                           style: GoogleFonts.rubik(
-                            fontSize: 16,
+                            fontSize: 12,
                             fontWeight: FontWeight.w400,
-                            color: _colorController.getTextColor(),
+                            color: colorController.getTextColor(),
                           ),
                         ),
                       ),
