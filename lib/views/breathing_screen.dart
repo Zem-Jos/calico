@@ -90,7 +90,7 @@ class BreathingScreen extends StatelessWidget {
                                     // 'INHALE',
                                     style: GoogleFonts.rubik(
                                       color: Colors.white,
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w500,
                                     )),
                               )),
