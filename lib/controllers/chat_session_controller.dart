@@ -65,14 +65,14 @@ class ChatSessionController extends GetxController {
       print(chatSession.value.messages.isEmpty);
       if (chatSession.value.messages.isEmpty) {
         // send initial chat message
-        ChatMessage message = ChatMessage(
-          messageContent: AuthController.instance.user?.displayName != null
-              ? "Halo ${AuthController.instance.user!.displayName?.split(" ")[0]}."
-              : "Halo.",
-          messageSender: "user",
-        );
+        String initialMessage = AuthController.instance.user?.displayName !=
+                null
+            ? "Halo ${AuthController.instance.user!.displayName?.split(" ")[0]}."
+            : "Halo.";
 
-        await sendMessage(message);
+        // get response from dialogflow
+        DialogflowResponse dialogflowResponse = await sendEvent(initialMessage);
+        await setChatMessage(dialogflowResponse.responseMessages);
       }
     } catch (e) {
       // TODO Handle error
@@ -106,34 +106,44 @@ class ChatSessionController extends GetxController {
       // insert chat message to db
       await insertChatMessage(message);
 
-      if (dialogflow == null) throw Exception("Dialogflow not initialized.");
-
-      var response = await dialogflow!.detectIntent(message.messageContent);
-
       DialogflowResponse dialogflowResponse =
-          DialogflowResponse.fromJson(response);
+          await sendEvent(message.messageContent);
 
-      // insert responseMessages to chatSession
-      for (var message in dialogflowResponse.responseMessages) {
-        ChatMessage chatMessage = ChatMessage(
-          messageContent: message.text,
-          messageSender: "calico",
-        );
-
-        // insert chatmessage to state
-        chatSession.value.messages.add(chatMessage);
-        isLoading.value = false;
-        update();
-
-        // insert chat message to db
-        await insertChatMessage(chatMessage);
-      }
+      await setChatMessage(dialogflowResponse.responseMessages);
     } catch (e) {
       // TODO Handle error
       print(e);
     } finally {
       isLoading.value = false;
     }
+  }
+
+  Future<void> setChatMessage(List<ResponseMessage> responseMessages) async {
+    for (var message in responseMessages) {
+      ChatMessage chatMessage = ChatMessage(
+        messageContent: message.text,
+        messageSender: "calico",
+      );
+
+      // insert chatmessage to state
+      chatSession.value.messages.add(chatMessage);
+      isLoading.value = false;
+      update();
+
+      // insert chat message to db
+      await insertChatMessage(chatMessage);
+    }
+  }
+
+  Future<DialogflowResponse> sendEvent(String eventName) async {
+    if (dialogflow == null) throw Exception("Dialogflow not initialized.");
+
+    var response = await dialogflow!.detectIntent(eventName);
+
+    DialogflowResponse dialogflowResponse =
+        DialogflowResponse.fromJson(response);
+
+    return dialogflowResponse;
   }
 
   Future<ChatSession?> getChatSession(DateTime session) async {
@@ -144,16 +154,6 @@ class ChatSessionController extends GetxController {
 
     final querySnapshot = await ref.get();
 
-    // if (querySnapshot.docs.isEmpty) {
-    //   // TODO: init chat session
-    //   String id = await createNewChatSession();
-    //   // return empty ChatSession
-    //   return ChatSession(
-    //       id: id,
-    //       messages: [],
-    //       session: DateUtil.getCurrentDate(),
-    //       userId: AuthController.instance.user!.uid);
-    // }
     if (querySnapshot.docs.isEmpty) return null;
 
     ChatSession chatSession =
@@ -168,13 +168,10 @@ class ChatSessionController extends GetxController {
       userId: AuthController.instance.user!.uid,
     );
 
-    // String id = "";
     DocumentSnapshot<Map<String, dynamic>>? documentSnapshot = await _db
         .collection('chatSessions')
         .add(chatSession.toJson())
         .then((value) => value.get());
-
-    // return id;
 
     if (documentSnapshot == null) {
       throw Exception("Failed to create chat session.");
