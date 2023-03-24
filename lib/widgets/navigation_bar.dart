@@ -23,8 +23,7 @@ class _NavigationPageState extends State<NavigationPage> {
   final screen = [
     const HomeScreen(),
     ActivityScreen(),
-    // ExpertScreen(),
-    SplashScreen(),
+    ExpertScreen(),
     CalendarScreen(),
   ];
 
