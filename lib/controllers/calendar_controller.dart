@@ -120,7 +120,8 @@ class CalendarController extends GetxController {
           await findChatSession(DateUtil.getFormattedDate(selectedDay.value!));
 
       if (chatSession == null) {
-        throw Exception("Chat session not found.");
+        selectedSummary.value = "";
+        return;
       }
 
       // if chat session has summary set summary

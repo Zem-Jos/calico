@@ -157,10 +157,13 @@ class CalendarScreen extends StatelessWidget {
                                 .compareTo(DateUtil.getCurrentDate()) >=
                             0) {
                           // return empty
-                          return const SizedBox(
-                            height: 0,
-                          );
+                          return const SizedBox();
                         }
+
+                        if (calendarController.selectedMessages.isEmpty) {
+                          return const SizedBox();
+                        }
+
                         return Container(
                           padding: const EdgeInsets.symmetric(
                               vertical: 15, horizontal: 16),
