@@ -26,6 +26,14 @@ class ArticleImage extends StatelessWidget {
         if (loadingProgress == null) return child;
         return const ShimmerArticleCard();
       },
+      errorBuilder: (context, error, stackTrace) {
+        return Image.asset(
+          'assets/images/article/article-default.png',
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+        );
+      },
     );
   }
 }

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../utils/date_util.dart';
+
 class ChatSummaryScreen extends StatelessWidget {
   const ChatSummaryScreen({super.key});
 
@@ -87,6 +89,16 @@ class ChatSummaryScreen extends StatelessWidget {
                       );
                     }
 
+                    if (controller.selectedSummary.value.isEmpty) {
+                      return Text(
+                        "Percakapan pada ${DateUtil.instance.getFormattedDateStr(controller.selectedDay.value!)} tidak ditemukan.",
+                        style: GoogleFonts.rubik(
+                          color: Colors.grey,
+                        ),
+                        textAlign: TextAlign.center,
+                      );
+                    }
+
                     return Text(
                       controller.selectedSummary.value,
                       style: GoogleFonts.rubik(
@@ -102,28 +114,36 @@ class ChatSummaryScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              GestureDetector(
-                onTap: () => Get.to(() => ChatRecapScreen()),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  decoration: BoxDecoration(
-                    color: brownColor,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  width: double.infinity,
-                  child: Center(
-                    child: Text(
-                      'Lihat Detail Riwayat Percakapan',
-                      style: GoogleFonts.rubik(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
-                        color: whiteColor,
+              GetBuilder<CalendarController>(
+                builder: (controller) {
+                  if (controller.selectedSummary.value.isEmpty) {
+                    return const SizedBox();
+                  }
+
+                  return GestureDetector(
+                    onTap: () => Get.to(() => ChatRecapScreen()),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      decoration: BoxDecoration(
+                        color: brownColor,
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      textAlign: TextAlign.justify,
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          'Lihat Detail Riwayat Percakapan',
+                          style: GoogleFonts.rubik(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            color: whiteColor,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
+                  );
+                },
+              )
             ],
           ),
         ),
