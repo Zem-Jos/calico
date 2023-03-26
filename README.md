@@ -117,14 +117,18 @@ As stated earlier, we will leverage the power of GPT-3 to aid in data collection
 
    Currently, Dialogflow CX doesn’t support integrations with flutter directly as it does with other applications. Most of the documentation and libraries support Dialogflow v2 whereas Dialogflow CX is accessed using the Dialogflow v3 API. We had quite a hard time since the documentation doesn’t explicitly mention integrations with flutter.
 
-   ********\*\*\*\*********How we tackle that challenge********\*\*\*\*********
+   **How we tackle that challenge**
 
    By referencing open-source libraries in GitHub, we have a general idea of how to connect the Dialogflow CX to our application using the rest API method mentioned in the documentation. Our current implementation is not perfect and there may be parts of the code that doesn’t abide by the best practices mentioned in the documentation.
 
-1. ********\*\*********Cloud Credit********\*\*********
+1. **Cloud Credit**
 
-   TODO
+   We didn't recieve our Google Cloud Credit request to the Google Solution Challenge team until Wed, Mar 15. Hence we got some difficulties in training and developing our chatbot model.
 
+   **How we tackle that challenge**
+   
+   By applying to the Google Cloud Platform and use the free $300 cloud credits from the trial program to start our chatbot model training and development.
+   
 ## Further Development
 
 ---
