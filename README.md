@@ -75,7 +75,7 @@ Here are the instructions for setting up our flutter application. However, we su
 
 ---
 
-![Brainstorming.png](https://file.notion.so/f/s/aa26ee2a-6156-492e-9893-24f95a223a40/Brainstorming.png?spaceId=a85faf36-cd79-4771-9c89-69ebfe74ab33&table=block&id=ed0e6118-d50c-49e7-916a-649f5e21ee18&expirationTimestamp=1679996884930&signature=MnhzC0q6Vbg-mmyyKPufYXvFrObg2DZJARli6RZa7eo&downloadName=Brainstorming.png)
+[![Brainstorming.png](https://file.notion.so/f/s/aa26ee2a-6156-492e-9893-24f95a223a40/Brainstorming.png?spaceId=a85faf36-cd79-4771-9c89-69ebfe74ab33&table=block&id=ed0e6118-d50c-49e7-916a-649f5e21ee18&expirationTimestamp=1679996884930&signature=MnhzC0q6Vbg-mmyyKPufYXvFrObg2DZJARli6RZa7eo&downloadName=Brainstorming.png)]()
 
 ### Flutter
 
@@ -126,9 +126,9 @@ As stated earlier, we will leverage the power of GPT-3 to aid in data collection
    We didn't recieve our Google Cloud Credit request to the Google Solution Challenge team until Wed, Mar 15. Hence we got some difficulties in training and developing our chatbot model.
 
    **How we tackle that challenge**
-   
+
    By applying to the Google Cloud Platform and use the free $300 cloud credits from the trial program to start our chatbot model training and development.
-   
+
 ## Further Development
 
 ---
