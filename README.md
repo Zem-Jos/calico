@@ -29,7 +29,7 @@ Calico is a chatbot designed to assist users in understanding and managing their
 
 ---
 
-Here are the instructions for setting up our flutter application. However, we suggest downloading the app from this link instead.
+Here are the instructions for setting up our flutter application. However, we suggest downloading the app from this [link](https://drive.google.com/file/d/1wrb6lzI8sedru9hiuI0LOfUaIXRFB3-6/view?usp=share_link) instead.
 
 1. Ensure that both Flutter and Android Studio are installed on your device and that you can run Flutter projects locally.
 2. All requirements must be met to run the app. To verify that your system meets the requirements to run the app, run the following command.
