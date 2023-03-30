@@ -173,7 +173,7 @@ class _ExpertScreenState extends State<ExpertScreen> {
                     child: DropdownButtonFormField(
                       decoration: const InputDecoration.collapsed(hintText: ''),
                       isExpanded: true,
-                      hint: const Text('Pilih Lokasi'),
+                      hint: const Text('Pilih Sesi'),
                       items: ['satu', 'dua', 'tiga']
                           .map((e) => DropdownMenuItem(
                                 child: Text(e),
@@ -204,12 +204,15 @@ class _ExpertScreenState extends State<ExpertScreen> {
                       borderRadius: BorderRadius.circular(6)),
                   width: double.infinity,
                   child: const Center(
-                    child: Text('pokok range harga'),
+                    child: Text('0 - 100.000'),
                   ),
+                ),
+                SizedBox(
+                  height: 8,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [const Text('40'), const Text('80')],
+                  children: [const Text('0'), const Text('100.000')],
                 ),
                 RangeSlider(
                   activeColor: const Color(0xffC97D50),
