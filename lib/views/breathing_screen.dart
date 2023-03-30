@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class BreathingScreen extends StatelessWidget {
   @override
@@ -14,6 +15,7 @@ class BreathingScreen extends StatelessWidget {
         Get.put(BreathingController());
     final circleWidth = MediaQuery.of(context).size.width * 0.68;
     final smallCircleWidth = MediaQuery.of(context).size.width * 0.29;
+    final AudioPlayer _audioPlayer = AudioPlayer();
     return Scaffold(
       backgroundColor: _colorController.getBackgroundColor(),
       appBar: AppBar(
@@ -39,6 +41,8 @@ class BreathingScreen extends StatelessWidget {
                     ? null
                     : _breathingController.onTap();
                 _breathingController.startTimer();
+                // _audioPlayer.setSourceAsset('audio/breathing.mp3');
+                // _audioPlayer.play();
               },
               child: Stack(
                 children: [
