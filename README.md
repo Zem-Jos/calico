@@ -135,19 +135,16 @@ As stated earlier, we will leverage the power of GPT-3 to aid in data collection
 
 ### Chatbot
 
-If the conversation data is large enough, we plan to:
-
 1. Create our own custom model.
 2. Annotate the data from Firestore (that was collected from the edge device).
-3. Train the model.
-4. Test the model.
-5. We plan to replace or combine our own model with GPT-3.
-6. Deploy the model to Dialogflow CX.
+3. We plan to replace or combine our own model with GPT-3.
+4. Deploy the model to Dialogflow CX.
+5. Connect mood input to the chatbot conversation
 
 ### Application
 
-1. Local notification to cheer up and remind to take the mood tracker
+1. Local notification that remind users to interact with our application
 2. Text-to-speech for chat
 3. Collaborate with real psychologists
-4. Implement Dialogflow integration best practice
+4. Implement Dialogflow integration best practice (client connects to Dialogflow through a server)
 5. Community platform
