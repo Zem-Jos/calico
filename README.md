@@ -149,6 +149,7 @@ As stated earlier, we will leverage the power of GPT-3 to aid in data collection
 4. Implement Dialogflow integration best practice (client connects to Dialogflow through a server)
 5. Community platform
 
+# 👨‍👩‍👦 Contributors
 <table width="100%">
     <thead>
     </thead>
