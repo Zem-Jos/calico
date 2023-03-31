@@ -179,22 +179,22 @@ As stated earlier, we will leverage the power of GPT-3 to aid in data collection
         <th>GitHub</th>
         <td width="100" align="center">
             <a href="https://github.com/josiahfs">
-                <img src="https://avatars.githubusercontent.com/u/87465571?v=4"/>
+                <img width="50" src="https://avatars.githubusercontent.com/u/87465571?v=4"/>
             </a>
         </td>
         <td width="100" align="center">
             <a href="https://github.com/jon-mun">
-                <img src="https://avatars.githubusercontent.com/u/88200206?v=4"/>
+                <img width="50" src="https://avatars.githubusercontent.com/u/88200206?v=4"/>
             </a>
         </td>
         <td width="100" align="center">
             <a href="https://github.com/hadhaz">
-                <img src="https://avatars.githubusercontent.com/u/88570718?v=4"/>
+                <img width="50" src="https://avatars.githubusercontent.com/u/88570718?v=4"/>
             </a>
         </td>
         <td align="center">
             <a href="https://github.com/vincalaudia">
-                <img src="https://avatars.githubusercontent.com/u/89190971?v=4"/>
+                <img width="50" src="https://avatars.githubusercontent.com/u/89190971?v=4"/>
             </a>
         </td>
      </tr>
