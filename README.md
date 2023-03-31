@@ -148,3 +148,55 @@ As stated earlier, we will leverage the power of GPT-3 to aid in data collection
 3. Collaborate with real psychologists
 4. Implement Dialogflow integration best practice (client connects to Dialogflow through a server)
 5. Community platform
+
+<table width="100%">
+    <thead>
+    </thead>
+    <tbody>
+    <tr>
+        <th>Name</th>
+        <td width="100" align="center">Josiah</td>
+        <td width="100" align="center">Jonathan</td>
+        <td width="100" align="center">Hadzami</td>
+        <td width="100" align="center">Jovinca</td>
+    </tr>
+    <tr>
+        <th>Position</th>
+        <td width="150" align="center">
+            Mobile<br>
+        </td>
+        <td width="150" align="center">
+            Mobile<br>
+        </td>
+        <td width="150" align="center">
+            Backend<br>
+        </td>
+        <td width="150" align="center">
+            Design<br>
+        </td>
+    </tr>
+    <tr>
+        <th>GitHub</th>
+        <td width="100" align="center">
+            <a href="https://github.com/josiahfs">
+                <img src="https://avatars.githubusercontent.com/u/87465571?v=4"/>
+            </a>
+        </td>
+        <td width="100" align="center">
+            <a href="https://github.com/jon-mun">
+                <img src="https://avatars.githubusercontent.com/u/88200206?v=4"/>
+            </a>
+        </td>
+        <td width="100" align="center">
+            <a href="https://github.com/hadhaz">
+                <img src="https://avatars.githubusercontent.com/u/88570718?v=4"/>
+            </a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/vincalaudia">
+                <img src="https://avatars.githubusercontent.com/u/89190971?v=4"/>
+            </a>
+        </td>
+     </tr>
+    </tbody>
+</table>
