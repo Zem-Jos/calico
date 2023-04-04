@@ -92,7 +92,7 @@ class SosProfessionalScreen extends StatelessWidget {
                               ),
                               child: const Text('Iya'),
                               onPressed: () {
-                                _callNumber();
+                                _callNumber('119');
                               },
                             ),
                             ElevatedButton(
@@ -183,7 +183,7 @@ class SosProfessionalScreen extends StatelessWidget {
                               ),
                               child: Text('Iya'),
                               onPressed: () {
-                                _callNumber();
+                                _callNumber('500454');
                               },
                             ),
                             ElevatedButton(
@@ -275,7 +275,7 @@ class SosProfessionalScreen extends StatelessWidget {
                               ),
                               child: Text('Iya'),
                               onPressed: () {
-                                _callNumber();
+                                _callNumber('082124326459');
                               },
                             ),
                             ElevatedButton(
@@ -355,7 +355,7 @@ class SosProfessionalScreen extends StatelessWidget {
   }
 }
 
-_callNumber() async {
-  const number = '081234264440'; //set the number here
-  bool? res = await FlutterPhoneDirectCaller.callNumber(number);
+_callNumber(String number) async {
+  String call = number; //set the number here
+  bool? res = await FlutterPhoneDirectCaller.callNumber(call);
 }
