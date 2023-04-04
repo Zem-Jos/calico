@@ -1,0 +1,6 @@
+framework module flutter_phone_direct_caller {
+  umbrella header "flutter_phone_direct_caller-umbrella.h"
+
+  export *
+  module * { export * }
+}

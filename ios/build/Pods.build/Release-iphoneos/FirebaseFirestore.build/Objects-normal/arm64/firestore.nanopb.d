@@ -1,0 +1,34 @@
+dependencies: \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1/firestore.nanopb.cc \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1/firestore.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/nanopb/pb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/api/annotations.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/api/http.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1/aggregation_result.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1/document.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/struct.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/timestamp.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/type/latlng.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1/common.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1/query.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/wrappers.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/firestore/v1/write.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/empty.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/rpc/status.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/Protos/nanopb/google/protobuf/any.nanopb.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseFirestore/Firestore/core/src/nanopb/pretty_printing.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/strings/str_cat.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/base/port.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/base/attributes.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/base/config.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/base/options.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/base/policy_checks.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/base/optimization.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/strings/numbers.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/base/macros.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/numeric/bits.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/numeric/internal/bits.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/numeric/int128.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/numeric/int128_have_intrinsic.inc \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/strings/string_view.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/build/ios/Release-iphoneos/abseil/absl.framework/Headers/base/internal/throw_delegate.h

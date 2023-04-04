@@ -1,10 +1,10 @@
+import 'package:calico/views/onboarding_screen.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../views/goto_screen.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -24,7 +24,8 @@ class AuthController extends GetxController {
 
   _initialScreen(User? user) async {
     if (user == null) {
-      await Get.offAll(() => GotoScreen());
+      // await Get.offAll(() => GotoScreen());
+      await Get.offAll(() => OnboardingScreen());
     } else {
       Get.offAll(() => NavigationPage());
     }
