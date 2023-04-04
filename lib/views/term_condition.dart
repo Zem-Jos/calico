@@ -1,5 +1,6 @@
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,78 +30,87 @@ class TermCondition extends StatelessWidget {
       ),
       body: SingleChildScrollView(
           child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: edge),
+        padding: const EdgeInsets.symmetric(horizontal: edge),
         child: Column(
           children: [
-            Markdown(
-              selectable: true,
-              padding: const EdgeInsets.only(bottom: 20),
-              data: 'assets/tnc.md',
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              styleSheet: MarkdownStyleSheet(
-                p: GoogleFonts.rubik(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                  color: _colorController.getTextColor(),
-                ),
-                h1: GoogleFonts.rubik(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                  color: _colorController.getTextColor(),
-                ),
-                h2: GoogleFonts.rubik(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: _colorController.getTextColor(),
-                ),
-                h3: GoogleFonts.rubik(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: _colorController.getTextColor(),
-                ),
-                h4: GoogleFonts.rubik(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: _colorController.getTextColor(),
-                ),
-                h5: GoogleFonts.rubik(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: _colorController.getTextColor(),
-                ),
-                h6: GoogleFonts.rubik(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: _colorController.getTextColor(),
-                ),
-                em: GoogleFonts.rubik(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.italic,
-                  color: _colorController.getTextColor(),
-                ),
-                strong: GoogleFonts.rubik(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: _colorController.getTextColor(),
-                ),
-                blockquote: GoogleFonts.rubik(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: _colorController.getTextColor(),
-                ),
-                code: GoogleFonts.rubik(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: _colorController.getTextColor(),
-                ),
-                codeblockDecoration: BoxDecoration(
-                  color: _colorController.getContainerColor(),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            )
+            FutureBuilder(
+                future: rootBundle.loadString('assets/tnc.md'),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Markdown(
+                      selectable: true,
+                      padding: const EdgeInsets.only(bottom: 20),
+                      data: snapshot.data.toString(),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      styleSheet: MarkdownStyleSheet(
+                        p: GoogleFonts.rubik(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                          color: _colorController.getTextColor(),
+                        ),
+                        h1: GoogleFonts.rubik(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: _colorController.getTextColor(),
+                        ),
+                        h2: GoogleFonts.rubik(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: _colorController.getTextColor(),
+                        ),
+                        h3: GoogleFonts.rubik(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: _colorController.getTextColor(),
+                        ),
+                        h4: GoogleFonts.rubik(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: _colorController.getTextColor(),
+                        ),
+                        h5: GoogleFonts.rubik(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _colorController.getTextColor(),
+                        ),
+                        h6: GoogleFonts.rubik(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: _colorController.getTextColor(),
+                        ),
+                        em: GoogleFonts.rubik(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.italic,
+                          color: _colorController.getTextColor(),
+                        ),
+                        strong: GoogleFonts.rubik(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: _colorController.getTextColor(),
+                        ),
+                        blockquote: GoogleFonts.rubik(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: _colorController.getTextColor(),
+                        ),
+                        code: GoogleFonts.rubik(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: _colorController.getTextColor(),
+                        ),
+                        codeblockDecoration: BoxDecoration(
+                          color: _colorController.getContainerColor(),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                })
           ],
         ),
       )),
