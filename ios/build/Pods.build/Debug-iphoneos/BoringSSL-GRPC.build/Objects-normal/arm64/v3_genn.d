@@ -1,0 +1,43 @@
+dependencies: \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/crypto/x509v3/v3_genn.c \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/Target\ Support\ Files/BoringSSL-GRPC/BoringSSL-GRPC-prefix.pch \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/asn1t.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/base.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/is_boringssl.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/opensslconf.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/boringssl_prefix_symbols.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/asn1.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/bio.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/buffer.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/buf.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/err.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/ex_data.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/stack.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/type_check.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/thread.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/bn.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/conf.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/lhash.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/obj.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/bytestring.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/span.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/nid.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/x509v3.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/x509.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/cipher.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/dh.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/dsa.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/engine.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/ec.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/ec_key.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/ecdh.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/ecdsa.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/evp.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/evp_errors.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/aead.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/base64.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/digest.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/pkcs7.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/pool.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/rsa.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/sha.h

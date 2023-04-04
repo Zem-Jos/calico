@@ -1,0 +1,19 @@
+dependencies: \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/crypto/fipsmodule/md5/md5.c \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/Target\ Support\ Files/BoringSSL-GRPC/BoringSSL-GRPC-prefix.pch \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/md5.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/base.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/is_boringssl.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/opensslconf.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/boringssl_prefix_symbols.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/mem.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/crypto/fipsmodule/md5/../../internal.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/crypto.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/sha.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/thread.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/ex_data.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/stack.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/include/openssl/type_check.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/crypto/fipsmodule/md5/../digest/md32_common.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/crypto/fipsmodule/md5/../digest/../../internal.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/BoringSSL-GRPC/src/crypto/fipsmodule/md5/internal.h

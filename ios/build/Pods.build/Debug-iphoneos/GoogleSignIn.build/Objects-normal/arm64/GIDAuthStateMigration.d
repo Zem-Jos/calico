@@ -1,0 +1,57 @@
+dependencies: \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDAuthStateMigration.m \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Debug-iphoneos/GoogleSignIn.build/module.modulemap \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDAuthStateMigration.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GoogleSignIn/GoogleSignIn/Sources/GIDSignInCallbackSchemes.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Debug-iphoneos/AppAuth.build/module.modulemap \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuth/iOS/OIDExternalUserAgentCatalyst.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuth/iOS/OIDExternalUserAgentIOSCustomBrowser.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuth/iOS/OIDExternalUserAgentIOS.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuth/iOS/OIDAuthorizationService+IOS.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuth/iOS/OIDAuthState+IOS.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuth.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDURLQueryComponent.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDFieldMapping.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDDefines.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDClientMetadataParameters.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDEndSessionResponse.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDEndSessionRequest.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDURLSessionProvider.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDTokenUtilities.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDTokenResponse.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDTokenRequest.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDServiceDiscovery.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDServiceConfiguration.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDScopeUtilities.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDRegistrationResponse.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDRegistrationRequest.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDIDToken.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDGrantTypes.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDExternalUserAgentSession.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDExternalUserAgent.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDErrorUtilities.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDError.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthorizationService.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthorizationResponse.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDScopes.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDResponseTypes.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDExternalUserAgentRequest.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthorizationRequest.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthStateErrorDelegate.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthStateChangeDelegate.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore/OIDAuthState.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/AppAuth/Source/AppAuthCore.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/Target\ Support\ Files/AppAuth/AppAuth-umbrella.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Debug-iphoneos/GTMAppAuth.build/module.modulemap \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Debug-iphoneos/GTMSessionFetcher.build/module.modulemap \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GTMSessionFetcher/Sources/Core/Public/GTMSessionFetcher/GTMSessionUploadFetcher.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GTMSessionFetcher/Sources/Core/Public/GTMSessionFetcher/GTMSessionFetcherService.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GTMSessionFetcher/Sources/Core/Public/GTMSessionFetcher/GTMSessionFetcherLogging.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GTMSessionFetcher/Sources/Core/Public/GTMSessionFetcher/GTMSessionFetcher.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/Target\ Support\ Files/GTMSessionFetcher/GTMSessionFetcher-umbrella.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/Public/GTMAppAuth/GTMOAuth2KeychainCompatibility.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/Public/GTMAppAuth/GTMKeychain.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/Public/GTMAppAuth/GTMAppAuthFetcherAuthorization+Keychain.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/Public/GTMAppAuth/GTMAppAuthFetcherAuthorization.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/GTMAppAuth/GTMAppAuth/Sources/Public/GTMAppAuth/GTMAppAuth.h \
+  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/Target\ Support\ Files/GTMAppAuth/GTMAppAuth-umbrella.h

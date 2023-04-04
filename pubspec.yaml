@@ -30,6 +30,7 @@ dependencies:
   jumping_dot: ^0.0.4
   percent_indicator: ^4.2.3
   shimmer: ^2.0.0
+  smooth_page_indicator: ^1.0.1
   table_calendar: ^3.0.1
 
 dev_dependencies:

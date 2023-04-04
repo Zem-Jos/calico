@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "425d74f9240ffee43a6793815d916bb7cfe5500b3d93e6f8fb07795bd3a459e1"
+build_start_time: [1680253552, 379915952]
+build_end_time: [1680253552, 495602130]
+inputs:
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Runner/AppDelegate.swift": !dirty [1679217992, 525403499]

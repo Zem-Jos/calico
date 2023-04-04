@@ -1,0 +1,32 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "4351bf4dfa80a2e5126eff083596a715f4db77ae908c0ee58663484e80a00b43"
+build_start_time: [1680203943, 318382024]
+build_end_time: [1680203943, 582642078]
+inputs:
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/AsyncAwait.swift": !private [1680176406, 654326915]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageDeleteTask.swift": !private [1680176406, 650814533]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageGetDownloadURLTask.swift"
+  : !private [1680176406, 651384115]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageGetMetadataTask.swift"
+  : !private [1680176406, 653609752]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageListTask.swift": !private [1680176406, 653941154]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StoragePath.swift": !private [1680176406, 651074171]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageTaskState.swift": !private [1680176406, 652949094]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageTokenAuthorizer.swift"
+  : !private [1680176406, 653252363]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageUpdateMetadataTask.swift"
+  : !private [1680176406, 652654170]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Internal/StorageUtils.swift": !private [1680176406, 652308464]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Result.swift": !private [1680176406, 650422096]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/Storage.swift": !private [1680176406, 646637916]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageComponent.swift": !private [1680176406, 649247646]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageConstants.swift": !private [1680176406, 656659841]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageDownloadTask.swift": !private [1680176406, 648327350]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageError.swift": !private [1680176406, 657859802]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageListResult.swift": !private [1680176406, 648876667]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageMetadata.swift": !private [1680176406, 655465841]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageObservableTask.swift": !private [1680176406, 647989034]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageReference.swift": !private [1680176406, 657590866]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageTask.swift": !private [1680176406, 650052070]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageTaskSnapshot.swift": !private [1680176406, 647598266]
+  "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/StorageUploadTask.swift": !private [1680176406, 654738426]

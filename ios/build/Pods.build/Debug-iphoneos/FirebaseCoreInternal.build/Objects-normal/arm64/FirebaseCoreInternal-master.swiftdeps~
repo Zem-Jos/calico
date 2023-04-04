@@ -1,0 +1,27 @@
+version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
+options: "e4dc8ba08bac85dd76c04a80da9350f6e710b8965cbdee72f44f4b0cecae5295"
+build_start_time: [1680203940, 446579933]
+build_end_time: [1680203940, 586362838]
+inputs:
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift"
+  : !private [1680176406, 185653686]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatController.swift"
+  : !private [1680176406, 187457561]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatStorage.swift"
+  : !private [1680176406, 188164234]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsBundle.swift"
+  : !private [1680176406, 189186811]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsPayload.swift"
+  : !private [1680176406, 191193580]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/RingBuffer.swift"
+  : !private [1680176406, 186292648]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Storage.swift"
+  : !private [1680176406, 185291528]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/StorageFactory.swift"
+  : !private [1680176406, 191585063]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/WeakContainer.swift"
+  : !private [1680176406, 190798997]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatController.swift"
+  : !private [1680176406, 187100887]
+  ? "/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatsPayload.swift"
+  : !private [1680176406, 187825202]

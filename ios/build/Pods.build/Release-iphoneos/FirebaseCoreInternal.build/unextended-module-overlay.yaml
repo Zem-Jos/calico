@@ -1,0 +1,14 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Release-iphoneos/FirebaseCoreInternal/FirebaseCoreInternal.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Release-iphoneos/FirebaseCoreInternal.build/unextended-module.modulemap",
+    }]
+  }]
+}
