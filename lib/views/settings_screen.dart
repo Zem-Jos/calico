@@ -1,10 +1,12 @@
 import 'package:calico/controllers/authentication_controller.dart';
 import 'package:calico/controllers/theme_controller.dart';
 import 'package:calico/theme.dart';
+import 'package:calico/views/term_condition.dart';
 import 'package:calico/widgets/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:googleapis/androidmanagement/v1.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -158,27 +160,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: _colorController.getContainerColor(),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 16.0),
-                    child: Row(children: [
-                      Image.asset(
-                        'assets/images/icon/term_icon.png',
-                        width: 35,
-                      ),
-                      SizedBox(width: 16),
-                      Text(
-                        'Ketentuan Penggunaan',
-                        style: GoogleFonts.rubik(
-                            fontSize: 17, fontWeight: FontWeight.w400),
-                      ),
-                    ]),
+                GestureDetector(
+                  onTap: () => Get.to(TermCondition()),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: _colorController.getContainerColor(),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16.0),
+                      child: Row(children: [
+                        Image.asset(
+                          'assets/images/icon/term_icon.png',
+                          width: 35,
+                        ),
+                        SizedBox(width: 16),
+                        Text(
+                          'Ketentuan Penggunaan',
+                          style: GoogleFonts.rubik(
+                              fontSize: 17, fontWeight: FontWeight.w400),
+                        ),
+                      ]),
+                    ),
                   ),
                 ),
                 SizedBox(height: 8),
