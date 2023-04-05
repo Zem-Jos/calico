@@ -1,12 +1,8 @@
 # Calico
 
----
-
 Calico is a chatbot designed to assist users in understanding and managing their mental health. It provides appropriate responses and guidance. Users can chat with Calico and share their day, concerns, or problems. Calico will respond by listening, giving advice, and offering solutions to their stories to help users relieve their stress or anxiety.
 
-## Features
-
----
+# Features
 
 ![intro](gif/calicoIntro.gif)
 ![meet](gif/meetCalico.gif)
@@ -14,16 +10,12 @@ Calico is a chatbot designed to assist users in understanding and managing their
 ![activity](gif/activity.gif)
 ![additional feature](gif/addFeature.gif)
 
-## Application Architecture
-
----
+# Application Architecture
 
 [![Brainstorming.png](assets/Brainstorming.png)](https://file.notion.so/f/s/aa26ee2a-6156-492e-9893-24f95a223a40/Brainstorming.png?spaceId=a85faf36-cd79-4771-9c89-69ebfe74ab33&table=block&id=ed0e6118-d50c-49e7-916a-649f5e21ee18&expirationTimestamp=1679996884930&signature=MnhzC0q6Vbg-mmyyKPufYXvFrObg2DZJARli6RZa7eo&downloadName=Brainstorming.png)
 
 
-## Setup
-
----
+# Setup
 
 Here are the instructions for setting up our flutter application. However, we suggest downloading the app from this [link](https://drive.google.com/file/d/1DPIdKPOHvwthO1LTYMJJQTCIhwfOLeqg/view?usp=sharing) instead.
 
@@ -67,9 +59,7 @@ Here are the instructions for setting up our flutter application. However, we su
    flutter run
    ```
 
-## Challenges
-
----
+# Challenges
 
 1. **Chatbot Development**
 
@@ -95,17 +85,15 @@ Here are the instructions for setting up our flutter application. However, we su
 
    By applying to the Google Cloud Platform and use the free $300 cloud credits from the trial program to start our chatbot model training and development.
 
-## Further Development
+# Further Development
 
----
-
-### Chatbot
+## Chatbot
 
 1. Consider using Google Bard
 2. Use Cloud Functions to connect edge device instead of Dialogflow CX directly
 3. Add Psychologist recommendation based on user issues and background 
 
-### Application
+## Application
 
 1. Local notification that remind users to interact with our application
 2. Text-to-speech for chat
