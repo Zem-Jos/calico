@@ -1,3 +1,0 @@
-dependencies: \
-  /Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/Target\ Support\ Files/FirebaseAuth/FirebaseAuth-dummy.m \
-  /Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Release-iphoneos/FirebaseAuth.build/module.modulemap

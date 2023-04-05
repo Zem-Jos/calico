@@ -1,8 +1,0 @@
-"/Users/josiahfarrelsuwito/MobileDev/calico/ios/Pods/FirebaseStorage/FirebaseStorage/Sources/AsyncAwait.swift":
-  abi-baseline-json: "/Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Release-iphoneos/FirebaseStorage.build/Objects-normal/arm64/FirebaseStorage.abi.json"
-  swiftmodule: "/Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Release-iphoneos/FirebaseStorage.build/Objects-normal/arm64/FirebaseStorage.swiftmodule"
-  dependencies: "/Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Release-iphoneos/FirebaseStorage.build/Objects-normal/arm64/FirebaseStorage-master.d"
-  swiftsourceinfo: "/Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Release-iphoneos/FirebaseStorage.build/Objects-normal/arm64/FirebaseStorage.swiftsourceinfo"
-  swiftdoc: "/Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Release-iphoneos/FirebaseStorage.build/Objects-normal/arm64/FirebaseStorage.swiftdoc"
-  objc-header: "/Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Release-iphoneos/FirebaseStorage.build/Objects-normal/arm64/FirebaseStorage-Swift.h"
-  diagnostics: "/Users/josiahfarrelsuwito/MobileDev/calico/ios/build/Pods.build/Release-iphoneos/FirebaseStorage.build/Objects-normal/arm64/FirebaseStorage-master.dia"

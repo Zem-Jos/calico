@@ -1,7 +1,0 @@
-version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
-options: "01c5d2fd223fae8c8513117cc1b3df91fe4fcaf6a08a51fd7014f07e49d939aa"
-build_start_time: [1680204071, 67387104]
-build_end_time: [1680204071, 119194030]
-inputs:
-  "/Users/josiahfarrelsuwito/.pub-cache/hosted/pub.dev/path_provider_foundation-2.1.3/ios/Classes/PathProviderPlugin.swift": !dirty [1678458362, 919147014]
-  "/Users/josiahfarrelsuwito/.pub-cache/hosted/pub.dev/path_provider_foundation-2.1.3/ios/Classes/messages.g.swift": !dirty [1678458362, 918943405]
