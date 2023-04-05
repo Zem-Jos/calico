@@ -67,9 +67,9 @@ Here are the instructions for setting up our flutter application. However, we su
 
    **How we tackle that challenge**
 
-   We are taking advantage of the latest advancement in GPT-3 to assist data collection for our system. In the early stage of development, we will fine-tune and apply the GPT-3 model in our applications. Furthermore, we will collect conversational chat and user feedback to create a high-quality dataset. If we have enough data we will replace GPT-3 with our own model.
+   To tackle this challenge, we have made the strategic decision to leverage the natural language capabilities of GPT-3 in our system. During the initial phases of development, we will focus on fine-tuning and implementing the GPT-3 model across our applications to optimize their performance and functionality.
 
-1. **Chatbot Integration**
+2. **Chatbot Integration**
 
    Currently, Dialogflow CX doesn’t support integrations with flutter directly as it does with other applications. Most of the documentation and libraries support Dialogflow v2 whereas Dialogflow CX is accessed using the Dialogflow v3 API. We had quite a hard time since the documentation doesn’t explicitly mention integrations with flutter.
 
@@ -77,7 +77,7 @@ Here are the instructions for setting up our flutter application. However, we su
 
    By referencing open-source libraries in GitHub, we have a general idea of how to connect the Dialogflow CX to our application using the rest API method mentioned in the documentation. Our current implementation is not perfect and there may be parts of the code that doesn’t abide by the best practices mentioned in the documentation.
 
-1. **Cloud Credit**
+3. **Cloud Credit**
 
    We didn't recieve our Google Cloud Credit request to the Google Solution Challenge team until Wed, Mar 15. Hence we got some difficulties in training and developing our chatbot model.
 
