@@ -85,30 +85,6 @@ Here are the instructions for setting up our flutter application. However, we su
 
 [![Brainstorming.png](assets/Brainstorming.png)](https://file.notion.so/f/s/aa26ee2a-6156-492e-9893-24f95a223a40/Brainstorming.png?spaceId=a85faf36-cd79-4771-9c89-69ebfe74ab33&table=block&id=ed0e6118-d50c-49e7-916a-649f5e21ee18&expirationTimestamp=1679996884930&signature=MnhzC0q6Vbg-mmyyKPufYXvFrObg2DZJARli6RZa7eo&downloadName=Brainstorming.png)
 
-### Flutter
-
-Our application will run on a mobile interface since it is more convenient and accessible for the user. To meet this need, we will be using Flutter since it has cross-platform capabilities and great performance. Flutter is an open-source UI software development kit created by Google. It is used to develop cross-platform applications for Android, iOS, Linux, macOS, Windows, Google Fuchsia, and the web from a single codebase.
-
-### Firebase
-
-Firestore will be utilized as our main database for storing user information and chat logs. It's a NoSQL document database that provides real-time updates and seamless integration with other Google Cloud Platform services. This will allow us to easily retrieve user information and chat logs to improve our chatbot's performance and provide better recommendations to users.
-
-We implemented Firebase Storage in addition to the Firestore service. This allowed us to store our article markdowns and images. As a result, we can easily retrieve and display articles and images within our application. Storing markdowns and images in Firebase Storage also enables us to manage them more efficiently without incurring high costs. This ensures that our application remains affordable and user-friendly.
-
-We also use the Firebase Authentication service to authenticate our users. Firebase Authentication provides a quick and secure way for users to sign up and log in to our application. It offers multiple authentication methods, including email and password, Google sign-in, and anonymous sign-in. With Firebase Authentication, we can easily manage user authentication, and our users can access our app with ease.
-
-### Dialogflow CX
-
-We opted to use Dialogflow CX as the foundation for our system, recognizing its potential for growth and development. This platform enables our chatbot to offer personalized psychologist recommendations based on the user’s background and issues. Furthermore, developing a chatbot with Dialogflow CX is intuitive, and integrating it with other Google Cloud Platform services is a seamless process.
-
-### Cloud Function
-
-To facilitate webhook calls from Dialogflow CX, we rely on Cloud Functions, which eliminates the need for setting up our server, making it an effortless solution. Additionally, integrating with other platforms is seamless. Using the Cloud Platform, we link Dialogflow to GPT-3, GPT-3 to Firestore, and webhooks that require programming languages. For instance, we use Cloud Functions to furnish the chatbot's responses to queries such as "what is the current time?"
-
-### GPT-3
-
-As stated earlier, we will leverage the power of GPT-3 to aid in data collection during the initial phases of development. By integrating GPT-3 with Dialogflow CX, we will generate conversational responses to users. We are confident in our ability to fine-tune the model to ensure that the responses are both pertinent and valuable to users. Additionally, we will utilize GPT-3 to summarize and provide feedback on user conversations each day, further enhancing the user experience.
-
 ## Challenges
 
 ---
