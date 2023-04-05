@@ -25,6 +25,14 @@ Calico is a chatbot designed to assist users in understanding and managing their
 - Breathing Exercise
   Users can perform a guided breathing exercise to soothe their anxiety and overall improve their well-being.
 
+## How to use
+![intro](gif/calicoIntro.gif)
+![meet](gif/meetCalico.gif)
+![chat](gif/chat.gif)
+![activity](gif/activity.gif)
+![additional feature](gif/addFeature.gif)
+
+
 ## Setup
 
 ---
